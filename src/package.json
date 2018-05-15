@@ -32,7 +32,10 @@
     "pluginOptions": {
       "talavera": {
         "dest": "resources",
-        "folders": ["1x", "2x"]
+        "folders": [
+          "1x",
+          "2x"
+        ]
       }
     },
     "bundleOptions": {
@@ -57,8 +60,8 @@
     "pug": "^2.0.3",
     "rollup": "^0.58.2",
     "svelte": "^2.5.1",
-    "talavera": "^0.5.0",
-    "tarima": "^4.0.8",
+    "talavera": "^0.6.0",
+    "tarima": "^4.1.0",
     "tarima-lr": "^0.4.1"
   }
 }
