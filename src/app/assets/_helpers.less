@@ -1,0 +1,39 @@
+.reset {
+  padding: 0;
+  margin: 0;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+
+  * > {
+    flex: 1 1 auto;
+  }
+}
+
+.sm-show,
+.md-show {
+  display: none;
+}
+
+@media screen and (min-width: @SmallWidth) {
+  .sm-flex {
+    .flex;
+  }
+
+  .sm-show {
+    display: block;
+  }
+}
+
+
+@media screen and (min-width: @MediumWidth) {
+  .md-flex {
+    .flex;
+  }
+
+  .md-show {
+    display: block;
+  }
+}
