@@ -19,10 +19,39 @@ body {
 }
 
 .navigation {
-  padding: @Pad2 @Pad3;
   color: @LightText;
+  padding: @Pad2;
 
   > .pad {
+    padding: 0 @Pad2;
+
+    &:first-child {
+      padding-left: 0;
+    }
+  }
+}
+
+.wrapper {
+  max-width: @LargerWidth;
+  margin: auto;
+}
+
+.scroll {
+  overflow: hidden;
+  height: 50px;
+
+  > * {
+    height: 100px;
+    overflow: auto;
+    white-space: nowrap;
+  }
+}
+
+.topbar {
+  background-color: @DarkNavy;
+  padding: @Pad2;
+
+  .push {
     padding: 0 @Pad2;
 
     &:first-child {

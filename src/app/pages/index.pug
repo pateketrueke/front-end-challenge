@@ -9,21 +9,30 @@ html
     title Bitso
   body.reset
     #app
-      .flex.navigation
-        .sp.pad.no-sel.flex.sm-auto
-          |[![icon "bitso_logo"]]
-          span.md-hide.menu
-        .sp.pad.no-sel.auto.sm-show Exchange
-        .pad.no-sel.auto.align-right.lg-show 1 BTC = 000,000.00 MXN
-        .sp.pad.no-sel.menu.md-show Wallet
-        .pad.no-sel.menu.md-show Exchange
-        .pad.no-sel.md-show Ayuda
-        .no-sel.user-menu
-          img(src='//placehold.it/45/4e5863/4e5863')
-        .pad.no-sel.sm-flex
-          span.menu Usuario
-        .toggler
-          input#cb1.tgl(type = "checkbox")
-          label.tgl-btn(for = "cb1")
-          span.no-sel.on ☀
-          span.no-sel.off ☾
+      .wrapper
+        .flex.navigation
+          .sp.pad.no-sel.flex.sm-auto
+            |[![icon "bitso_logo"]]
+            span.md-hide.menu
+          .sp.pad.no-sel.auto.sm-show Exchange
+          .pad.no-sel.auto.align-right.lg-show 1 BTC = 000,000.00 MXN
+          .sp.pad.no-sel.menu.md-show Wallet
+          .pad.no-sel.menu.md-show Exchange
+          .pad.no-sel.md-show Ayuda
+          .no-sel.user-menu
+            img(src='//placehold.it/45/4e5863/4e5863')
+          .pad.no-sel.sm-flex
+            span.menu Usuario
+          .toggler
+            input#cb1.tgl(type = "checkbox")
+            label.tgl-btn(for = "cb1")
+            span.no-sel.on ☀
+            span.no-sel.off ☾
+      .scroll
+        .topbar
+          .wrapper.flex
+            span.push.menu BTC / MXN
+            span.push Volumen 24 hr. 170.5405818 BTC
+            span.push Máx. 304,934.23 MXN
+            span.push Mín. 274,934.23 MXN
+            span.push Variación +4,061.68 MXN (1.4 %)
