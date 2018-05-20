@@ -2,6 +2,10 @@
   text-align: right;
 }
 
+.no-wrap {
+  white-space: nowrap;
+}
+
 .reset {
   padding: 0;
   margin: 0;
@@ -9,7 +13,10 @@
 
 .flex {
   display: flex;
-  align-items: center;
+
+  &.center {
+    align-items: center;
+  }
 
   > .auto {
     flex: 1 1 auto;

@@ -10,8 +10,8 @@ html
   body.reset
     #app
       .wrapper
-        .flex.navigation
-          .sp.pad.no-sel.flex.sm-auto
+        .flex.center.navigation
+          .sp.pad.no-sel.flex.center.sm-auto
             |[![icon "bitso_logo"]]
             span.md-hide.menu
           .sp.pad.no-sel.auto.sm-show Exchange
@@ -28,11 +28,12 @@ html
             label.tgl-btn(for = "cb1")
             span.no-sel.on ☀
             span.no-sel.off ☾
-      .scroll
-        .topbar
-          .wrapper.flex
-            span.push.menu BTC / MXN
-            span.push Volumen 24 hr. 170.5405818 BTC
-            span.push Máx. 304,934.23 MXN
-            span.push Mín. 274,934.23 MXN
-            span.push Variación +4,061.68 MXN (1.4 %)
+      .topbar
+        .wrapper.flex.center
+          .push.no-wrap.menu BTC / MXN
+          .scroll
+            .flex
+              span.push Volumen 24 hr. #[span.light 170.5405818 BTC]
+              span.push Máx. #[span.light 304,934.23 MXN]
+              span.push Mín. #[span.light 274,934.23 MXN]
+              span.push Variación #[span.light +4,061.68 MXN (1.4 %)]
