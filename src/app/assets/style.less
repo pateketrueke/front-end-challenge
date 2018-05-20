@@ -4,6 +4,12 @@
 @import (less) '_colors';
 @import (less) '_layout';
 
+*,
+::after,
+::before {
+  box-sizing: border-box;
+}
+
 body {
   font-family: DINPro;
 }
@@ -14,4 +20,27 @@ body {
 
 .navigation {
   padding: @Pad2 @Pad3;
+  color: @LightText;
+
+  > .pad {
+    padding: 0 @Pad2;
+
+    &:first-child {
+      padding-left: 0;
+    }
+  }
+}
+
+.menu {
+  &::after {
+    content: ' ▾';
+  }
+}
+
+.user-menu {
+  img {
+    padding: 2px;
+    border-radius: 50%;
+    border: 1px solid @DarkText;
+  }
 }

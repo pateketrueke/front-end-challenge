@@ -4,24 +4,24 @@ html
     meta(charset='utf-8')
     meta(content='IE=edge,chrome=1' http-equiv='X-UA-Compatible')
     meta(content='width=device-width, user-scalable=no' name='viewport')
-    link(rel='stylesheet' href='style.css')
     link(rel='stylesheet' href='resources/sprites.css')
+    link(rel='stylesheet' href='style.css')
     title Bitso
   body.reset
-    |[![destFile "resources/svg.svg"]]
     #app
       .flex.navigation
-        div
-          |[![icon "bitso_logo"]]
-          |[![svg "bitso_logo"]]
-        .menu Exchange
-        .md-show Exchange
-        .md-show 1 BTC = 000,000.00 MXN
-        .sm-show.menu Wallet
-        .sm-show.menu Exchange
-        .sm-show Ayuda
-        div
-          img(src='//placehold.it/45')
-        .sm-flex
+        .pad.no-sel.sp [![icon "bitso_logo"]]
+        .pad.no-sel.sp.md-show Exchange
+        .pad.no-sel.md-show.auto.align-right 1 BTC = 000,000.00 MXN
+        .pad.no-sel.sp.sm-show.menu Wallet
+        .pad.no-sel.sm-show.menu Exchange
+        .pad.no-sel.sm-show Ayuda
+        .pad.no-sel.user-menu
+          img(src='//placehold.it/45/4e5863/4e5863')
+        .pad.no-sel.sm-flex
           .menu Usuario
-          div ( d | l )
+        .toggler
+          input#cb1.tgl(type = "checkbox")
+          label.tgl-btn(for = "cb1")
+          span.no-sel.on ☀
+          span.no-sel.off ☾

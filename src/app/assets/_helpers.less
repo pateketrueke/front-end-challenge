@@ -1,3 +1,7 @@
+.align-right {
+  text-align: right;
+}
+
 .reset {
   padding: 0;
   margin: 0;
@@ -7,8 +11,107 @@
   display: flex;
   align-items: center;
 
-  * > {
+  > .auto {
     flex: 1 1 auto;
+  }
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.no-sel {
+  user-select: none;
+
+  &::selection {
+    background: none;
+  }
+}
+
+.tgl {
+  display: none;
+
+  ~ .tgl-btn {
+    outline: 0;
+    display: block;
+    position: relative;
+    width: 3em;
+    height: 1.5em;
+
+    &::after,
+    &::before {
+      position: relative;
+      display: block;
+      content: ' ';
+      width: 50%;
+      height: 100%;
+    }
+
+    &::after {
+      left: 0;
+    }
+
+    &::before {
+      display: none;
+    }
+  }
+
+  &:checked ~ .tgl-btn:after {
+    left: 50%;
+  }
+}
+
+.toggler {
+  position: relative;
+
+  span {
+    transition: all .4s ease;
+    position: absolute;
+    color: @DarkText;
+    top: 0;
+
+    &.off {
+      visibility: hidden;
+      opacity: 0;
+      left: 6px;
+    }
+
+    &.on {
+      right: 5px;
+    }
+  }
+
+  .tgl ~ .tgl-btn {
+    transition: all .4s ease;
+    background-color: @LightText;
+    border-radius: 2em;
+    padding: 2px;
+
+    &:after {
+      border-radius: 50%;
+      background-color: @DarkText;
+      transition: all .2s ease;
+    }
+  }
+
+  .tgl:checked ~ .tgl-btn {
+    background: @DarkNavy;
+
+    ~ .on {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    ~ .off {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}
+
+.sp {
+  ~ .sp {
+    border-left: 1px solid @DarkText;
   }
 }
 
