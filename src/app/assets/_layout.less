@@ -2,5 +2,64 @@
 @Pad2: 16px;
 @Pad3: 32px;
 
-@SmallWidth: 720px;
+@TinyWidth: 480px;
+@SmallWidth: 760px;
 @MediumWidth: 960px;
+
+.sm-show,
+.md-show,
+.lg-show {
+  display: none;
+}
+
+@media screen and (max-width: @TinyWidth) {
+  .sm-auto {
+    flex: 1 1 auto;
+  }
+}
+
+@media screen and (min-width: @TinyWidth) {
+  .sm-flex {
+    .flex;
+
+    > .auto {
+      flex: none;
+    }
+  }
+
+  .sm-show {
+    display: block;
+  }
+}
+
+@media screen and (min-width: @SmallWidth) {
+  .md-flex {
+    .flex;
+
+    > .auto {
+      flex: none;
+    }
+  }
+
+  .md-show {
+    display: block;
+  }
+
+  .md-hide {
+    display: none;
+  }
+}
+
+@media screen and (min-width: @MediumWidth) {
+  .lg-flex {
+    .flex;
+
+    > .auto {
+      flex: none;
+    }
+  }
+
+  .lg-show {
+    display: block;
+  }
+}

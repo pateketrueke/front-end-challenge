@@ -10,16 +10,18 @@ html
   body.reset
     #app
       .flex.navigation
-        .pad.no-sel.sp [![icon "bitso_logo"]]
-        .pad.no-sel.sp.md-show Exchange
-        .pad.no-sel.md-show.auto.align-right 1 BTC = 000,000.00 MXN
-        .pad.no-sel.sp.sm-show.menu Wallet
-        .pad.no-sel.sm-show.menu Exchange
-        .pad.no-sel.sm-show Ayuda
-        .pad.no-sel.user-menu
+        .sp.pad.no-sel.flex.sm-auto
+          |[![icon "bitso_logo"]]
+          span.md-hide.menu
+        .sp.pad.no-sel.auto.sm-show Exchange
+        .pad.no-sel.auto.align-right.lg-show 1 BTC = 000,000.00 MXN
+        .sp.pad.no-sel.menu.md-show Wallet
+        .pad.no-sel.menu.md-show Exchange
+        .pad.no-sel.md-show Ayuda
+        .no-sel.user-menu
           img(src='//placehold.it/45/4e5863/4e5863')
         .pad.no-sel.sm-flex
-          .menu Usuario
+          span.menu Usuario
         .toggler
           input#cb1.tgl(type = "checkbox")
           label.tgl-btn(for = "cb1")
