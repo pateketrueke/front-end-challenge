@@ -28,12 +28,30 @@ html
             label.tgl-btn(for = "cb1")
             span.no-sel.on ☀
             span.no-sel.off ☾
+
       .topbar
         .wrapper.flex.center
-          .push.no-wrap.menu BTC / MXN
-          .scroll
+          .no-wrap.no-sel.menu BTC / MXN
+          .scroll.no-sel
+            .flex.push
+              span Volumen 24 h #[span.light 170.5405818 BTC]
+              span Máx. #[span.light 304,934.23 MXN]
+              span Mín. #[span.light 274,934.23 MXN]
+              span Variación #[span.light +4,061.68 MXN (1.4 %)]
+
+      .wrapper.debug
+        .flex
+          div
+            table
+              caption Últimos trades
+              thead
+                tr
+                  th Hora
+                  th #[span MXN] Precio
+                  th #[span BTC] Monto
+
+          .auto
+            div MAIN CANVAS
             .flex
-              span.push Volumen 24 h #[span.light 170.5405818 BTC]
-              span.push Máx. #[span.light 304,934.23 MXN]
-              span.push Mín. #[span.light 274,934.23 MXN]
-              span.push Variación #[span.light +4,061.68 MXN (1.4 %)]
+              .auto LEFT TABLE
+              .auto RIGHT TABLE

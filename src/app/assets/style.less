@@ -19,8 +19,8 @@ body {
 }
 
 .navigation {
+  padding: @Pad1 @Pad2;
   color: @LightText;
-  padding: @Pad2;
 
   > .pad {
     padding: 0 @Pad2;
@@ -37,13 +37,35 @@ body {
 }
 
 .scroll {
+  position: relative;
   overflow: hidden;
   height: 20px;
 
   > * {
-    height: 100px;
+    height: 50px;
     overflow: auto;
     white-space: nowrap;
+
+    @media screen and (max-width: @MediumWidth) {
+      &::after,
+      &::before {
+        content: ' ';
+        position: absolute;
+        left: 0;
+        width: 50px;
+        height: 50px;
+      }
+
+      &::before {
+        background-image: linear-gradient(to left, transparent, @DarkNavy);
+      }
+
+      &::after {
+        background-image: linear-gradient(to right, transparent, @DarkNavy);
+        left: auto;
+        right: 0;
+      }
+    }
   }
 }
 
@@ -51,12 +73,8 @@ body {
   background-color: @DarkNavy;
   padding: @Pad2;
 
-  .push {
-    padding: 0 @Pad2;
-
-    &:first-child {
-      padding-left: 0;
-    }
+  .push > * {
+    margin-left: @Pad3;
   }
 
   .light {
