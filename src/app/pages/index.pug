@@ -49,32 +49,62 @@ html
                 thead
                   tr.caps
                     th.pad.align-left Hora
-                    th.pad.align-right #[span MXN] Precio
-                    th.pad.align-center #[span BTC] Monto
+                    th.pad.align-right.mxn Precio
+                    th.pad.align-right.btc Monto
                 tbody
                   each x, _ in Array.from({ length: 8 })
                     tr
                       td.pad.align-left #[span.hi 16:10:25]
                       td.pad.align-right #[span.up 319,149.99]
-                      td.pad.align-center #[span.hi 1.0900484]00
+                      td.pad.align-right #[span.hi 1.0900484]00
                     tr(class=_ === 5 ? 'sel' : null)
                       td.pad.align-left #[span.hi 16:10:25]
                       td.pad.align-right #[span.up 319,149.99]
-                      td.pad.align-center #[span.hi 0.0904]00000
+                      td.pad.align-right #[span.hi 0.0904]00000
                     tr
                       td.pad.align-left #[span.hi 16:10:25]
                       td.pad.align-right #[span.down 319,149.99]
-                      td.pad.align-center #[span.hi 49.0903]0000
+                      td.pad.align-right #[span.hi 49.0903]0000
             .auto
               .auto.md-pad
                 img.fit(src='//placehold.it/1000x400')
               .lg-flex
                 .auto.md-pad
-                  table.full-width(cellpadding=0 cellspacing=0)
+                  table.ordered.full-width(cellpadding=0 cellspacing=0)
                     caption.pad.align-left
-                      span.caps Posturas de compra
+                      .flex
+                        .caps Posturas de compra
+                        span.mxn Bid 319,140.00
+                    thead
+                      tr.caps
+                        th.pad.align-right Sum
+                        th.pad.align-right.btc Monto
+                        th.pad.align-right.mxn Valor
+                        th.pad.align-right.mxn Precio
+                    tbody
+                      each x, _ in Array.from({ length: 8 })
+                        tr(class=_ === 5 ? 'sel' : null)
+                          td.pad.align-right 1.09
+                          td.pad.align-right #[span.hi 1.090484]00
+                          td.pad.align-right 2,307,984.29
+                          td.pad.align-right #[span.up 319,149.99]
 
                 .auto.md-pad
-                  table.full-width(cellpadding=0 cellspacing=0)
+                  table.inverted.full-width(cellpadding=0 cellspacing=0)
                     caption.pad.align-left
-                      span.caps Posturas de venta
+                      .flex
+                        .caps Posturas de venta
+                        span.mxn 274,934.23 Ask
+                    thead
+                      tr.caps
+                        th.pad.align-right Sum
+                        th.pad.align-right.btc Monto
+                        th.pad.align-right.mxn Valor
+                        th.pad.align-right.mxn Precio
+                    tbody
+                      each x, _ in Array.from({ length: 8 })
+                        tr(class=_ === 3 ? 'sel' : null)
+                          td.pad.align-right 1.09
+                          td.pad.align-right #[span.hi 1.090484]00
+                          td.pad.align-right 2,307,984.29
+                          td.pad.align-right #[span.down 319,149.99]
