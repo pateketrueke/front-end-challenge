@@ -7,6 +7,11 @@
 @MediumWidth: 960px;
 @LargerWidth: 1260px;
 
+.wrapper {
+  max-width: @LargerWidth;
+  margin: auto;
+}
+
 .sm-show,
 .md-show,
 .lg-show {
@@ -22,10 +27,6 @@
 @media screen and (min-width: @TinyWidth) {
   .sm-flex {
     .flex;
-
-    > .auto {
-      flex: none;
-    }
   }
 
   .sm-show {
@@ -36,10 +37,15 @@
 @media screen and (min-width: @SmallWidth) {
   .md-flex {
     .flex;
+  }
 
-    > .auto {
-      flex: none;
-    }
+  .md-pad {
+    margin: @Pad1;
+  }
+
+  .auto {
+    margin-left: 0;
+    margin-bottom: 0;
   }
 
   .md-show {
@@ -54,10 +60,6 @@
 @media screen and (min-width: @MediumWidth) {
   .lg-flex {
     .flex;
-
-    > .auto {
-      flex: none;
-    }
   }
 
   .lg-show {

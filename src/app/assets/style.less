@@ -12,6 +12,8 @@
 
 body {
   font-family: DINPro;
+  font-weight: 300;
+  font-size: 85%;
 }
 
 #app, html, body {
@@ -19,11 +21,15 @@ body {
 }
 
 .navigation {
-  padding: @Pad1 @Pad2;
   color: @LightText;
+  padding: @Pad1;
+
+  @media screen and (min-width: @SmallWidth) {
+    padding: @Pad1 @Pad2;
+  }
 
   > .pad {
-    padding: 0 @Pad2;
+    padding: 0 @Pad1;
 
     &:first-child {
       padding-left: 0;
@@ -31,9 +37,8 @@ body {
   }
 }
 
-.wrapper {
-  max-width: @LargerWidth;
-  margin: auto;
+.header {
+  background-color: @RegularNavy;
 }
 
 .scroll {
@@ -71,7 +76,11 @@ body {
 
 .topbar {
   background-color: @DarkNavy;
-  padding: @Pad2;
+  padding: @Pad1;
+
+  @media screen and (min-width: @SmallWidth) {
+    padding: @Pad2;
+  }
 
   .push > * {
     margin-left: @Pad3;
@@ -83,6 +92,62 @@ body {
 
   .menu {
     color: @LightGreen;
+  }
+}
+
+.stats {
+  .pad {
+    padding: @Pad1;
+  }
+
+  .sel {
+    background-color: @Sidebar;
+  }
+
+  .hi {
+    color: @SidebarText;
+  }
+
+  .up {
+    color: @DarkGreen;
+  }
+
+  .down {
+    color: @DarkRed;
+  }
+
+  .sel {
+    .hi {
+      color: @LightText;
+    }
+
+    .up {
+      color: @LightGreen;
+    }
+
+    .down {
+      color: @LightRed;
+    }
+  }
+
+  caption {
+    background-color: @NavyHeaders;
+    color: @LightText;
+  }
+
+  tr {
+    .pad {
+      padding: (@Pad1 / 2) @Pad1;
+    }
+  }
+
+  th {
+    font-weight: normal;
+    color: @SidebarText;
+
+    span {
+      color: @DarkText;
+    }
   }
 }
 

@@ -8,26 +8,27 @@ html
     link(rel='stylesheet' href='style.css')
     title Bitso
   body.reset
-    #app
-      .wrapper
-        .flex.center.navigation
-          .sp.pad.no-sel.flex.center.sm-auto
-            |[![icon "bitso_logo"]]
-            span.md-hide.menu
-          .sp.pad.no-sel.auto.sm-show Exchange
-          .pad.no-sel.auto.align-right.lg-show 1 BTC = 000,000.00 MXN
-          .sp.pad.no-sel.menu.md-show Wallet
-          .pad.no-sel.menu.md-show Exchange
-          .pad.no-sel.md-show Ayuda
-          .no-sel.user-menu
-            img(src='//placehold.it/45/4e5863/4e5863')
-          .pad.no-sel.sm-flex
-            span.menu Usuario
-          .toggler
-            input#cb1.tgl(type = "checkbox")
-            label.tgl-btn(for = "cb1")
-            span.no-sel.on ☀
-            span.no-sel.off ☾
+    #app.x-debug
+      .header
+        .wrapper
+          .flex.center.navigation
+            .sp.pad.no-sel.flex.center.sm-auto
+              |[![icon "bitso_logo"]]
+              span.md-hide.menu
+            .sp.pad.no-sel.auto.sm-show Exchange
+            .pad.no-sel.auto.align-right.lg-show 1 BTC = 000,000.00 MXN
+            .sp.pad.no-sel.menu.md-show Wallet
+            .pad.no-sel.menu.md-show Exchange
+            .pad.no-sel.md-show Ayuda
+            .no-sel.user-menu
+              img(src='//placehold.it/45/4e5863/4e5863')
+            .pad.no-sel.sm-flex
+              span.menu Usuario
+            .toggler
+              input#cb1.tgl(type = "checkbox")
+              label.tgl-btn(for = "cb1")
+              span.no-sel.on ☀
+              span.no-sel.off ☾
 
       .topbar
         .wrapper.flex.center
@@ -39,19 +40,41 @@ html
               span Mín. #[span.light 274,934.23 MXN]
               span Variación #[span.light +4,061.68 MXN (1.4 %)]
 
-      .wrapper.debug
-        .flex
-          div
-            table
-              caption Últimos trades
-              thead
-                tr
-                  th Hora
-                  th #[span MXN] Precio
-                  th #[span BTC] Monto
+      .stats
+        .wrapper
+          .md-flex
+            .md-pad(style='min-width:260px')
+              table.full-width(cellpadding=0 cellspacing=0)
+                caption.pad.caps.align-left Últimos trades
+                thead
+                  tr.caps
+                    th.pad.align-left Hora
+                    th.pad.align-right #[span MXN] Precio
+                    th.pad.align-center #[span BTC] Monto
+                tbody
+                  each x, _ in Array.from({ length: 8 })
+                    tr
+                      td.pad.align-left #[span.hi 16:10:25]
+                      td.pad.align-right #[span.up 319,149.99]
+                      td.pad.align-center #[span.hi 1.0900484]00
+                    tr(class=_ === 5 ? 'sel' : null)
+                      td.pad.align-left #[span.hi 16:10:25]
+                      td.pad.align-right #[span.up 319,149.99]
+                      td.pad.align-center #[span.hi 0.0904]00000
+                    tr
+                      td.pad.align-left #[span.hi 16:10:25]
+                      td.pad.align-right #[span.down 319,149.99]
+                      td.pad.align-center #[span.hi 49.0903]0000
+            .auto
+              .auto.md-pad
+                img.fit(src='//placehold.it/1000x400')
+              .lg-flex
+                .auto.md-pad
+                  table.full-width(cellpadding=0 cellspacing=0)
+                    caption.pad.align-left
+                      span.caps Posturas de compra
 
-          .auto
-            div MAIN CANVAS
-            .flex
-              .auto LEFT TABLE
-              .auto RIGHT TABLE
+                .auto.md-pad
+                  table.full-width(cellpadding=0 cellspacing=0)
+                    caption.pad.align-left
+                      span.caps Posturas de venta
