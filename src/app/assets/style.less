@@ -115,6 +115,17 @@ body {
     }
   }
 
+  .kind {
+    &::after {
+      display: none;
+      margin-left: @Pad1;
+    }
+
+    &::before {
+      margin-right: @Pad1;
+    }
+  }
+
   .mxn::after,
   .mxn::before {
     content: 'MXN';
@@ -123,6 +134,16 @@ body {
   .btc::after,
   .btc::before {
     content: 'BTC';
+  }
+
+  .bid::after,
+  .bid::before {
+    content: 'Bid';
+  }
+
+  .ask::after,
+  .ask::before {
+    content: 'Ask';
   }
 
   .sel {
@@ -196,8 +217,8 @@ body {
       caption {
         background-color: #1D262F;
 
-        .coin::after { display: inline-block; }
-        .coin::before { display: none; }
+        .coin::after, .kind::after { display: inline-block; }
+        .coin::before, .kind::before { display: none; }
       }
 
       tr {

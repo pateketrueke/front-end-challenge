@@ -42,8 +42,8 @@ html
 
       .stats
         .wrapper
-          .md-flex
-            .md-pad(style='min-width:260px')
+          .sm-flex
+            .md-pad.one-third
               table.full-width(cellpadding=0 cellspacing=0)
                 caption.pad.caps.align-left Últimos trades
                 thead
@@ -52,7 +52,7 @@ html
                     th.pad.align-right.coin.mxn Precio
                     th.pad.align-right.coin.btc Monto
                 tbody
-                  each x, _ in Array.from({ length: 8 })
+                  each x, _ in Array.from({ length: 11 })
                     tr
                       td.pad.align-left #[span.hi 16:10:25]
                       td.pad.align-right #[span.up 319,149.99]
@@ -74,7 +74,7 @@ html
                     caption.pad.align-left
                       .flex
                         .caps Posturas de compra
-                        span.coin.mxn Bid 319,140.00
+                        span.coin.mxn #[span.kind.bid 319,140.00]
                     thead
                       tr.caps
                         th.pad.align-right Sum
@@ -82,7 +82,7 @@ html
                         th.pad.align-right.coin.mxn Valor
                         th.pad.align-right.coin.mxn Precio
                     tbody
-                      each x, _ in Array.from({ length: 8 })
+                      each x, _ in Array.from({ length: 11 })
                         tr(class=_ === 5 ? 'sel' : null)
                           td.pad.align-right #[span.hi 1.09]
                           td.pad.align-right #[span.hi 1.090484]00
@@ -94,7 +94,7 @@ html
                     caption.pad.align-left
                       .flex
                         .caps Posturas de venta
-                        span.coin.mxn 274,934.23 Ask
+                        span.coin.mxn #[span.kind.ask 274,934.23]
                     thead
                       tr.caps
                         th.pad.align-right Sum
@@ -102,7 +102,7 @@ html
                         th.pad.align-right.coin.mxn Valor
                         th.pad.align-right.coin.mxn Precio
                     tbody
-                      each x, _ in Array.from({ length: 8 })
+                      each x, _ in Array.from({ length: 11 })
                         tr(class=_ === 3 ? 'sel' : null)
                           td.pad.align-right 1.09
                           td.pad.align-right #[span.hi 1.090484]00

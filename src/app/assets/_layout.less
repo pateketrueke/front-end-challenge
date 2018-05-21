@@ -2,7 +2,7 @@
 @Pad2: 16px;
 @Pad3: 32px;
 
-@TinyWidth: 480px;
+@TinyWidth: 600px;
 @SmallWidth: 760px;
 @MediumWidth: 960px;
 @LargerWidth: 1260px;
@@ -12,13 +12,17 @@
   margin: auto;
 }
 
+.one-third {
+  min-width: 260px;
+}
+
 .sm-show,
 .md-show,
 .lg-show {
   display: none;
 }
 
-@media screen and (max-width: @TinyWidth) {
+@media screen and (max-width: (@TinyWidth - 1px)) {
   .sm-auto {
     flex: 1 1 auto;
   }
