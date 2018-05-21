@@ -74,6 +74,47 @@ body {
   }
 }
 
+.sidebar {
+  top: 0;
+  right: 0;
+  height: 100%;
+  min-width: 32px;
+  position: absolute;
+  background-color: @SidebarBackground;
+
+  &:hover {
+    background-color: @Sidebar;
+  }
+
+  .mkt-menu {
+    top: @Pad1;
+    position: absolute;
+    transform: rotate(90deg) translateY(-26px);
+    transform-origin: 0 0;
+
+    &::before {
+      content: '▾';
+      margin-right: @Pad1;
+    }
+
+    ~ .content {
+      background-color: @SidebarBackground;
+      margin-left: 32px;
+      min-width: 320px;
+      height: 100%;
+      display: none;
+    }
+
+    ~ input {
+      display: none;
+
+      &:checked ~ .content {
+        display: block;
+      }
+    }
+  }
+}
+
 .topbar {
   background-color: @DarkNavy;
   padding: @Pad1;
@@ -96,6 +137,9 @@ body {
 }
 
 .stats {
+  border-top: 1px solid @Sidebar;
+  position: relative;
+
   .pad {
     padding: @Pad1;
   }
