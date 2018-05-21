@@ -9,6 +9,7 @@
 
 .wrapper {
   max-width: @LargerWidth;
+  position: relative;
   margin: auto;
 }
 
@@ -20,6 +21,16 @@
 .md-show,
 .lg-show {
   display: none;
+}
+
+@media screen and (max-width: ((@LargerWidth + 50px) - 1px)) {
+  .sidebar {
+    ~ .wrapper {
+      > .sm-flex {
+        margin-right: 32px;
+      }
+    }
+  }
 }
 
 @media screen and (max-width: (@TinyWidth - 1px)) {

@@ -41,6 +41,34 @@ html
               span Variación #[span.light +4,061.68 MXN (1.4 %)]
 
       .stats
+        .sidebar
+          label.no-sel.mkt-menu(for='sideBar') Mercados
+          input#sideBar(type='checkbox')
+          .content
+            h4.pad.caps.reset Mercados 24 H
+            ul.reset.no-type
+              li
+                .flex
+                  .hi.auto ETH/MXN
+                  .up $172,948.00 MXN
+              li
+                .flex
+                  .hi.auto ETH/MXN
+                  .down $12,248.55 MXN
+              li.open
+                .flex
+                  .hi.auto XRP/MXN
+                  .up $12.75 MXN
+                img.fit(src='//placehold.it/260x120')
+              li
+                .flex
+                  .hi.auto LTC/MXN
+                  .down $2,948.55 MXN
+              li
+                .flex
+                  .hi.auto BCH/MXN
+                  .up $29,248.55 MXN
+
         .wrapper
           .sm-flex
             .md-pad.one-third
@@ -104,11 +132,7 @@ html
                     tbody
                       each x, _ in Array.from({ length: 11 })
                         tr(class=_ === 3 ? 'sel' : null)
-                          td.pad.align-right 1.09
+                          td.pad.align-right #[span.hi 1.09]
                           td.pad.align-right #[span.hi 1.090484]00
-                          td.pad.align-right 2,307,984.29
+                          td.pad.align-right #[span.hi 2,307,984.29]
                           td.pad.align-right #[span.down 319,149.99]
-          .sidebar
-            label.no-sel.mkt-menu(for='sideBar') Mercados
-            input#sideBar(type='checkbox')
-            .content CONTENT
