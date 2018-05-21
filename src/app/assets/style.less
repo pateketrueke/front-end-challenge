@@ -100,10 +100,27 @@ body {
     padding: @Pad1;
   }
 
+  .coin {
+    font-size: 90%;
+
+    &::after {
+      display: none;
+      color: @DarkText;
+      margin-left: @Pad1 / 2;
+    }
+
+    &::before {
+      color: @DarkText;
+      margin-right: @Pad1 / 2;
+    }
+  }
+
+  .mxn::after,
   .mxn::before {
     content: 'MXN';
   }
 
+  .btc::after,
   .btc::before {
     content: 'BTC';
   }
@@ -127,6 +144,7 @@ body {
   .sel {
     .hi {
       color: @LightText;
+      color: #E4E8E5;
     }
 
     .up {
@@ -159,12 +177,27 @@ body {
         > *:nth-child(1) { order: 1; flex: 1 1 auto; }
         > *:nth-child(2) { order: 2; }
       }
+
+      .sel {
+        background-color: #385D3C;
+
+        td {
+          color: #898E8A;
+        }
+      }
     }
 
     .inverted {
       .flex {
         > *:nth-child(1) { order: 2; flex: none; }
         > *:nth-child(2) { order: 1; flex: 1 1 auto; }
+      }
+
+      caption {
+        background-color: #1D262F;
+
+        .coin::after { display: inline-block; }
+        .coin::before { display: none; }
       }
 
       tr {
@@ -178,7 +211,7 @@ body {
   }
 
   caption {
-    background-color: @NavyHeaders;
+    background-color: #23313E;
     color: @LightText;
   }
 

@@ -49,8 +49,8 @@ html
                 thead
                   tr.caps
                     th.pad.align-left Hora
-                    th.pad.align-right.mxn Precio
-                    th.pad.align-right.btc Monto
+                    th.pad.align-right.coin.mxn Precio
+                    th.pad.align-right.coin.btc Monto
                 tbody
                   each x, _ in Array.from({ length: 8 })
                     tr
@@ -74,19 +74,19 @@ html
                     caption.pad.align-left
                       .flex
                         .caps Posturas de compra
-                        span.mxn Bid 319,140.00
+                        span.coin.mxn Bid 319,140.00
                     thead
                       tr.caps
                         th.pad.align-right Sum
-                        th.pad.align-right.btc Monto
-                        th.pad.align-right.mxn Valor
-                        th.pad.align-right.mxn Precio
+                        th.pad.align-right.coin.btc Monto
+                        th.pad.align-right.coin.mxn Valor
+                        th.pad.align-right.coin.mxn Precio
                     tbody
                       each x, _ in Array.from({ length: 8 })
                         tr(class=_ === 5 ? 'sel' : null)
-                          td.pad.align-right 1.09
+                          td.pad.align-right #[span.hi 1.09]
                           td.pad.align-right #[span.hi 1.090484]00
-                          td.pad.align-right 2,307,984.29
+                          td.pad.align-right #[span.hi 2,307,984.29]
                           td.pad.align-right #[span.up 319,149.99]
 
                 .auto.md-pad
@@ -94,13 +94,13 @@ html
                     caption.pad.align-left
                       .flex
                         .caps Posturas de venta
-                        span.mxn 274,934.23 Ask
+                        span.coin.mxn 274,934.23 Ask
                     thead
                       tr.caps
                         th.pad.align-right Sum
-                        th.pad.align-right.btc Monto
-                        th.pad.align-right.mxn Valor
-                        th.pad.align-right.mxn Precio
+                        th.pad.align-right.coin.btc Monto
+                        th.pad.align-right.coin.mxn Valor
+                        th.pad.align-right.coin.mxn Precio
                     tbody
                       each x, _ in Array.from({ length: 8 })
                         tr(class=_ === 3 ? 'sel' : null)
