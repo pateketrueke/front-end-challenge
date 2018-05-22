@@ -25,7 +25,7 @@ html
             .pad.no-sel.sm-flex
               span.menu Usuario
             .toggler
-              input#themeDark.tgl(type='checkbox')
+              input#themeDark.tgl(type='checkbox' checked)
               label.tgl-btn(for='themeDark')
               span.no-sel.on ☀
               span.no-sel.off ☾
@@ -47,27 +47,36 @@ html
           .content
             h4.pad.caps.reset Mercados 24 H
             ul.reset.no-type
-              li
+              li.pad
                 .flex
                   .hi.auto ETH/MXN
                   .up $172,948.00 MXN
-              li
+              li.pad
                 .flex
                   .hi.auto ETH/MXN
                   .down $12,248.55 MXN
-              li.open
+              li.pad.open
                 .flex
                   .hi.auto XRP/MXN
                   .up $12.75 MXN
-                img.fit(src='//placehold.it/260x120')
-              li
+                small.float-right 10:23 AM
+                img.fit(src='//placehold.it/260x80/161a1e/161a1e')
+              li.pad
                 .flex
                   .hi.auto LTC/MXN
                   .down $2,948.55 MXN
-              li
+              li.pad
                 .flex
                   .hi.auto BCH/MXN
                   .up $29,248.55 MXN
+              li.pad
+                .flex
+                  .hi.auto ETH/BTC
+                  .down #[span.hi 0.08136]000 BTC
+              li.pad
+                .flex
+                  .hi.auto LTC/BTC
+                  .up #[span.hi 0.016757]00 BTC
 
         .wrapper
           .sm-flex
@@ -95,7 +104,7 @@ html
                       td.pad.align-right #[span.hi 49.0903]0000
             .auto
               .auto.md-pad
-                img.fit(src='//placehold.it/1000x400')
+                img.fit(src='//placehold.it/1000x400/171E24/171E24')
               .lg-flex
                 .auto.md-pad
                   table.ordered.full-width(cellpadding=0 cellspacing=0)

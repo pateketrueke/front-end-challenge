@@ -90,8 +90,36 @@ body {
   }
 
   li {
-    ~ li > *:first-child {
+    position: relative;
+
+    + li::before {
       border-top: 1px solid @DarkText;
+      width: 220 - @Pad2;
+      position: absolute;
+      content: ' ';
+      height: 1px;
+      top: 0;
+    }
+
+    &.open {
+      border-top: 1px solid @DarkText;
+      background-color: @DarkNavy;
+      min-height: 110px;
+
+      &::before {
+        border: none;
+      }
+
+      + li::before {
+        width: 220px;
+        left: 0;
+      }
+
+      img {
+        left: 0;
+        bottom: 0;
+        position: absolute;
+      }
     }
   }
 
@@ -106,21 +134,39 @@ body {
     }
   }
 
-  .up::before {
-    left: -2px;
-    content: '▾';
-    transform-origin: 0 0;
-    margin-right: @Pad1 / 2;
-    transform: rotate(180deg) translateY(-20px);
+  .up {
+    .hi {
+      color: @LightGreen;
+    }
+
+    &::before {
+      left: -2px;
+      content: '▾';
+      transform-origin: 0 0;
+      margin-right: @Pad1 / 2;
+      transform: rotate(180deg) translateY(-20px);
+    }
   }
 
-  .down::before {
-    content: '▾';
-    left: -12px;
+  .down {
+    .hi {
+      color: @LightRed;
+    }
+
+    &::before {
+      content: '▾';
+      left: -12px;
+    }
   }
 
   &:hover {
     background-color: @Sidebar;
+  }
+
+  .content {
+    .pad {
+      padding: @Pad1;
+    }
   }
 
   .mkt-menu {
@@ -137,7 +183,8 @@ body {
 
     ~ .content {
       background-color: @SidebarBackground;
-      margin-left: 32px;
+      border-left: 1px solid @DarkBackground;
+      margin-left: @Pad3;
       width: 220px;
       height: 100%;
       display: none;
