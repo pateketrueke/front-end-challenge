@@ -140,7 +140,8 @@ mixin Stats02
             td.pad.align-right #[span.down 319,149.99]
 
 mixin Footer
-  p.align-center.reset Is this real life?
+  - var link = 'https://github.com/pateketrueke/front-end-challenge/tree/feature/ui-proto/src'
+  p.align-center.reset Is this real life? &mdash; Source code: #[a(href=link)= link]
 
 doctype html
 html
