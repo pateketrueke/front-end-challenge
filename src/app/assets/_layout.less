@@ -7,6 +7,10 @@
 @MediumWidth: 960px;
 @LargerWidth: 1260px;
 
+html, body {
+  height: 100%;
+}
+
 #app {
   overflow: auto;
   height: 100%;
@@ -46,6 +50,38 @@
   min-width: 260px;
 }
 
+.reset {
+  padding: 0;
+  margin: 0;
+}
+
+.flex {
+  display: flex;
+
+  &.center {
+    align-items: center;
+  }
+
+  > .auto {
+    flex: 1 1 auto;
+  }
+}
+
+.fit {
+  max-width: 100%;
+  height: auto;
+}
+
+.full {
+  height: 100%;
+}
+
+.sp {
+  + .sp {
+    border-left: 1px solid @DarkText;
+  }
+}
+
 .sm-show,
 .md-show,
 .lg-show {
@@ -55,7 +91,7 @@
 @media screen and (max-width: ((@LargerWidth + 50px) - 1px)) {
   .sidebar {
     + .wrapper {
-      > .sm-flex {
+      > * {
         margin-right: 32px;
       }
     }
@@ -81,13 +117,13 @@
 @media screen and (min-width: @SmallWidth) {
   #app {
     display: grid;
-    grid-template-columns: 1fr 2fr;
-    grid-template-rows: min-content min-content min-content min-content;
+    grid-template-columns: 1fr 3fr;
+    grid-template-rows: 300px auto auto;
     grid-template-areas:
-      'header header'
       'table-left main'
       'table-left tmain01'
-      'footer tmain02';
+      'table-left tmain02'
+      'footer footer';
   }
 
   .md-flex {
@@ -114,10 +150,10 @@
 
 @media screen and (min-width: @MediumWidth) {
   #app {
-    grid-template-columns: 1fr 2fr 2fr;
-    grid-template-rows: min-content min-content min-content min-content;
+    display: grid;
+    grid-template-columns: 2fr 3fr 3fr;
+    grid-template-rows: 400px auto auto;
     grid-template-areas:
-      'header header header'
       'table-left main main'
       'table-left tmain01 tmain02'
       'footer footer footer';

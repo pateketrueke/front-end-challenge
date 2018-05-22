@@ -15,7 +15,7 @@ mixin Header
         .pad.no-sel.sm-flex
           span.menu Usuario
         .toggler
-          input#themeDark.tgl(type='checkbox' checked)
+          input#themeDark.tgl-in(type='checkbox' checked)
           label.tgl-btn(for='themeDark')
           span.no-sel.on ☀
           span.no-sel.off ☾
@@ -94,8 +94,8 @@ mixin Stats00
             td.pad.align-right #[span.hi 49.0903]0000
 
 mixin Canvas
-  .md-pad
-    img.fit(src='//placehold.it/1000x400/171E24/fff')
+  .md-pad.full
+    img.fit.full(src='//placehold.it/1000x400/171E24/fff')
 
 mixin Stats01
   .md-pad
@@ -151,7 +151,7 @@ html
     link(rel='stylesheet' href='resources/sprites.css')
     link(rel='stylesheet' href='style.css')
     title Bitso
-  body#theme.reset
+  body#theme.reset.x-debug
     +Header
     +Topbar
 
