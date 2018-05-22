@@ -8,6 +8,9 @@ help: Makefile ## Show this help
 dev: all ## Start dev environment
 	@cd src && npm run dev
 
+open: all ## Run dev and open the browser :wink:
+	@cd src && npm run dev -- -o
+
 build: all ## Build artifacts for production
 	@cd src && npm run build
 
