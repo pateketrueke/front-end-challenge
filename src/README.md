@@ -1,6 +1,7 @@
 # Bitso
-> **Frontend Challenge**
-> Lo contenido en éste repositorio honra a sus respectivos autores.
+
+> **Frontend Challenge**<br>
+> Lo contenido en éste repositorio honra a sus respectivos autores.<br>
 > Yo sólo soy un artesano que ha unido todo y, gracias al trabajo de todo el mundo, ha hecho posible darle vida.
 
 ## ¿Cómo funciona?
