@@ -40,6 +40,42 @@
 }
 
 @media screen and (min-width: @TinyWidth) {
+  #app {
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr;
+    grid-template-rows: min-content min-content min-content min-content;
+    grid-template-areas:
+      'header header header'
+      'table-left main main'
+      'table-left tmain01 tmain02'
+      'footer footer footer';
+    height: 100%;
+  }
+
+  #top {
+    grid-area: header;
+  }
+
+  #table-left {
+    grid-area: table-left;
+  }
+
+  #main {
+    grid-area: main;
+  }
+
+  #table-main-01 {
+    grid-area: tmain01;
+  }
+
+  #table-main-02 {
+    grid-area: tmain02;
+  }
+
+  #footer {
+    grid-area: footer;
+  }
+
   .sm-flex {
     .flex;
   }

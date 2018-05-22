@@ -1,3 +1,147 @@
+mixin Header
+  .header
+    .wrapper
+      .flex.center.navigation
+        .sp.pad.no-sel.flex.center.sm-auto
+          |[![icon "bitso_logo"]]
+          span.md-hide.menu
+        .sp.pad.no-sel.auto.sm-show Exchange
+        .pad.no-sel.auto.align-right.lg-show 1 BTC = 000,000.00 MXN
+        .sp.pad.no-sel.menu.md-show Wallet
+        .pad.no-sel.menu.md-show Exchange
+        .pad.no-sel.md-show Ayuda
+        .no-sel.user-menu
+          img(src='//placehold.it/45/4e5863/4e5863')
+        .pad.no-sel.sm-flex
+          span.menu Usuario
+        .toggler
+          input#themeDark.tgl(type='checkbox' checked)
+          label.tgl-btn(for='themeDark')
+          span.no-sel.on ☀
+          span.no-sel.off ☾
+
+mixin Topbar
+  .topbar
+    .wrapper.flex.center
+      .no-wrap.no-sel.menu BTC / MXN
+      .scroll.no-sel
+        .flex.push
+          span Volumen 24 h #[span.light 170.5405818 BTC]
+          span Máx. #[span.light 304,934.23 MXN]
+          span Mín. #[span.light 274,934.23 MXN]
+          span Variación #[span.light +4,061.68 MXN (1.4 %)]
+
+mixin Sidebar
+  .sidebar
+    label.no-sel.mkt-menu(for='sideBar') Mercados
+    input#sideBar(type='checkbox')
+    .content
+      h4.pad.caps.reset Mercados 24 H
+      ul.reset.no-type
+        li.pad
+          .flex
+            .hi.auto ETH/MXN
+            .up $172,948.00 MXN
+        li.pad
+          .flex
+            .hi.auto ETH/MXN
+            .down $12,248.55 MXN
+        li.pad.open
+          .flex
+            .hi.auto XRP/MXN
+            .up $12.75 MXN
+          small.float-right 10:23 AM
+          img.fit(src='//placehold.it/260x80/161a1e/fff')
+        li.pad
+          .flex
+            .hi.auto LTC/MXN
+            .down $2,948.55 MXN
+        li.pad
+          .flex
+            .hi.auto BCH/MXN
+            .up $29,248.55 MXN
+        li.pad
+          .flex
+            .hi.auto ETH/BTC
+            .down #[span.hi 0.08136]000 BTC
+        li.pad
+          .flex
+            .hi.auto LTC/BTC
+            .up #[span.hi 0.016757]00 BTC
+
+mixin Stats00
+  .md-pad.one-third
+    table.full-width(cellpadding=0 cellspacing=0)
+      caption.pad.caps.align-left Últimos trades
+      thead
+        tr.caps
+          th.pad.align-left Hora
+          th.pad.align-right.coin.mxn Precio
+          th.pad.align-right.coin.btc Monto
+      tbody
+        each x, _ in Array.from({ length: 11 })
+          tr
+            td.pad.align-left #[span.hi 16:10:25]
+            td.pad.align-right #[span.up 319,149.99]
+            td.pad.align-right #[span.hi 1.0900484]00
+          tr(class=_ === 5 ? 'sel' : null)
+            td.pad.align-left #[span.hi 16:10:25]
+            td.pad.align-right #[span.up 319,149.99]
+            td.pad.align-right #[span.hi 0.0904]00000
+          tr
+            td.pad.align-left #[span.hi 16:10:25]
+            td.pad.align-right #[span.down 319,149.99]
+            td.pad.align-right #[span.hi 49.0903]0000
+
+mixin Canvas
+  .md-pad
+    img.fit(src='//placehold.it/1000x400/171E24/fff')
+
+mixin Stats01
+  .md-pad
+    table.ordered.full-width(cellpadding=0 cellspacing=0)
+      caption.pad.align-left
+        .flex
+          .caps Posturas de compra
+          span.coin.mxn #[span.kind.bid 319,140.00]
+      thead
+        tr.caps
+          th.pad.align-right Sum
+          th.pad.align-right.coin.btc Monto
+          th.pad.align-right.coin.mxn Valor
+          th.pad.align-right.coin.mxn Precio
+      tbody
+        each x, _ in Array.from({ length: 11 })
+          tr(class=_ === 5 ? 'sel' : null)
+            td.pad.align-right #[span.hi 1.09]
+            td.pad.align-right #[span.hi 1.090484]00
+            td.pad.align-right #[span.hi 2,307,984.29]
+            td.pad.align-right #[span.up 319,149.99]
+
+mixin Stats02
+  .md-pad
+    table.inverted.full-width(cellpadding=0 cellspacing=0)
+      caption.pad.align-left
+        .flex
+          .caps Posturas de venta
+          span.coin.mxn #[span.kind.ask 274,934.23]
+      thead
+        tr.caps
+          th.pad.align-right Sum
+          th.pad.align-right.coin.btc Monto
+          th.pad.align-right.coin.mxn Valor
+          th.pad.align-right.coin.mxn Precio
+      tbody
+        each x, _ in Array.from({ length: 11 })
+          tr(class=_ === 3 ? 'sel' : null)
+            td.pad.align-right #[span.hi 1.09]
+            td.pad.align-right #[span.hi 1.090484]00
+            td.pad.align-right #[span.hi 2,307,984.29]
+            td.pad.align-right #[span.down 319,149.99]
+
+mixin Footer
+  p.align-center.reset Is this real life?
+
 doctype html
 html
   head
@@ -7,141 +151,22 @@ html
     link(rel='stylesheet' href='resources/sprites.css')
     link(rel='stylesheet' href='style.css')
     title Bitso
-  body.reset
-    #app.x-debug
-      .header
-        .wrapper
-          .flex.center.navigation
-            .sp.pad.no-sel.flex.center.sm-auto
-              |[![icon "bitso_logo"]]
-              span.md-hide.menu
-            .sp.pad.no-sel.auto.sm-show Exchange
-            .pad.no-sel.auto.align-right.lg-show 1 BTC = 000,000.00 MXN
-            .sp.pad.no-sel.menu.md-show Wallet
-            .pad.no-sel.menu.md-show Exchange
-            .pad.no-sel.md-show Ayuda
-            .no-sel.user-menu
-              img(src='//placehold.it/45/4e5863/4e5863')
-            .pad.no-sel.sm-flex
-              span.menu Usuario
-            .toggler
-              input#themeDark.tgl(type='checkbox' checked)
-              label.tgl-btn(for='themeDark')
-              span.no-sel.on ☀
-              span.no-sel.off ☾
+  body#theme.reset
+    +Header
+    +Topbar
 
-      .topbar
-        .wrapper.flex.center
-          .no-wrap.no-sel.menu BTC / MXN
-          .scroll.no-sel
-            .flex.push
-              span Volumen 24 h #[span.light 170.5405818 BTC]
-              span Máx. #[span.light 304,934.23 MXN]
-              span Mín. #[span.light 274,934.23 MXN]
-              span Variación #[span.light +4,061.68 MXN (1.4 %)]
+    .rel
+      +Sidebar
 
-      .stats
-        .sidebar
-          label.no-sel.mkt-menu(for='sideBar') Mercados
-          input#sideBar(type='checkbox')
-          .content
-            h4.pad.caps.reset Mercados 24 H
-            ul.reset.no-type
-              li.pad
-                .flex
-                  .hi.auto ETH/MXN
-                  .up $172,948.00 MXN
-              li.pad
-                .flex
-                  .hi.auto ETH/MXN
-                  .down $12,248.55 MXN
-              li.pad.open
-                .flex
-                  .hi.auto XRP/MXN
-                  .up $12.75 MXN
-                small.float-right 10:23 AM
-                img.fit(src='//placehold.it/260x80/161a1e/161a1e')
-              li.pad
-                .flex
-                  .hi.auto LTC/MXN
-                  .down $2,948.55 MXN
-              li.pad
-                .flex
-                  .hi.auto BCH/MXN
-                  .up $29,248.55 MXN
-              li.pad
-                .flex
-                  .hi.auto ETH/BTC
-                  .down #[span.hi 0.08136]000 BTC
-              li.pad
-                .flex
-                  .hi.auto LTC/BTC
-                  .up #[span.hi 0.016757]00 BTC
-
-        .wrapper
-          .sm-flex
-            .md-pad.one-third
-              table.full-width(cellpadding=0 cellspacing=0)
-                caption.pad.caps.align-left Últimos trades
-                thead
-                  tr.caps
-                    th.pad.align-left Hora
-                    th.pad.align-right.coin.mxn Precio
-                    th.pad.align-right.coin.btc Monto
-                tbody
-                  each x, _ in Array.from({ length: 11 })
-                    tr
-                      td.pad.align-left #[span.hi 16:10:25]
-                      td.pad.align-right #[span.up 319,149.99]
-                      td.pad.align-right #[span.hi 1.0900484]00
-                    tr(class=_ === 5 ? 'sel' : null)
-                      td.pad.align-left #[span.hi 16:10:25]
-                      td.pad.align-right #[span.up 319,149.99]
-                      td.pad.align-right #[span.hi 0.0904]00000
-                    tr
-                      td.pad.align-left #[span.hi 16:10:25]
-                      td.pad.align-right #[span.down 319,149.99]
-                      td.pad.align-right #[span.hi 49.0903]0000
-            .auto
-              .auto.md-pad
-                img.fit(src='//placehold.it/1000x400/171E24/171E24')
-              .lg-flex
-                .auto.md-pad
-                  table.ordered.full-width(cellpadding=0 cellspacing=0)
-                    caption.pad.align-left
-                      .flex
-                        .caps Posturas de compra
-                        span.coin.mxn #[span.kind.bid 319,140.00]
-                    thead
-                      tr.caps
-                        th.pad.align-right Sum
-                        th.pad.align-right.coin.btc Monto
-                        th.pad.align-right.coin.mxn Valor
-                        th.pad.align-right.coin.mxn Precio
-                    tbody
-                      each x, _ in Array.from({ length: 11 })
-                        tr(class=_ === 5 ? 'sel' : null)
-                          td.pad.align-right #[span.hi 1.09]
-                          td.pad.align-right #[span.hi 1.090484]00
-                          td.pad.align-right #[span.hi 2,307,984.29]
-                          td.pad.align-right #[span.up 319,149.99]
-
-                .auto.md-pad
-                  table.inverted.full-width(cellpadding=0 cellspacing=0)
-                    caption.pad.align-left
-                      .flex
-                        .caps Posturas de venta
-                        span.coin.mxn #[span.kind.ask 274,934.23]
-                    thead
-                      tr.caps
-                        th.pad.align-right Sum
-                        th.pad.align-right.coin.btc Monto
-                        th.pad.align-right.coin.mxn Valor
-                        th.pad.align-right.coin.mxn Precio
-                    tbody
-                      each x, _ in Array.from({ length: 11 })
-                        tr(class=_ === 3 ? 'sel' : null)
-                          td.pad.align-right #[span.hi 1.09]
-                          td.pad.align-right #[span.hi 1.090484]00
-                          td.pad.align-right #[span.hi 2,307,984.29]
-                          td.pad.align-right #[span.down 319,149.99]
+      .wrapper
+        #app.stats
+          #main
+            +Canvas
+          #table-left
+            +Stats00
+          #table-main-01
+            +Stats01
+          #table-main-02
+            +Stats02
+          #footer
+            +Footer
