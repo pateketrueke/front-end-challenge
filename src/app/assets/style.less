@@ -297,66 +297,6 @@ a {
     }
   }
 
-  .inverted,
-  .ordered {
-    .flex {
-      *:nth-child(1) { flex: 1 1 auto; }
-    }
-  }
-
-  @media screen and (min-width: @MediumWidth) {
-    tr {
-      display: flex;
-
-      td, th {
-        flex: 1 1 auto;
-      }
-    }
-
-    .ordered {
-      .flex {
-        > *:nth-child(1) { order: 1; flex: 1 1 auto; }
-        > *:nth-child(2) { order: 2; }
-      }
-
-      .sel {
-        background-color: #385D3C;
-
-        td {
-          color: #898E8A;
-        }
-      }
-    }
-
-    .inverted {
-      .flex {
-        > *:nth-child(1) { order: 2; flex: none; }
-        > *:nth-child(2) { order: 1; flex: 1 1 auto; }
-      }
-
-      .sel {
-        td {
-          color: #898E8A;
-        }
-      }
-
-      caption {
-        background-color: #1D262F;
-
-        .coin::after, .kind::after { display: inline-block; }
-        .coin::before, .kind::before { display: none; }
-      }
-
-      tr {
-        td:nth-child(1), th:nth-child(1) { order: 5; }
-        td:nth-child(2), th:nth-child(2) { order: 4; }
-        td:nth-child(3), th:nth-child(3) { order: 3; }
-        td:nth-child(4), th:nth-child(4) { order: 2; }
-        td:nth-child(5), th:nth-child(5) { order: 1; }
-      }
-    }
-  }
-
   caption {
     background-color: #23313E;
     color: @LightText;
@@ -374,6 +314,72 @@ a {
 
     span {
       color: @DarkText;
+    }
+  }
+
+  .inverted,
+  .ordered {
+    .flex {
+      *:nth-child(1) { flex: 1 1 auto; }
+    }
+  }
+
+  .ordered {
+    caption {
+      background-color: #1D262F;
+    }
+
+    .sel {
+      background-color: #385D3C;
+
+      td {
+        color: #898E8A;
+      }
+    }
+  }
+
+  .inverted {
+    .sel {
+      td {
+        color: #898E8A;
+      }
+    }
+  }
+
+  @media screen and (min-width: @MediumWidth) {
+    tr {
+      display: flex;
+
+      td, th {
+        flex: 1 1 auto;
+      }
+    }
+
+    .ordered {
+      .flex {
+        > *:nth-child(1) { order: 1; flex: 1 1 auto; }
+        > *:nth-child(2) { order: 2; }
+      }
+    }
+
+    .inverted {
+      .flex {
+        > *:nth-child(1) { order: 2; flex: none; }
+        > *:nth-child(2) { order: 1; flex: 1 1 auto; }
+      }
+
+      caption {
+        .coin::after, .kind::after { display: inline-block; }
+        .coin::before, .kind::before { display: none; }
+      }
+
+      tr {
+        td:nth-child(1), th:nth-child(1) { order: 5; }
+        td:nth-child(2), th:nth-child(2) { order: 4; }
+        td:nth-child(3), th:nth-child(3) { order: 3; }
+        td:nth-child(4), th:nth-child(4) { order: 2; }
+        td:nth-child(5), th:nth-child(5) { order: 1; }
+      }
     }
   }
 }
