@@ -6,7 +6,8 @@
   "author": "Alvaro Cabrera <yo@soypache.co>",
   "license": "MIT",
   "scripts": {
-    "dev": "tarima watch -s"
+    "dev": "tarima watch -s",
+    "build": "tarima -fqe production"
   },
   "tarima": {
     "public": "build",
