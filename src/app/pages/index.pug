@@ -111,7 +111,7 @@ mixin Stats01
           th.pad.align-right.coin.mxn Valor
           th.pad.align-right.coin.mxn Precio
       tbody
-        each x, _ in Array.from({ length: 50 })
+        each x, _ in Array.from({ length: 49 })
           tr(class=_ === 5 ? 'sel' : null)
             td.pad.align-right #[span.hi 1.09]
             td.pad.align-right #[span.hi 1.090484]00
@@ -132,7 +132,7 @@ mixin Stats02
           th.pad.align-right.coin.mxn Valor
           th.pad.align-right.coin.mxn Precio
       tbody
-        each x, _ in Array.from({ length: 50 })
+        each x, _ in Array.from({ length: 49 })
           tr(class=_ === 3 ? 'sel' : null)
             td.pad.align-right #[span.hi 1.09]
             td.pad.align-right #[span.hi 1.090484]00
@@ -164,9 +164,9 @@ html
         #app
           #main
             +Canvas
-          #table-left.full
+          #table-left
             +Stats00
-          #table-main-01.mid
+          #table-main-01
             +Stats01
-          #table-main-02.mid
+          #table-main-02
             +Stats02

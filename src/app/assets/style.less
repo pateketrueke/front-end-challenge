@@ -78,7 +78,7 @@ a {
   top: 0;
   right: 0;
   z-index: 1;
-  xheight: 100%;
+  height: 100%;
   min-width: 32px;
   overflow: hidden;
   position: absolute;
@@ -182,7 +182,7 @@ a {
       border-left: 1px solid @DarkBackground;
       margin-left: @Pad3;
       width: 220px;
-      xheight: 100%;
+      height: 100%;
       display: none;
     }
 
@@ -219,6 +219,9 @@ a {
 
 .stats {
   border-top: 1px solid @Sidebar;
+  position: absolute;
+  right: 0;
+  left: 0;
 
   .coin {
     font-size: 90%;

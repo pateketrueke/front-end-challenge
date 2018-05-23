@@ -87,11 +87,11 @@ html, body {
   display: none;
 }
 
-@media screen and (max-width: ((@LargerWidth + 50px) - 1px)) {
+@media screen and (max-width: ((@LargerWidth + (@Pad3 * 2)) - 1px)) {
   .sidebar {
     + .wrapper {
       > * {
-        margin-right: 32px;
+        margin-right: @Pad3;
       }
     }
   }
@@ -117,39 +117,23 @@ html, body {
   #app {
     display: grid;
     grid-template-columns: 1.9fr 3.1fr;
-    grid-template-rows: 1.1fr .8fr .8fr;
+    grid-template-rows: ~"calc(40vh - 123px)" 30vh 30vh;
     grid-template-areas:
       'table-left main'
       'table-left tmain01'
-      'table-left tmain02'
-      'footer footer';
+      'table-left tmain02';
 
-    > .full {
-      height: ~"calc(100vh - 123px)";
-      overflow: auto;
-    }
-
-    > .mid {
-      height: ~"calc(40vh - 123px)";
-      overflow: auto;
-    }
-
-    .fit.full-height {
-      height: 33vh;
+    > * {
+      overflow: hidden;
     }
   }
 
-  #main > .md-pad {
-    margin-bottom: 0;
-  }
-
-  .stats {
-    position: absolute;
-    overflow: hidden;
-    bottom: 0;
-    top: 122px;
-    left: 0;
-    right: 0;
+  .sidebar {
+    + .wrapper {
+      > * {
+        margin-right: @Pad3 + @Pad1;
+      }
+    }
   }
 
   .md-flex {
@@ -157,7 +141,9 @@ html, body {
   }
 
   .md-pad {
-    margin: @Pad1;
+    padding: @Pad1;
+    padding-right: 0;
+    padding-bottom: 0;
   }
 
   .auto {
@@ -178,15 +164,10 @@ html, body {
   #app {
     display: grid;
     grid-template-columns: 2fr 3fr 3fr;
-    grid-template-rows: 320px auto auto;
+    grid-template-rows: ~"calc(60vh - 123px)" 40vh;
     grid-template-areas:
       'table-left main main'
-      'table-left tmain01 tmain02'
-      'footer footer footer';
-
-    > .mid {
-      height: ~"calc(60vh - 122px)";
-    }
+      'table-left tmain01 tmain02';
   }
 
   .lg-flex {
