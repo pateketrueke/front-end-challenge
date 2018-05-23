@@ -79,7 +79,7 @@ mixin Stats00
           th.pad.align-right.coin.mxn Precio
           th.pad.align-right.coin.btc Monto
       tbody
-        each x, _ in Array.from({ length: 11 })
+        each x, _ in Array.from({ length: 20 })
           tr
             td.pad.align-left #[span.hi 16:10:25]
             td.pad.align-right #[span.up 319,149.99]
@@ -94,8 +94,8 @@ mixin Stats00
             td.pad.align-right #[span.hi 49.0903]0000
 
 mixin Canvas
-  .md-pad.full
-    img.fit.full(src='//placehold.it/1000x400/171E24/fff')
+  .md-pad.full-height
+    img.fit.full-height(src='//placehold.it/1000x400/x/fff')
 
 mixin Stats01
   .md-pad
@@ -111,7 +111,7 @@ mixin Stats01
           th.pad.align-right.coin.mxn Valor
           th.pad.align-right.coin.mxn Precio
       tbody
-        each x, _ in Array.from({ length: 11 })
+        each x, _ in Array.from({ length: 50 })
           tr(class=_ === 5 ? 'sel' : null)
             td.pad.align-right #[span.hi 1.09]
             td.pad.align-right #[span.hi 1.090484]00
@@ -132,16 +132,16 @@ mixin Stats02
           th.pad.align-right.coin.mxn Valor
           th.pad.align-right.coin.mxn Precio
       tbody
-        each x, _ in Array.from({ length: 11 })
+        each x, _ in Array.from({ length: 50 })
           tr(class=_ === 3 ? 'sel' : null)
             td.pad.align-right #[span.hi 1.09]
             td.pad.align-right #[span.hi 1.090484]00
             td.pad.align-right #[span.hi 2,307,984.29]
             td.pad.align-right #[span.down 319,149.99]
 
-mixin Footer
+mixin Source
   - var link = 'https://github.com/pateketrueke/front-end-challenge/tree/feature/ui-proto/src'
-  p.align-center.reset Is this real life? &mdash; Source code: #[a(href=link)= link]
+  <!-- Hola, aquí está el código fuente: #{link} ;-) -->
 
 doctype html
 html
@@ -152,6 +152,7 @@ html
     link(rel='stylesheet' href='resources/sprites.css')
     link(rel='stylesheet' href='style.css')
     title Bitso
+    +Source
   body#theme.reset.x-debug
     +Header
     +Topbar
@@ -163,11 +164,9 @@ html
         #app
           #main
             +Canvas
-          #table-left
+          #table-left.full
             +Stats00
-          #table-main-01
+          #table-main-01.mid
             +Stats01
-          #table-main-02
+          #table-main-02.mid
             +Stats02
-          #footer
-            +Footer
