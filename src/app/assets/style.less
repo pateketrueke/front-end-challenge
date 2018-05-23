@@ -41,7 +41,7 @@ a {
   background-color: @RegularNavy;
 }
 
-.scroll {
+.h-scroll {
   position: relative;
   overflow: hidden;
   height: 20px;
@@ -51,7 +51,7 @@ a {
     overflow: auto;
     white-space: nowrap;
 
-    @media screen and (max-width: @MediumWidth) {
+    @media screen and (max-width: (@MediumWidth - 1px)) {
       &::after,
       &::before {
         content: ' ';
@@ -74,10 +74,34 @@ a {
   }
 }
 
+.v-scroll {
+  @media screen and (min-width: @SmallWidth) {
+    &::before,
+    &::after {
+      position: absolute;
+      width: 100%;
+      content: ' ';
+      z-index: 1;
+    }
+
+    &::before {
+      background-image: linear-gradient(to top, transparent, @DarkBackground);
+      top: (@Pad1 * 3) + @Pad3;
+      height: 25px;
+    }
+
+    &::after {
+      background-image: linear-gradient(to bottom, transparent, @DarkBackground);
+      height: 50px;
+      bottom: 0;
+    }
+  }
+}
+
 .sidebar {
   top: 0;
   right: 0;
-  z-index: 1;
+  z-index: 2;
   height: 100%;
   min-width: 32px;
   overflow: hidden;
@@ -206,6 +230,10 @@ a {
 
   .push > * {
     margin-left: @Pad3;
+
+    &:last-child {
+      padding-right: @Pad2;
+    }
   }
 
   .light {

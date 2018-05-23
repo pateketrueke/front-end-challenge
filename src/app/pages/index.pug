@@ -24,7 +24,7 @@ mixin Topbar
   .topbar
     .wrapper.flex.center
       .no-wrap.no-sel.menu BTC / MXN
-      .scroll.no-sel
+      .h-scroll.no-sel
         .flex.push
           span Volumen 24 h #[span.light 170.5405818 BTC]
           span Máx. #[span.light 304,934.23 MXN]
@@ -70,7 +70,7 @@ mixin Sidebar
             .up #[span.hi 0.016757]00 BTC
 
 mixin Stats00
-  .md-pad.one-third
+  .md-push.v-scroll
     table.full-width(cellpadding=0 cellspacing=0)
       caption.pad.caps.align-left Últimos trades
       thead
@@ -94,11 +94,11 @@ mixin Stats00
             td.pad.align-right #[span.hi 49.0903]0000
 
 mixin Canvas
-  .md-pad.full-height
+  .md-push.full-height
     img.fit.full-height(src='//placehold.it/1000x400/x/fff')
 
 mixin Stats01
-  .md-pad
+  .md-push.v-scroll
     table.ordered.full-width(cellpadding=0 cellspacing=0)
       caption.pad.align-left
         .flex
@@ -119,7 +119,7 @@ mixin Stats01
             td.pad.align-right #[span.up 319,149.99]
 
 mixin Stats02
-  .md-pad
+  .md-push.v-scroll
     table.inverted.full-width(cellpadding=0 cellspacing=0)
       caption.pad.align-left
         .flex

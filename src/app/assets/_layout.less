@@ -45,10 +45,6 @@ html, body {
   margin: auto;
 }
 
-.one-third {
-  min-width: 260px;
-}
-
 .reset {
   padding: 0;
   margin: 0;
@@ -125,14 +121,53 @@ html, body {
 
     > * {
       overflow: hidden;
+      position: relative;
     }
   }
 
-  .sidebar {
-    + .wrapper {
-      > * {
-        margin-right: @Pad3 + @Pad1;
+  #main {
+    .md-push {
+      margin-left: 0;
+    }
+
+    ~ #table-main-01,
+    ~ #table-main-02 {
+      .md-push {
+        margin-left: 0;
       }
+    }
+  }
+
+  .stats {
+    caption,
+    table,
+    tbody,
+    thead {
+      display: block;
+    }
+
+    table {
+      position: absolute;
+      bottom: 0;
+      top: 0;
+    }
+
+    tbody {
+      width: 110%;
+      padding-right: 10%;
+      position: absolute;
+      overflow: auto;
+      bottom: 0;
+      top: (@Pad1 * 3) + @Pad3;
+    }
+
+    tr {
+      display: flex;
+    }
+
+    th, td {
+      flex: 1 1 auto;
+      overflow: hidden;
     }
   }
 
@@ -140,10 +175,10 @@ html, body {
     .flex;
   }
 
-  .md-pad {
-    padding: @Pad1;
-    padding-right: 0;
-    padding-bottom: 0;
+  .md-push {
+    height: 100%;
+    margin: @Pad1;
+    position: relative;
   }
 
   .auto {
