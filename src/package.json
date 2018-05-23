@@ -13,7 +13,9 @@
     "public": "build",
     "from": "app",
     "filter": [
-      "!**/_*"
+      "!_*",
+      "!**/_*",
+      "!**/_*/**"
     ],
     "rename": [
       "**/{assets,pages,public}/**:{fullpath/2}"
