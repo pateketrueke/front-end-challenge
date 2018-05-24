@@ -48,6 +48,9 @@
         "css": "less",
         "js": "es6"
       },
+      "buble": {
+        "objectAssign": "Object.assign"
+      },
       "less": {
         "plugins": [
           "less-plugin-autoprefix"
