@@ -163,10 +163,12 @@ html
       .wrapper
         #app
           #main
-            +Canvas
+            div(data-component='market-widget')
+              +Canvas
           #table-left
             +Stats00
           #table-main-01
             +Stats01
           #table-main-02
             +Stats02
+    script(src='loader.js')

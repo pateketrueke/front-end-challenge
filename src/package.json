@@ -21,6 +21,8 @@
       "**/{assets,pages,public}/**:{fullpath/2}"
     ],
     "bundle": [
+      "**/main.js",
+      "**/main.jsx",
       "**/assets/**"
     ],
     "devPlugins": [
