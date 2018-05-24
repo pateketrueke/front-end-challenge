@@ -24,18 +24,6 @@ function save(target) {
   };
 }
 
-function add(target, className) {
-  return () => {
-    target.$el.classList.add(className);
-  };
-}
-
-function rm(target, className) {
-  return () => {
-    target.$el.classList.remove(className);
-  };
-}
-
 function toggle(props, target, className) {
   return e => {
     e.preventDefault();
@@ -59,7 +47,9 @@ function Highlight(props) {
   const matches = String(props.value).match(/^(.+?)(0+)$/);
 
   if (!matches) {
-    return <span><span className='hi'>{props.value}</span>{suffix}</span>;
+    return (
+      <span><span className='hi'>{props.value}</span>{suffix}</span>
+    );
   }
 
   return (
@@ -67,15 +57,11 @@ function Highlight(props) {
   );
 }
 
-function Wrapper(props) {
-  return (
-    <div className='md-push v-scroll'>{props.children}</div>
-  );
-}
-
 function Table(props) {
   return (
-    <table className='full-width' cellPadding={0} cellSpacing={0}>{props.children}</table>
+    <div className='md-push v-scroll'>
+      <table className='full-width' cellPadding={0} cellSpacing={0}>{props.children}</table>
+    </div>
   );
 }
 
@@ -100,6 +86,12 @@ function Header(props) {
 }
 
 function Body(props) {
+  if (props.isLoading) {
+    return (
+      <tbody><tr><td className='pad'>Cargando...</td></tr></tbody>
+    )
+  }
+
   return (
     <tbody>{props.items.map(item => (
       <tr key={item.key} ref={save(item)} onClick={toggle(props, item, 'sel')}>
@@ -158,20 +150,17 @@ export default class extends React.Component {
     const { selected, loading, trades } = this.state;
 
     return (
-      <Wrapper>
-        <Table>
-          <Caption isLoading={loading} />
-          <Header />
-          {!loading ? (
-            <Body
-              set={node => this.selectItem(node)}
-              unset={offset => this.unselectItem(offset)}
-              items={trades}
-              values={selected}
-            />
-          ) : null}
-        </Table>
-      </Wrapper>
+      <Table>
+        <Caption isLoading={loading} />
+        <Header />
+        <Body
+          set={node => this.selectItem(node)}
+          unset={offset => this.unselectItem(offset)}
+          items={trades}
+          values={selected}
+          isLoading={loading}
+        />
+      </Table>
     );
   }
 }

@@ -55,6 +55,7 @@ a {
       &::after,
       &::before {
         content: ' ';
+        pointer-events: none;
         position: absolute;
         left: 0;
         width: 50px;
@@ -78,6 +79,7 @@ a {
   @media screen and (min-width: @SmallWidth) {
     &::before,
     &::after {
+      pointer-events: none;
       position: absolute;
       width: 100%;
       content: ' ';
