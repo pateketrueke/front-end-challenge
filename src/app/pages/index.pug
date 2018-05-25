@@ -38,36 +38,37 @@ mixin Sidebar
     .content
       h4.pad.caps.reset Mercados 24 H
       ul.reset.no-type.full-height
-        li.pad
-          .flex
-            .hi.auto ETH/MXN
-            .up $172,948.00 MXN
-        li.pad
-          .flex
-            .hi.auto ETH/MXN
-            .down $12,248.55 MXN
-        li.pad.open
-          .flex
-            .hi.auto XRP/MXN
-            .up $12.75 MXN
-          small.float-right 10:23 AM
-          img.fit(src='//placehold.it/260x80/161a1e/fff')
-        li.pad
-          .flex
-            .hi.auto LTC/MXN
-            .down $2,948.55 MXN
-        li.pad
-          .flex
-            .hi.auto BCH/MXN
-            .up $29,248.55 MXN
-        li.pad
-          .flex
-            .hi.auto ETH/BTC
-            .down #[span.hi 0.08136]000 BTC
-        li.pad
-          .flex
-            .hi.auto LTC/BTC
-            .up #[span.hi 0.016757]00 BTC
+        each x in Array.from({ length: 3 })
+          li.pad
+            .flex
+              .hi.auto ETH/MXN
+              .up $172,948.00 MXN
+          li.pad
+            .flex
+              .hi.auto ETH/MXN
+              .down $12,248.55 MXN
+          li.pad.open
+            .flex
+              .hi.auto XRP/MXN
+              .up $12.75 MXN
+            small.float-right 10:23 AM
+            img.fit(src='//placehold.it/260x80/161a1e/fff')
+          li.pad
+            .flex
+              .hi.auto LTC/MXN
+              .down $2,948.55 MXN
+          li.pad
+            .flex
+              .hi.auto BCH/MXN
+              .up $29,248.55 MXN
+          li.pad
+            .flex
+              .hi.auto ETH/BTC
+              .down #[span.hi 0.08136]000 BTC
+          li.pad
+            .flex
+              .hi.auto LTC/BTC
+              .up #[span.hi 0.016757]00 BTC
 
 mixin Stats00
   .md-push.v-scroll
