@@ -117,6 +117,10 @@ body {
   }
 }
 
+.push-left {
+  margin-left: @Pad1;
+}
+
 .pad {
   padding: @Pad1;
 }
@@ -168,7 +172,7 @@ body {
   #app {
     display: grid;
     grid-template-columns: 1.9fr 3.1fr;
-    grid-template-rows: ~"calc(40vh - 124px)" 30vh 30vh;
+    grid-template-rows: ~"calc(40vh - 107px)" 30vh 30vh;
     grid-template-areas:
       'table-left main'
       'table-left tmain01'
@@ -202,6 +206,10 @@ body {
 }
 
 @media screen and (min-width: @SmallWidth) {
+  #app {
+    grid-template-rows: ~"calc(40vh - 124px)" 30vh 30vh;
+  }
+
   .stats {
     top: 123px;
   }
@@ -232,7 +240,6 @@ body {
 
 @media screen and (min-width: @MediumWidth) {
   #app {
-    display: grid;
     grid-template-columns: 2fr 3fr 3fr;
     grid-template-rows: ~"calc(60vh - 124px)" 40vh;
     grid-template-areas:

@@ -50,24 +50,33 @@ a {
     height: 50px;
     overflow: auto;
     white-space: nowrap;
+  }
 
-    @media screen and (max-width: (@MediumWidth - 1px)) {
+  &.is-enabled {
+    > * {
       &::after,
       &::before {
         content: ' ';
+        opacity: 0;
         pointer-events: none;
         position: absolute;
         left: 0;
         width: 50px;
         height: 50px;
       }
+    }
 
+    &.from-left > * {
       &::before {
-        background-image: linear-gradient(to left, transparent, @DarkNavy);
+        background-image: linear-gradient(to left, transparent, @DarkShadow);
+        opacity: 1;
       }
+    }
 
+    &.from-right > * {
       &::after {
-        background-image: linear-gradient(to right, transparent, @DarkNavy);
+        background-image: linear-gradient(to right, transparent, @DarkShadow);
+        opacity: 1;
         left: auto;
         right: 0;
       }
@@ -76,26 +85,33 @@ a {
 }
 
 .v-scroll {
-  @media screen and (min-width: @SmallWidth) {
+  &.is-enabled {
     &::before,
     &::after {
       pointer-events: none;
       position: absolute;
+      opacity: 0;
       width: 100%;
       content: ' ';
       z-index: 1;
     }
 
-    &::before {
-      background-image: linear-gradient(to top, transparent, @DarkBackground);
-      top: (@Pad1 * 3) + @Pad3;
-      height: 25px;
+    &.from-top {
+      &::before {
+        background-image: linear-gradient(to top, transparent, @DarkShadow);
+        top: (@Pad1 * 3) + @Pad3;
+        opacity: 1;
+        height: 25px;
+      }
     }
 
-    &::after {
-      background-image: linear-gradient(to bottom, transparent, @DarkBackground);
-      height: 50px;
-      bottom: 0;
+    &.from-bottom {
+      &::after {
+        background-image: linear-gradient(to bottom, transparent, @DarkShadow);
+        opacity: 1;
+        height: 50px;
+        bottom: 0;
+      }
     }
   }
 }
