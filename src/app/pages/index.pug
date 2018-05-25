@@ -22,9 +22,9 @@ mixin Header
 
 mixin Topbar
   .topbar
-    .wrapper.flex.center
+    .wrapper.flex
       .no-wrap.no-sel.menu BTC / MXN
-      .h-scroll.no-sel.push-left
+      .h-scroll.no-sel(data-scrollable='.flex')
         .flex.push
           span Volumen 24 h #[span.light 170.5405818 BTC]
           span Máx. #[span.light 304,934.23 MXN]
@@ -37,7 +37,7 @@ mixin Sidebar
     input#sideBar(type='checkbox')
     .content
       h4.pad.caps.reset Mercados 24 H
-      ul.reset.no-type.full-height
+      ul.reset.no-type.full-height.v-scroll
         each x in Array.from({ length: 3 })
           li.pad
             .flex
@@ -71,7 +71,7 @@ mixin Sidebar
               .up #[span.hi 0.016757]00 BTC
 
 mixin Stats00
-  .md-push.v-scroll
+  .md-push.v-scroll(data-scrollable='tbody')
     table.full-width(cellpadding=0 cellspacing=0)
       caption.pad.caps.align-left Últimos trades
       thead
@@ -99,7 +99,7 @@ mixin Canvas
     img.fit.full-height(src='//placehold.it/1000x400/x/fff')
 
 mixin Stats01
-  .md-push.v-scroll
+  .md-push.v-scroll(data-scrollable='tbody')
     table.ordered.full-width(cellpadding=0 cellspacing=0)
       caption.pad.align-left
         .flex
@@ -120,7 +120,7 @@ mixin Stats01
             td.pad.align-right #[span.up 319,149.99]
 
 mixin Stats02
-  .md-push.v-scroll
+  .md-push.v-scroll(data-scrollable='tbody')
     table.inverted.full-width(cellpadding=0 cellspacing=0)
       caption.pad.align-left
         .flex
@@ -173,3 +173,4 @@ html
           #table-main-02
             +Stats02
     script(src='loader.js')
+    script(src='scripts.js')

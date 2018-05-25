@@ -44,7 +44,7 @@ a {
 .h-scroll {
   position: relative;
   overflow: hidden;
-  height: 20px;
+  height: 40px;
 
   > * {
     height: 50px;
@@ -57,26 +57,27 @@ a {
       &::after,
       &::before {
         content: ' ';
-        opacity: 0;
+        display: none;
         pointer-events: none;
         position: absolute;
         left: 0;
         width: 50px;
         height: 50px;
+        z-index: 0;
       }
     }
 
-    &.from-left > * {
+    &.at-begin > * {
       &::before {
         background-image: linear-gradient(to left, transparent, @DarkShadow);
-        opacity: 1;
+        display: block;
       }
     }
 
-    &.from-right > * {
+    &.at-end > * {
       &::after {
         background-image: linear-gradient(to right, transparent, @DarkShadow);
-        opacity: 1;
+        display: block;
         left: auto;
         right: 0;
       }
@@ -90,29 +91,35 @@ a {
     &::after {
       pointer-events: none;
       position: absolute;
-      opacity: 0;
+      display: none;
       width: 100%;
       content: ' ';
-      z-index: 1;
+      z-index: 0;
     }
 
-    &.from-top {
+    &.at-begin {
       &::before {
         background-image: linear-gradient(to top, transparent, @DarkShadow);
-        top: (@Pad1 * 3) + @Pad3;
-        opacity: 1;
-        height: 25px;
+        top: @Pad3;
+        display: block;
+        height: @Pad1;
       }
     }
 
-    &.from-bottom {
+    &.at-end {
       &::after {
         background-image: linear-gradient(to bottom, transparent, @DarkShadow);
-        opacity: 1;
+        display: block;
         height: 50px;
         bottom: 0;
       }
     }
+  }
+}
+
+.md-push.v-scroll.is-enabled.at-begin {
+  &::before {
+    top: (@Pad1 * 3) + @Pad3;
   }
 }
 
@@ -248,10 +255,27 @@ a {
 
 .topbar {
   background-color: @DarkNavy;
-  padding: @Pad1;
+
+  .menu,
+  .h-scroll .flex > * {
+    padding: @Pad1;
+  }
 
   @media screen and (min-width: @SmallWidth) {
-    padding: @Pad2;
+    xheight: 55px;
+
+    .h-scroll {
+      height: 50px;
+
+      .flex {
+        height: 60px;
+      }
+    }
+
+    .menu,
+    .h-scroll .flex > * {
+      padding: @Pad2;
+    }
   }
 
   .push > * {

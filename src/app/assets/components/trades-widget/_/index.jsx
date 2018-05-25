@@ -59,7 +59,7 @@ function Highlight(props) {
 
 function Table(props) {
   return (
-    <div className='md-push v-scroll'>
+    <div className='md-push v-scroll' data-scrollable='tbody'>
       <table className='full-width' cellPadding={0} cellSpacing={0}>{props.children}</table>
     </div>
   );
