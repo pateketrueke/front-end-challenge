@@ -15,7 +15,7 @@ build: all ## Build artifacts for production
 	@cd src && npm run build
 
 clean: ## Remove al built artifacts and dependencies
-	@rm -rf src/node_modules
+	@rm -rf src/node_modules/*
 	@rm -rf src/build
 
 dist: src/build ## Publish built files over gh-pages
