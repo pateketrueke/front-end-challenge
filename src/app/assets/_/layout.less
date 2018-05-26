@@ -64,9 +64,7 @@ body {
 }
 
 .stats {
-  position: absolute;
-  top: 106px;
-  bottom: 0;
+  height: 100%;
 
   caption,
   table,
@@ -168,7 +166,7 @@ body {
   #app {
     display: grid;
     grid-template-columns: 1.9fr 3.1fr;
-    grid-template-rows: ~"calc(40vh - 107px)" 30vh 30vh;
+    grid-template-rows: 200px auto auto;
     grid-template-areas:
       'table-left main'
       'table-left tmain01'
@@ -203,7 +201,7 @@ body {
 
 @media screen and (min-width: @SmallWidth) {
   #app {
-    grid-template-rows: ~"calc(40vh - 121px)" 30vh 30vh;
+    grid-template-rows: 260px auto auto;
   }
 
   .stats {
@@ -237,7 +235,7 @@ body {
 @media screen and (min-width: @MediumWidth) {
   #app {
     grid-template-columns: 2fr 3fr 3fr;
-    grid-template-rows: ~"calc(60vh - 121px)" 40vh;
+    grid-template-rows: 420px auto;
     grid-template-areas:
       'table-left main main'
       'table-left tmain01 tmain02';
