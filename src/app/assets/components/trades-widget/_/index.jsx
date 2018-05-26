@@ -46,7 +46,7 @@ export default class extends React.Component {
           { key: 'amount', label: 'Monto', align: 'right', classes: 'coin btc' },
         ]}
         caption='Últimos trades'
-        isLoading={loading}
+        loading={loading}
         data={trades}
       />
     );

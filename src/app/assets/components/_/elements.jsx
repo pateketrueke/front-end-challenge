@@ -30,10 +30,10 @@ export function Table(props) {
   );
 }
 
-export function Caption({ caption, isLoading }) {
+export function Caption({ caption, loading }) {
   return (
     <caption className='pad caps align-left'>
-      {caption}{isLoading ? '...' : ''}
+      {caption}{loading ? '...' : ''}
     </caption>
   );
 }
@@ -67,7 +67,7 @@ export function Value(props) {
 }
 
 export function Body(props) {
-  if (props.isLoading) {
+  if (props.loading) {
     return (
       <tbody><tr><td className='pad'>Cargando...</td></tr></tbody>
     );
@@ -114,12 +114,12 @@ export class CustomTable extends React.Component {
   }
 
   render() {
-    const { selected, loading, trades } = this.state;
-    const { data, fields, caption, isLoading } = this.props;
+    const { selected, trades } = this.state;
+    const { data, fields, caption, loading } = this.props;
 
     return (
       <Table>
-        <Caption caption={caption} isLoading={isLoading}/>
+        <Caption caption={caption} loading={loading}/>
         <Header fields={fields}/>
         <Body
           set={node => this.selectItem(node)}
@@ -127,7 +127,7 @@ export class CustomTable extends React.Component {
           items={data}
           fields={fields}
           values={selected}
-          isLoading={isLoading}
+          loading={loading}
         />
       </Table>
     );
