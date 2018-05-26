@@ -103,7 +103,23 @@ window.Bitso.bindScrollers = sources => {
   });
 };
 
+const _stats = document.querySelector('.stats');
+
+let isSticky;
+
 function update() {
+  if (window.innerHeight > 800) {
+    if (!isSticky) {
+      isSticky = true;
+      _stats.classList.add('is-sticky');
+    }
+  } else {
+    if (isSticky) {
+      isSticky = false;
+      _stats.classList.remove('is-sticky');
+    }
+  }
+
   _scrollers.forEach(scroller => {
     if (!scroller.target) {
       _scrollers.splice(scroller.offset, 1);
@@ -112,6 +128,8 @@ function update() {
     }
   });
 }
+
+update();
 
 window.addEventListener('resize', throttle(update, 200));
 window.Bitso.bindScrollers(document.querySelectorAll('.h-scroll, .v-scroll'));
