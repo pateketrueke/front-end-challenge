@@ -13,6 +13,28 @@ const throttle = (func, limit) => {
   };
 };
 
+const check = (scroller, type) => {
+  if (scroller.enabled[type].oldBegin !== scroller.enabled[type].begin) {
+    scroller.enabled[type].oldBegin = scroller.enabled[type].begin;
+
+    if (scroller.enabled[type].begin) {
+      scroller.classList.add('at-begin');
+    } else {
+      scroller.classList.remove('at-begin');
+    }
+  }
+
+  if (scroller.enabled[type].oldEnd !== scroller.enabled[type].end) {
+    scroller.enabled[type].oldEnd = scroller.enabled[type].end;
+
+    if (scroller.enabled[type].end) {
+      scroller.classList.add('at-end');
+    } else {
+      scroller.classList.remove('at-end');
+    }
+  }
+};
+
 const run = (target, scroller, isVertical) => {
   if (!scroller.enabled) {
     scroller.enabled = {
@@ -25,48 +47,12 @@ const run = (target, scroller, isVertical) => {
     scroller.enabled.vertical.begin = target.scrollTop > 0;
     scroller.enabled.vertical.end = (target.scrollHeight - target.scrollTop) > target.offsetHeight;
 
-    if (scroller.enabled.vertical.oldBegin !== scroller.enabled.vertical.begin) {
-      scroller.enabled.vertical.oldBegin = scroller.enabled.vertical.begin;
-
-      if (scroller.enabled.vertical.begin) {
-        scroller.classList.add('at-begin');
-      } else {
-        scroller.classList.remove('at-begin');
-      }
-    }
-
-    if (scroller.enabled.vertical.oldEnd !== scroller.enabled.vertical.end) {
-      scroller.enabled.vertical.oldEnd = scroller.enabled.vertical.end;
-
-      if (scroller.enabled.vertical.end) {
-        scroller.classList.add('at-end');
-      } else {
-        scroller.classList.remove('at-end');
-      }
-    }
+    check(scroller, 'vertical');
   } else {
     scroller.enabled.horizontal.begin = target.scrollLeft > 0;
     scroller.enabled.horizontal.end = (target.scrollWidth - target.scrollLeft) > target.offsetWidth;
 
-    if (scroller.enabled.horizontal.oldBegin !== scroller.enabled.horizontal.begin) {
-      scroller.enabled.horizontal.oldBegin = scroller.enabled.horizontal.begin;
-
-      if (scroller.enabled.horizontal.begin) {
-        scroller.classList.add('at-begin');
-      } else {
-        scroller.classList.remove('at-begin');
-      }
-    }
-
-    if (scroller.enabled.horizontal.oldEnd !== scroller.enabled.horizontal.end) {
-      scroller.enabled.horizontal.oldEnd = scroller.enabled.horizontal.end;
-
-      if (scroller.enabled.horizontal.end) {
-        scroller.classList.add('at-end');
-      } else {
-        scroller.classList.remove('at-end');
-      }
-    }
+    check(scroller, 'horizontal');
   }
 
   if (scroller.enabled.vertical.begin || scroller.enabled.vertical.end
