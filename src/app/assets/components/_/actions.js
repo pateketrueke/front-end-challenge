@@ -18,8 +18,3 @@ export function toggle(props, target, className) {
     props.set(target).$el.classList.add(className);
   };
 }
-
-export default {
-  save,
-  toggle,
-};

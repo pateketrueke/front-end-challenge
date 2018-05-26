@@ -8,7 +8,7 @@ function parseData(payload) {
     is: item.maker_side === 'sell' ? 'up' : 'down',
     key: item.tid,
     time: moment(item.created_at).format('H:mm:ss'),
-    price: formatNumber(item.book.split('_'), item.price),
+    price: formatNumber(item.book, item.price),
     amount: priceFormat(item.amount),
   }));
 }

@@ -9,14 +9,9 @@ export function priceFormat(number) {
 export function formatNumber(values, number) {
   const value = priceFormat(number);
 
-  if (values[1] !== 'mxn') {
+  if (values.indexOf('mxn') === -1) {
     return value;
   }
 
   return `$${value}`;
-};
-
-export default {
-  priceFormat,
-  formatNumber,
 };
