@@ -143,12 +143,12 @@ _components.forEach(node => {
       debugLog('Component', node.dataset.component, 'loaded');
 
       // Parses innerText as JSON, what a deal!
-      let options;
+      const options = { ...node.dataset };
 
       try {
-        options = JSON.parse(node.innerText);
+        Object.assign(options, JSON.parse(node.innerText));
       } catch (e) {
-        options = {};
+        // do nothing
       }
 
       // Ok, let the component do his magic here...

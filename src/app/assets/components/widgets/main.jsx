@@ -1,6 +1,7 @@
-import { save, toggle } from './actions';
+import { save, toggle } from '../_/actions';
+import TradesWidget from './_';
 
-export function Highlight(props) {
+function Highlight(props) {
   const suffix = Array.from({
     length: 11 - String(props.value).length
   }).join('0');
@@ -22,7 +23,7 @@ export function Highlight(props) {
   );
 }
 
-export function Table(props) {
+function Table(props) {
   return (
     <div className='md-push v-scroll' data-scrollable='tbody'>
       <table className='full-width' cellPadding={0} cellSpacing={0}>{props.children}</table>
@@ -30,7 +31,7 @@ export function Table(props) {
   );
 }
 
-export function Caption({ caption, loading }) {
+function Caption({ caption, loading }) {
   return (
     <caption className='pad caps align-left'>
       {caption}{loading ? '...' : ''}
@@ -38,7 +39,7 @@ export function Caption({ caption, loading }) {
   );
 }
 
-export function Header(props) {
+function Header(props) {
   return (
     <thead>
       <tr className='caps'>{props.fields.map(field => (
@@ -48,7 +49,7 @@ export function Header(props) {
   );
 }
 
-export function Value(props) {
+function Value(props) {
   if (props.field.key === 'amount') {
     return (
       <Highlight value={props[props.field.key]} />
@@ -66,7 +67,7 @@ export function Value(props) {
   );
 }
 
-export function Body(props) {
+function Body(props) {
   if (props.loading) {
     return (
       <tbody><tr><td className='pad'>Cargando...</td></tr></tbody>
@@ -82,7 +83,7 @@ export function Body(props) {
   );
 }
 
-export class CustomTable extends React.Component {
+class CustomTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -133,3 +134,14 @@ export class CustomTable extends React.Component {
     );
   }
 }
+
+document.currentScript.exports = {
+  TradesWidget,
+  CustomTable,
+  Highlight,
+  Table,
+  Caption,
+  Header,
+  Value,
+  Body,
+};

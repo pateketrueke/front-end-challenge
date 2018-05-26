@@ -5,18 +5,20 @@ document.currentScript.import([
   '//unpkg.com/prop-types@15.5.10/prop-types.js',
   '//unpkg.com/moment@2.22.0/moment.js',
   '//unpkg.com/moment@2.22.0/locale/es.js',
-  '//unpkg.com/numeral@2.0.6/numeral.js'
+  '//unpkg.com/numeral@2.0.6/numeral.js',
 ]);
 
 document.currentScript
-  .import('trades-widget/main')
-  .then(main => {
+  .import('widgets/main')
+  .then(widgets => {
     window.Bitso = window.Bitso || {};
-    Object.assign(window.Bitso, main);
+    Object.assign(window.Bitso, widgets);
   });
 
 document.currentScript.exports = {
   init(node, context) {
-    ReactDOM.render(React.createElement(window.Bitso.TradesWidget), node);
+    if (context.widget) {
+      ReactDOM.render(React.createElement(window.Bitso[context.widget]), node);
+    }
   },
 };

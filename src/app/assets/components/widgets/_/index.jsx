@@ -1,5 +1,4 @@
 import { formatNumber, priceFormat } from '../../_/util';
-import { CustomTable } from '../../_/elements';
 
 function parseData(payload) {
   return payload.map(item => ({
@@ -39,7 +38,7 @@ export default class extends React.Component {
     const { loading, trades } = this.state;
 
     return (
-      <CustomTable
+      <Bitso.CustomTable
         fields={[
           { key: 'time', label: 'Hora', align: 'left' },
           { key: 'price', label: 'Precio', align: 'right', classes: 'coin mxn' },
