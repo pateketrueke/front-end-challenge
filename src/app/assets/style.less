@@ -234,7 +234,7 @@ a {
       margin-right: @Pad1;
     }
 
-    ~ .content {
+    ~ * > .content {
       background-color: @SidebarBackground;
       border-left: 1px solid @DarkBackground;
       margin-left: @Pad3;
@@ -246,7 +246,7 @@ a {
     ~ input {
       display: none;
 
-      &:checked ~ .content {
+      &:checked ~ * > .content {
         display: block;
       }
     }
