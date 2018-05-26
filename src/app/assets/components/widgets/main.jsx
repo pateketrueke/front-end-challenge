@@ -91,9 +91,13 @@ class CustomTable extends React.Component {
   }
 
   componentDidMount() {
-    Bitso.bindScrollers([
-      ReactDOM.findDOMNode(this),
-    ]);
+    this.ref = ReactDOM.findDOMNode(this);
+
+    Bitso.bindScrollers([this.ref]);
+  }
+
+  componentDidUpdate() {
+    Bitso.updateScroller(this.ref);
   }
 
   unselectItem(offset) {

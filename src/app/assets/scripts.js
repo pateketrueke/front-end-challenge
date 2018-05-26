@@ -86,10 +86,17 @@ const run = (target, scroller, isVertical) => {
 const _scrollers = [];
 
 window.Bitso = window.Bitso || {};
-window.Bitso.bindScrollers = source => {
-  const scrollers = [].slice.call(source || document.querySelectorAll('.h-scroll, .v-scroll'));
+window.Bitso.updateScroller = target => {
+  const scroller = _scrollers
+    .find(x => x.target === target || x.source === target);
 
-  scrollers.forEach(scroller => {
+  if (scroller) {
+    scroller.callback();
+  }
+};
+
+window.Bitso.bindScrollers = sources => {
+  sources.forEach(scroller => {
     const target = scroller.querySelector(scroller.dataset.scrollable) || scroller;
 
     if (target) {
@@ -100,6 +107,7 @@ window.Bitso.bindScrollers = source => {
 
       _scrollers.push({
         offset: _scrollers.length,
+        source: scroller,
         target,
         callback,
       });
@@ -120,6 +128,4 @@ function update() {
 }
 
 window.addEventListener('resize', throttle(update, 200));
-window.Bitso.bindScrollers();
-
-update();
+window.Bitso.bindScrollers(document.querySelectorAll('.h-scroll, .v-scroll'));
