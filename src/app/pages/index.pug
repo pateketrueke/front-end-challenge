@@ -169,8 +169,11 @@ html
             div(data-component='widgets' data-widget='trades')
               +Stats00
           #table-main-01
-            +Stats01
+            div(data-component='widgets' data-widget='buys')
+              +Stats01
           #table-main-02
-            +Stats02
+            div(data-component='widgets' data-widget='sells')
+              +Stats02
+
     script(src='loader.js')
     script(src='scripts.js')

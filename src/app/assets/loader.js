@@ -37,6 +37,13 @@ function loadStyle(fromSrc) {
 // we rely on overloading `currentScript` for import/export things
 function loadScript(fromSrc) {
   if (_sources[fromSrc]) {
+    if (!_sources[fromSrc].loaded) {
+      // wait while being loaded...
+      return new Promise(resolve => {
+        setTimeout(resolve, 200);
+      }).then(() => loadScript(fromSrc));
+    }
+
     return Promise.resolve(_sources[fromSrc].context);
   }
 
