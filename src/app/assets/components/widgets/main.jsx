@@ -1,5 +1,4 @@
 import { save, toggle } from '../_/actions';
-import TradesWidget from './_';
 
 function Highlight(props) {
   const suffix = Array.from({
@@ -136,7 +135,6 @@ class CustomTable extends React.Component {
 }
 
 document.currentScript.exports = {
-  TradesWidget,
   CustomTable,
   Highlight,
   Table,

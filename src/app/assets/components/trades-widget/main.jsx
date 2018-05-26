@@ -1,4 +1,4 @@
-import { formatNumber, priceFormat } from '../../_/util';
+import { formatNumber, priceFormat } from '../_/util';
 
 function parseData(payload) {
   return payload.map(item => ({
@@ -16,7 +16,7 @@ function fetchData(book) {
     .then(data => parseData(data.payload));
 }
 
-export default class extends React.Component {
+class TradesWidget extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -51,3 +51,7 @@ export default class extends React.Component {
     );
   }
 }
+
+document.currentScript.exports = {
+  TradesWidget,
+};
