@@ -83,23 +83,43 @@ const run = (target, scroller, isVertical) => {
   }
 };
 
-window.update = () => {
-  const scrollers = [].slice.call(document.querySelectorAll('.h-scroll, .v-scroll'));
+const _scrollers = [];
+
+window.Bitso = window.Bitso || {};
+window.Bitso.bindScrollers = source => {
+  const scrollers = [].slice.call(source || document.querySelectorAll('.h-scroll, .v-scroll'));
 
   scrollers.forEach(scroller => {
     const target = scroller.querySelector(scroller.dataset.scrollable) || scroller;
 
     if (target) {
       const isVertical = scroller.classList.contains('v-scroll');
+      const callback = () => run(target, scroller, isVertical);
 
-      target.addEventListener('scroll', e => {
-        run(target, scroller, isVertical);
+      target.addEventListener('scroll', callback);
+
+      _scrollers.push({
+        offset: _scrollers.length,
+        target,
+        callback,
       });
 
-      run(target, scroller, isVertical);
+      callback();
     }
   });
 };
 
+function update() {
+  _scrollers.forEach(scroller => {
+    if (!scroller.target) {
+      _scrollers.splice(scroller.offset, 1);
+    } else {
+      scroller.callback();
+    }
+  });
+}
+
 window.addEventListener('resize', throttle(update, 200));
-setTimeout(update, 1000);
+window.Bitso.bindScrollers();
+
+update();

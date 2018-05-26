@@ -11,9 +11,9 @@ load([
 ]);
 
 load('widgets/main')
-  .then(widgets => {
+  .then(baseWidgets => {
     window.Bitso = window.Bitso || {};
-    Object.assign(window.Bitso, widgets);
+    Object.assign(window.Bitso, baseWidgets);
   });
 
 document.currentScript.exports = {

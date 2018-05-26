@@ -90,6 +90,12 @@ class CustomTable extends React.Component {
     };
   }
 
+  componentDidMount() {
+    Bitso.bindScrollers([
+      ReactDOM.findDOMNode(this),
+    ]);
+  }
+
   unselectItem(offset) {
     const node = this.state.selected[offset];
     const copy = this.state.selected;
