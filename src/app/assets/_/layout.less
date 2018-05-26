@@ -96,6 +96,13 @@ body {
     flex: 1 1 auto;
     overflow: hidden;
   }
+
+  &.is-sticky {
+    position: absolute;
+    height: auto;
+    top: 106px;
+    bottom: 0;
+  }
 }
 
 .reset {
@@ -190,6 +197,12 @@ body {
     }
   }
 
+  .stats.is-sticky {
+    #app {
+      grid-template-rows: ~"calc(40vh - 121px)" 30vh 30vh;
+    }
+  }
+
   .sm-flex {
     .flex;
   }
@@ -206,6 +219,10 @@ body {
 
   .stats {
     top: 120px;
+
+    &.is-sticky {
+      top: 120px;
+    }
   }
 
   .md-flex {
@@ -239,6 +256,12 @@ body {
     grid-template-areas:
       'table-left main main'
       'table-left tmain01 tmain02';
+  }
+
+  .stats.is-sticky {
+    #app {
+      grid-template-rows: ~"calc(60vh - 121px)" 40vh;
+    }
   }
 
   .lg-flex {
