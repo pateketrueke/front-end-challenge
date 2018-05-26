@@ -1,12 +1,10 @@
 import { formatNumber, priceFormat } from '../../_/util';
 import { CustomTable } from '../../_/elements';
 
-// FIXME: abstract as much as possible and reuse!
-
 function parseData(payload) {
   return payload.map(item => ({
-    is: item.maker_side === 'sell' ? 'up' : 'down',
     key: item.tid,
+    side: item.maker_side,
     time: moment(item.created_at).format('H:mm:ss'),
     price: formatNumber(item.book, item.price),
     amount: priceFormat(item.amount),
@@ -42,6 +40,11 @@ export default class extends React.Component {
 
     return (
       <CustomTable
+        fields={[
+          { key: 'time', label: 'Hora', align: 'left' },
+          { key: 'price', label: 'Precio', align: 'right', classes: 'coin mxn' },
+          { key: 'amount', label: 'Monto', align: 'right', classes: 'coin btc' },
+        ]}
         caption='Últimos trades'
         isLoading={loading}
         data={trades}

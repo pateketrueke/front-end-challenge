@@ -9,12 +9,16 @@ export function Highlight(props) {
 
   if (!matches) {
     return (
-      <span><span className='hi'>{props.value}</span>{suffix}</span>
+      <span>
+        <span className='hi'>{props.value}</span>{suffix}
+      </span>
     );
   }
 
   return (
-    <span><span className='hi'>{matches[1]}</span>{matches[2]}{suffix}</span>
+    <span>
+      <span className='hi'>{matches[1]}</span>{matches[2]}{suffix}
+    </span>
   );
 }
 
@@ -37,12 +41,28 @@ export function Caption({ caption, isLoading }) {
 export function Header(props) {
   return (
     <thead>
-      <tr className='caps'>
-        <th className='pad align-left'>Hora</th>
-        <th className='pad align-right coin mxn'>Precio</th>
-        <th className='pad align-right coin btc'>Monto</th>
-      </tr>
+      <tr className='caps'>{props.fields.map(field => (
+        <th key={field.label} className={`pad align-${field.align} ${field.classes || ''}`}>{field.label}</th>
+      ))}</tr>
     </thead>
+  );
+}
+
+export function Value(props) {
+  if (props.field.key === 'amount') {
+    return (
+      <Highlight value={props[props.field.key]} />
+    );
+  }
+
+  if (props.field.key === 'price') {
+    return (
+      <span className={props.side === 'sell' ? 'up' : 'down'}>{props[props.field.key]}</span>
+    );
+  }
+
+  return (
+    <span className='hi'>{props[props.field.key]}</span>
   );
 }
 
@@ -55,11 +75,9 @@ export function Body(props) {
 
   return (
     <tbody>{props.items.map(item => (
-      <tr key={item.key} ref={save(item)} onClick={toggle(props, item, 'sel')}>
-        <td className='pad align-left'><span className='hi'>{item.time}</span></td>
-        <td className='pad align-right'><span className={item.is}>{item.price}</span></td>
-        <td className='pad align-right'><Highlight value={item.amount} /></td>
-      </tr>
+      <tr key={item.key} ref={save(item)} onClick={toggle(props, item, 'sel')}>{props.fields.map(field => (
+        <th key={field.key} className={`pad align-${field.align}`}><Value {...item} field={field}/></th>
+      ))}</tr>
     ))}</tbody>
   );
 }
@@ -97,16 +115,17 @@ export class CustomTable extends React.Component {
 
   render() {
     const { selected, loading, trades } = this.state;
-    const { data, caption, isLoading } = this.props;
+    const { data, fields, caption, isLoading } = this.props;
 
     return (
       <Table>
         <Caption caption={caption} isLoading={isLoading}/>
-        <Header />
+        <Header fields={fields}/>
         <Body
           set={node => this.selectItem(node)}
           unset={offset => this.unselectItem(offset)}
           items={data}
+          fields={fields}
           values={selected}
           isLoading={isLoading}
         />
