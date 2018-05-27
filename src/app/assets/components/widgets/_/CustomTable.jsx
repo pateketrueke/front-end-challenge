@@ -18,8 +18,8 @@ export class CustomTable extends React.Component {
     Bitso.updateScroller(this.ref);
   }
 
-  unselectItem(offset) {
-    const node = this.state.selected[offset];
+  unselectItem(key) {
+    const offset = this.state.selected.indexOf(key);
     const copy = this.state.selected;
 
     copy.splice(offset, 1);
@@ -27,18 +27,14 @@ export class CustomTable extends React.Component {
     this.setState({
       selected: copy,
     });
-
-    return node;
   }
 
-  selectItem(node) {
+  selectItem(key) {
     const copy = this.state.selected;
 
     this.setState({
-      selected: copy.concat(copy.indexOf(node) === -1 ? node : []),
+      selected: copy.concat(copy.indexOf(key) === -1 ? key : []),
     });
-
-    return node;
   }
 
   render() {
@@ -50,8 +46,8 @@ export class CustomTable extends React.Component {
         <Caption caption={caption} loading={loading} suffix={captionRender}/>
         <Header fields={fields}/>
         <Body
-          set={node => this.selectItem(node)}
-          unset={offset => this.unselectItem(offset)}
+          set={item => this.selectItem(item.key)}
+          unset={item => this.unselectItem(item.key)}
           items={data}
           fields={fields}
           values={selected}

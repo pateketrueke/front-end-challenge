@@ -26,6 +26,5 @@ export function getQuery(params) {
 
 export function getJSON(url, params, callback) {
   return fetch(`${url}?${getQuery(params)}`)
-    .then(resp => resp.json())
-    .then(data => callback && callback(data.payload));
+    .then(resp => resp.json());
 }

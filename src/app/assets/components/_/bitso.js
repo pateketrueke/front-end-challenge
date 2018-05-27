@@ -24,6 +24,7 @@ export class API {
       if (data.type == 'trades' && data.payload) {
         this.trades = data.payload.map(trade => {
           return {
+            operation: trade.t ? 'sell' : 'buy',
             identifier: trade.i,
             amount: trade.a,
             value: trade.v,
@@ -34,14 +35,13 @@ export class API {
         this.emit('trades');
       } else if (data.type == 'diff-orders' && data.payload) {
         this.diff = data.payload.map(order => {
-
           return {
+            operation: order.t ? 'sell' : 'buy',
             timestamp: order.d,
             rate: order.r,
             amount: order.a,
             value: order.v,
             order: order.o,
-            type: order.t ? 'sell' : 'buy',
           };
         });
 
@@ -50,12 +50,12 @@ export class API {
         Object.keys(data.payload).forEach(key => {
           this.orders[key] = data.payload[key].map(order => {
             return {
+              operation: order.t ? 'sell' : 'buy',
               timestamp: order.d,
               rate: order.r,
               amount: order.a,
               value: order.v,
               order: order.o,
-              type: order.t ? 'sell' : 'buy',
             };
           });
         });
@@ -91,8 +91,16 @@ export class API {
     return `${BASE_URL}${path}`;
   }
 
-  getTrades(book, callback) {
-    return getJSON(this.getURL('/trades'), { book }, callback);
+  getBook(book, group) {
+    return getJSON(this.getURL(`/${group}`), { book });
+  }
+
+  getTrades(book) {
+    return this.getBook(book, 'trades');
+  }
+
+  getOrders(book) {
+    return this.getBook(book, 'order_book');
   }
 }
 

@@ -87,7 +87,11 @@ export function Body(props) {
   return (
     <tbody>{props.items.map(item => (
       <tr key={item.key} ref={save(item)} onClick={toggle(props, item, 'sel')}>{props.fields.map(field => (
-        <th key={field.key} className={`pad align-${field.align}`}><Value {...item} field={field}/></th>
+        <th
+          key={field.key}
+          className={`pad align-${field.align} ${props.values.indexOf(item.key) === -1 ? '' : 'sel'}`}
+        ><Value {...item} field={field} />
+        </th>
       ))}</tr>
     ))}</tbody>
   );

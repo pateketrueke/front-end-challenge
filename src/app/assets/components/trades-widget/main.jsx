@@ -1,4 +1,4 @@
-import { formatNumber, priceFormat, getJSON } from '../_/util';
+import { formatNumber, priceFormat } from '../_/util';
 
 function parseData(payload) {
   return payload.map(item => ({
@@ -10,8 +10,14 @@ function parseData(payload) {
   }));
 }
 
-function fetchData(book) {
-  return getJSON({ book }, parseData);
+function parseInfo(item) {
+  return {
+    key: item.identifier,
+    side: item.operation,
+    time: moment().format('H:mm:ss'),
+    price: formatNumber(item.book, item.rate),
+    amount: priceFormat(item.amount),
+  };
 }
 
 class TradesWidget extends React.Component {
@@ -23,13 +29,28 @@ class TradesWidget extends React.Component {
   }
 
   componentDidMount() {
-    fetchData('btc_mxn')
+    const book = 'btc_mxn';
+
+    Bitso.API.getTrades(book)
       .then(result => {
         this.setState({
-          trades: result,
+          trades: parseData(result.payload),
           loading: false,
         });
       });
+
+    Bitso.API.on('trades', () => {
+      Bitso.API.trades.forEach(trade => {
+        const tradeInfo = parseInfo({
+          ...trade,
+          book,
+        });
+
+        this.setState({
+          trades: [tradeInfo].concat(this.state.trades),
+        })
+      });
+    });
   }
 
   render() {

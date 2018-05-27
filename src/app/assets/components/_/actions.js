@@ -8,13 +8,11 @@ export function toggle(props, target, className) {
   return e => {
     e.preventDefault();
 
-    const offset = props.values.indexOf(target);
-
-    if (offset !== -1) {
-      props.unset(offset).$el.classList.remove(className);
+    if (props.values.indexOf(target.key) !== -1) {
+      props.unset(target);
       return;
     }
 
-    props.set(target).$el.classList.add(className);
+    props.set(target);
   };
 }
