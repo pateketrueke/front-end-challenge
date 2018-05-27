@@ -1,4 +1,4 @@
-import { formatNumber, priceFormat } from '../_/util';
+import { formatNumber, priceFormat, getJSON } from '../_/util';
 
 function parseData(payload) {
   return payload.map(item => ({
@@ -11,9 +11,7 @@ function parseData(payload) {
 }
 
 function fetchData(book) {
-  return fetch(`https://api.bitso.com/v3/trades/?book=${book}`)
-    .then(resp => resp.json())
-    .then(data => parseData(data.payload));
+  return getJSON({ book }, parseData);
 }
 
 class TradesWidget extends React.Component {
