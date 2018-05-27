@@ -13,10 +13,10 @@ export class API {
     };
 
     this._events = {};
+
     this.diff = [];
-    this.bids = [];
-    this.asks = [];
     this.trades = [];
+    this.orders = {};
 
     this.ws.onmessage = message => {
       const data = JSON.parse(message.data);
@@ -48,7 +48,7 @@ export class API {
         this.emit('diff');
       } else if (data.type == 'orders' && data.payload) {
         Object.keys(data.payload).forEach(key => {
-          this[key] = data.payload[key].map(order => {
+          this.orders[key] = data.payload[key].map(order => {
             return {
               timestamp: order.d,
               rate: order.r,

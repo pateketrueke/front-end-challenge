@@ -21,7 +21,7 @@ class OrdersWidget extends React.Component {
     Bitso.API.on('orders', () => {
       this.setState({
         loading: false,
-        data: parseData(Bitso.API[this.props.group]),
+        data: parseData(Bitso.API.orders[this.props.group]),
       });
     });
   }
