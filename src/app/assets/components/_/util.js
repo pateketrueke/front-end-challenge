@@ -16,12 +16,16 @@ export function formatNumber(values, number) {
   return `$${value}`;
 }
 
-export function getJSON(params, parseData) {
+export function getQuery(params) {
   const query = Object.keys(params)
     .map(key => `${key}=${params[key]}`)
     .join('&');
 
-  return fetch(`https://api.bitso.com/v3/trades/?${query}`)
+  return query;
+}
+
+export function getJSON(url, params, callback) {
+  return fetch(`${url}?${getQuery(params)}`)
     .then(resp => resp.json())
-    .then(data => parseData(data.payload));
+    .then(data => callback && callback(data.payload));
 }

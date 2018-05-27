@@ -1,3 +1,8 @@
+import Bitso from '../_/bitso';
+
+window.Bitso = window.Bitso || {};
+Object.assign(window.Bitso, Bitso);
+
 const load = document.currentScript.import;
 
 load([
@@ -29,7 +34,7 @@ document.currentScript.exports = {
             Object.assign(window.Bitso, exportedComponents);
           }
 
-          ReactDOM.render(React.createElement(window.Bitso[widgetName]), node);
+          ReactDOM.render(React.createElement(window.Bitso[widgetName], context), node);
         });
     }
   },
