@@ -136,7 +136,7 @@ class OrdersWidget extends React.Component {
           { key: 'price', label: 'Precio', align: 'right', classes: 'coin mxn' },
         ]}
         className={this.props.group === 'bids' ? 'left' : 'right'}
-        captionRender={(
+        titleRender={(
           <span className='coin mxn'>
             <span className={`type ${this.props.group}`}>${sum}</span>
           </span>

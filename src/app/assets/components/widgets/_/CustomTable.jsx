@@ -28,12 +28,12 @@ export class CustomTable extends React.Component {
   }
 
   render() {
-    const { selected, trades } = this.state;
-    const { data, fields, caption, loading, grouping, className, captionRender } = this.props;
+    const { selected } = this.state;
+    const { data, fields, caption, loading, grouping, className, titleRender } = this.props;
 
     return (
       <Table className={`no-sel ${className || ''}`}>
-        <Caption caption={caption} loading={loading} suffix={captionRender}/>
+        <Caption caption={caption} loading={loading} suffix={titleRender}/>
         <Header fields={fields}/>
         <Body
           set={item => this.selectItem(item.key)}

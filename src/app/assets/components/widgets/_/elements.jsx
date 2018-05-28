@@ -135,7 +135,7 @@ export function List(props) {
   return (
     <div>
       <h4 className='pad caps reset'>{props.caption}</h4>
-      <ReactTransitionGroup.TransitionGroup className='reset no-type full-height v-scroll' component='ul'>
+      <ReactTransitionGroup.TransitionGroup className='reset no-type v-scroll' component='ul'>
         {(props.items || []).map(item => (
           <ReactTransitionGroup.CSSTransition
             classNames={props.grouping || 'data'}
@@ -146,7 +146,7 @@ export function List(props) {
             key={item.key}
             onClick={toggle(props, item)}
             className={`pad ${props.values.indexOf(item.key) === -1 ? '' : 'sel'}`}
-          >{props.render(item)}</li>
+          >{props.render({ ...item, selected: props.values.indexOf(item.key) > -1 })}</li>
           </ReactTransitionGroup.CSSTransition>
         ))}
       </ReactTransitionGroup.TransitionGroup>
