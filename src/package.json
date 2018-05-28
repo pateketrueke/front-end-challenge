@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "lint": "eslint app",
-    "dev": "tarima watch -s",
+    "dev": "tarima watch -ds",
     "build": "tarima -fqe production"
   },
   "tarima": {
