@@ -420,8 +420,8 @@ a {
     }
   }
 
-  .inverted,
-  .ordered {
+  .right,
+  .left {
     .flex {
       *:nth-child(1) { flex: 1 1 auto; }
     }
@@ -434,7 +434,7 @@ a {
     }
   }
 
-  .ordered {
+  .left {
     caption {
       background-color: #1D262F;
     }
@@ -456,7 +456,7 @@ a {
     }
   }
 
-  .inverted {
+  .right {
     .bar > * {
       background-color: @DarkRed;
     }
@@ -481,14 +481,14 @@ a {
       }
     }
 
-    .ordered {
+    .left {
       .flex {
         > *:nth-child(1) { order: 1; flex: 1 1 auto; }
         > *:nth-child(2) { order: 2; }
       }
     }
 
-    .inverted {
+    .right {
       .bar {
         text-align: right;
         margin-right: 0;

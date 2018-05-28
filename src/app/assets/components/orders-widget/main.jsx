@@ -92,7 +92,7 @@ class OrdersWidget extends React.Component {
     Bitso.API.getOrders(book)
       .then(result => {
         const data = result.payload[this.props.group];
-        const max = (_.maxBy(data, 'amount') || { amount: 1 }).amount;
+        const max = (_.maxBy(data, 'amount') || {}).amount || 1;
 
         this.setState({
           loading: false,
@@ -110,10 +110,11 @@ class OrdersWidget extends React.Component {
 
     Bitso.API.on('diff', (sequence, payload) => {
       const result = mergeData(sequence, payload, this.state.orders)[this.props.group];
-      const data = this.state.orders[this.props.group];
-      const max = (_.maxBy(data, 'amount') || { amount: 1 }).amount;
 
       if (result) {
+        const data = this.state.orders[this.props.group];
+        const max = (_.maxBy(data, 'amount') || {}).amount || 1;
+
         this.setState({
           data: parseData(sequence, result, { book, max }),
           sum: priceFormat(average(data, 'rate')),
@@ -133,7 +134,7 @@ class OrdersWidget extends React.Component {
           { key: 'value', label: 'Valor', align: 'right', classes: 'coin mxn' },
           { key: 'price', label: 'Precio', align: 'right', classes: 'coin mxn' },
         ]}
-        className={this.props.group === 'bids' ? 'ordered' : 'inverted'}
+        className={this.props.group === 'bids' ? 'left' : 'right'}
         captionRender={(
           <span className='coin mxn'>
             <span className={`type ${this.props.group}`}>${sum}</span>

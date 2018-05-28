@@ -1,4 +1,4 @@
-import { save, toggle } from '../../_/actions';
+import { toggle } from '../../_/actions';
 
 export function Highlight(props) {
   const suffix = Array.from({
@@ -99,7 +99,7 @@ export function Body(props) {
 
   return (
     <tbody>{props.items.map(item => (
-      <tr key={item.key} ref={save(item)} onClick={toggle(props, item, 'sel')}>{props.fields.map(field => (
+      <tr key={item.key} onClick={toggle(props, item, 'sel')}>{props.fields.map(field => (
         <th
           key={field.key}
           className={`pad align-${field.align} ${props.values.indexOf(item.key) === -1 ? '' : 'sel'}`}

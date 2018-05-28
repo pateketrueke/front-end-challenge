@@ -1,9 +1,3 @@
-export function save(target) {
-  return ref => {
-    target.$el = ref;
-  };
-}
-
 export function toggle(props, target, className) {
   return e => {
     e.preventDefault();
