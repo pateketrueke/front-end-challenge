@@ -43,20 +43,3 @@ export function getJSON(url, params) {
 export function average(values, property) {
   return values.reduce((prev, cur) => prev + parseFloat(cur[property]), 0) / values.length;
 }
-
-export function throttle(func, limit) {
-  let inThrottle;
-
-  return function $throttled() {
-    const args = arguments;
-    const context = this;
-
-    if (!inThrottle) {
-      func.apply(context, args);
-      inThrottle = true;
-      setTimeout(() => {
-        inThrottle = false;
-      }, limit || 200);
-    }
-  };
-}

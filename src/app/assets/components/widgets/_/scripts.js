@@ -1,5 +1,3 @@
-import { throttle } from './components/_/util';
-
 const _stats = document.querySelector('.stats');
 
 let isSticky;
@@ -18,4 +16,4 @@ function update() {
 
 update();
 
-window.addEventListener('resize', throttle(update));
+window.addEventListener('resize', _.throttle(update, 200));
