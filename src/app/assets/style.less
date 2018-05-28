@@ -301,6 +301,15 @@ a {
   right: 0;
   left: 0;
 
+  tbody tr {
+    opacity: .8;
+
+    &:hover {
+      opacity: 1;
+      background-color: @DarkShadow;
+    }
+  }
+
   .coin {
     font-size: 90%;
 
@@ -316,7 +325,7 @@ a {
     }
   }
 
-  .kind {
+  .type {
     &::after {
       display: none;
       margin-left: @Pad1;
@@ -345,6 +354,19 @@ a {
   .asks::after,
   .asks::before {
     content: 'Ask';
+  }
+
+  .bar {
+    display: inline-block;
+    margin-right: @Pad1;
+    height: 100%;
+    width: 3em;
+
+    > * {
+      height: 10px;
+      display: inline-block;
+      background-color: @DarkText;
+    }
   }
 
   .sel {
@@ -405,10 +427,10 @@ a {
     }
 
     tr {
-      td:nth-child(1), th:nth-child(1) { width: 10%; }
-      td:nth-child(2), th:nth-child(2) { width: 33%; }
-      td:nth-child(3), th:nth-child(3) { width: 33%; }
-      td:nth-child(4), th:nth-child(4) { width: 33%; }
+      td:nth-child(1), th:nth-child(1) { width: 20%; }
+      td:nth-child(2), th:nth-child(2) { width: 26%; }
+      td:nth-child(3), th:nth-child(3) { width: 26%; }
+      td:nth-child(4), th:nth-child(4) { width: 26%; }
     }
   }
 
@@ -417,8 +439,16 @@ a {
       background-color: #1D262F;
     }
 
+    .bar > * {
+      background-color: @DarkGreen;
+    }
+
     .sel {
       background-color: #385D3C;
+
+      .bar > * {
+        background-color: @LightGreen;
+      }
 
       td {
         color: #898E8A;
@@ -427,7 +457,15 @@ a {
   }
 
   .inverted {
+    .bar > * {
+      background-color: @DarkRed;
+    }
+
     .sel {
+      .bar > * {
+        background-color: @LightRed;
+      }
+
       td {
         color: #898E8A;
       }
@@ -451,6 +489,12 @@ a {
     }
 
     .inverted {
+      .bar {
+        text-align: right;
+        margin-right: 0;
+        margin-left: @Pad1;
+      }
+
       .flex {
         > *:nth-child(1) { order: 2; flex: none; }
         > *:nth-child(2) { order: 1; flex: 1 1 auto; }
@@ -462,7 +506,7 @@ a {
       }
 
       tr {
-        td:nth-child(1), th:nth-child(1) { order: 4; }
+        td:nth-child(1), th:nth-child(1) { order: 4; text-align: left; }
         td:nth-child(2), th:nth-child(2) { order: 3; }
         td:nth-child(3), th:nth-child(3) { order: 2; }
         td:nth-child(4), th:nth-child(4) { order: 1; }

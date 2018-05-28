@@ -37,3 +37,7 @@ export function getJSON(url, params, callback) {
   return fetch(`${url}?${getQuery(params)}`)
     .then(resp => resp.json());
 }
+
+export function average(values, property) {
+  return values.reduce((prev, cur) => prev + parseFloat(cur[property]), 0) / values.length;
+}

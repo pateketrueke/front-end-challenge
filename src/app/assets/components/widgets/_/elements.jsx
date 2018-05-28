@@ -72,6 +72,19 @@ export function Value(props) {
     );
   }
 
+  if (props.field.key === 'sum') {
+    return (
+      <span className='flex'>
+        <span className='bar align-left'>
+          <span style={{
+            width: props.width,
+          }}></span>
+        </span>
+        <span className='hi'>{props[props.field.key]}</span>
+      </span>
+    );
+  }
+
   return (
     <span className='hi'>{props[props.field.key]}</span>
   );

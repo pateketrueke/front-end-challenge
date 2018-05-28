@@ -1,7 +1,22 @@
-import { fixedNumber, formatNumber, priceFormat } from '../_/util';
+import { fixedNumber, formatNumber, priceFormat, average } from '../_/util';
 
 function parseInfo(item) {
+  let width;
+
+  if (item.max) {
+    width = item.amount / item.max * 100;
+
+    if (width < 5) {
+      width = '1px';
+    } else if (width > 100) {
+      width = '100%';
+    } else {
+      width = `${width}%`;
+    }
+  }
+
   return {
+    width,
     key: item.order,
     sum: fixedNumber(item.sum, 2),
     amount: priceFormat(item.amount),
@@ -67,6 +82,7 @@ class OrdersWidget extends React.Component {
       loading: true,
       orders: {},
       data: [],
+      sum: 0,
     };
   }
 
@@ -75,10 +91,14 @@ class OrdersWidget extends React.Component {
 
     Bitso.API.getOrders(book)
       .then(result => {
+        const data = result.payload[this.props.group];
+        const max = _.maxBy(data, 'amount').amount;
+
         this.setState({
           loading: false,
           orders: result.payload,
-          data: parseData(result.payload.sequence, result.payload[this.props.group], { book }),
+          data: parseData(result.payload.sequence, data, { book, max }),
+          sum: priceFormat(average(data, 'price')),
         });
       });
 
@@ -90,17 +110,20 @@ class OrdersWidget extends React.Component {
 
     Bitso.API.on('diff', (sequence, payload) => {
       const result = mergeData(sequence, payload, this.state.orders)[this.props.group];
+      const data = this.state.orders[this.props.group];
+      const max = _.maxBy(data, 'amount').amount;
 
       if (result) {
         this.setState({
-          data: parseData(sequence, result, { book }),
+          data: parseData(sequence, result, { book, max }),
+          sum: priceFormat(average(data, 'rate')),
         });
       }
     });
   }
 
   render() {
-    const { loading, data } = this.state;
+    const { loading, data, sum } = this.state;
 
     return (
       <Bitso.CustomTable
@@ -113,7 +136,7 @@ class OrdersWidget extends React.Component {
         className={this.props.group === 'bids' ? 'ordered' : 'inverted'}
         captionRender={(
           <span className='coin mxn'>
-            <span className={`kind ${this.props.group}`}>N</span>
+            <span className={`type ${this.props.group}`}>${sum}</span>
           </span>
         )}
         caption={this.props.group === 'bids' ? 'Posturas de compra' : 'Posturas de venta'}
