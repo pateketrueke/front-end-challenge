@@ -2,7 +2,8 @@
 
 import { getJSON } from './util';
 
-const BASE_URL = 'https://api.bitso.com/v3';
+// const BASE_URL = 'https://api.bitso.com/v3';
+const BASE_URL = 'https://bitso-api-v3.herokuapp.com';
 const SOCKETS_URL = 'wss://ws.bitso.com';
 
 export class API {
@@ -88,22 +89,30 @@ export class API {
     return `${BASE_URL}${path}`;
   }
 
-  getBook(book, group, params) {
+  getData(group, params) {
     const path = `/${group}`;
     const url = this.getURL(path);
 
-    return getJSON(url, {
-      ...params,
-      book,
-    });
+    return getJSON(url, params);
+  }
+
+  getBooks() {
+    return this.getData('available_books');
   }
 
   getTrades(book) {
-    return this.getBook(book, 'trades', { limit: 50 });
+    return this.getData('trades', { book, limit: 50 });
   }
 
   getOrders(book) {
-    return this.getBook(book, 'order_book', { aggregate: true });
+    return this.getData('order_book', { book, aggregate: true });
+  }
+
+  getTicker(book) {
+    return this.getData('ticker', { book });
+  }
+
+  getMarkets() {
   }
 }
 
