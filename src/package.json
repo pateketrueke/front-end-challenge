@@ -6,6 +6,7 @@
   "author": "Alvaro Cabrera <yo@soypache.co>",
   "license": "MIT",
   "scripts": {
+    "lint": "eslint app",
     "dev": "tarima watch -s",
     "build": "tarima -fqe production"
   },
@@ -62,7 +63,7 @@
     "buble": "^0.19.3",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
-    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-import": "^2.12.0",
     "less": "^2.7.3",
     "less-plugin-autoprefix": "^1.5.1",
     "pug": "^2.0.3",

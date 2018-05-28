@@ -1,3 +1,5 @@
+/* global React, ReactDOM */
+
 import Bitso from '../_/bitso';
 
 window.Bitso = window.Bitso || {};

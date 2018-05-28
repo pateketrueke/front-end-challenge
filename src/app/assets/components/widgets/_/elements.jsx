@@ -105,7 +105,7 @@ export function Body(props) {
           key={item.key}
           timeout={700}
         >
-        <tr key={item.key} onClick={toggle(props, item, 'sel')}>{props.fields.map(field => (
+        <tr key={item.key} onClick={toggle(props, item)}>{props.fields.map(field => (
           <th
             key={field.key}
             className={`pad align-${field.align} ${props.values.indexOf(item.key) === -1 ? '' : 'sel'}`}

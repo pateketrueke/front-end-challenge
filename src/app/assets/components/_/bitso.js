@@ -21,7 +21,7 @@ export class API {
     this.ws.onmessage = throttle(message => {
       const data = JSON.parse(message.data);
 
-      if (data.type == 'trades' && data.payload) {
+      if (data.type === 'trades' && data.payload) {
         const trades = data.payload.map(trade => {
           return {
             operation: trade.t ? 'sell' : 'buy',
@@ -33,7 +33,7 @@ export class API {
         });
 
         this.emit('trades', trades);
-      } else if (data.type == 'diff-orders' && data.payload) {
+      } else if (data.type === 'diff-orders' && data.payload) {
         const diff = data.payload.map(order => {
           return {
             operation: order.t ? 'sell' : 'buy',
@@ -47,7 +47,7 @@ export class API {
         });
 
         this.emit('diff', data.sequence, diff);
-      } else if (data.type == 'orders' && data.payload) {
+      } else if (data.type === 'orders' && data.payload) {
         const orders = {};
 
         Object.keys(data.payload).forEach(key => {
@@ -78,7 +78,7 @@ export class API {
 
   off(event, callback) {
     if (this._events[event]) {
-      const offset = this._events[event].indexOf(event);
+      const offset = this._events[event].indexOf(callback);
 
       this._events.splice(offset, 1);
     }

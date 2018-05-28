@@ -85,7 +85,7 @@ function loadScript(fromSrc) {
 
     // The injected script is able to use this symbol
     // as `document.currentScript.import`
-    const loader = script.import = src => {
+    script.import = src => {
       // This function is very similar to `System.import()`
       // or NodeJS's `import()` call but instead it will
       // try to load known resources from BASE_URL

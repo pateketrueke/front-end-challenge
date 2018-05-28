@@ -10,11 +10,9 @@ function update() {
       isSticky = true;
       _stats.classList.add('is-sticky');
     }
-  } else {
-    if (isSticky) {
-      isSticky = false;
-      _stats.classList.remove('is-sticky');
-    }
+  } else if (isSticky) {
+    isSticky = false;
+    _stats.classList.remove('is-sticky');
   }
 }
 

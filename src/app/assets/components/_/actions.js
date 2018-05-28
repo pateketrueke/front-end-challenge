@@ -1,4 +1,4 @@
-export function toggle(props, target, className) {
+export function toggle(props, target) {
   return e => {
     e.preventDefault();
 
@@ -10,3 +10,7 @@ export function toggle(props, target, className) {
     props.set(target);
   };
 }
+
+export default {
+  toggle,
+};

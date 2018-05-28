@@ -1,3 +1,5 @@
+/* global numeral */
+
 export function priceFormat(number) {
   if (number < 1) {
     return numeral(number).format('0.00000000');
@@ -33,7 +35,7 @@ export function getQuery(params) {
   return query;
 }
 
-export function getJSON(url, params, callback) {
+export function getJSON(url, params) {
   return fetch(`${url}?${getQuery(params)}`)
     .then(resp => resp.json());
 }
@@ -45,14 +47,16 @@ export function average(values, property) {
 export function throttle(func, limit) {
   let inThrottle;
 
-  return function() {
+  return function $throttled() {
     const args = arguments;
     const context = this;
 
     if (!inThrottle) {
       func.apply(context, args);
       inThrottle = true;
-      setTimeout(() => inThrottle = false, limit || 200);
+      setTimeout(() => {
+        inThrottle = false;
+      }, limit || 200);
     }
   };
 }
