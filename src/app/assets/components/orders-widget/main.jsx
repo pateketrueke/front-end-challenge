@@ -22,6 +22,7 @@ function parseInfo(item) {
     amount: priceFormat(item.amount),
     value: priceFormat(item.value || (item.price * item.amount)),
     price: formatNumber(item.book, item.rate || item.price),
+    side: item.side || item.operation,
   };
 }
 

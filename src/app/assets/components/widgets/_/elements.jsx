@@ -106,11 +106,11 @@ export function Body(props) {
           timeout={700}
         >
         <tr key={item.key} onClick={toggle(props, item)}>{props.fields.map(field => (
-          <th
+          <td
             key={field.key}
             className={`pad align-${field.align} ${props.values.indexOf(item.key) === -1 ? '' : 'sel'}`}
           ><Value {...item} field={field} />
-          </th>
+          </td>
         ))}</tr>
         </ReactTransitionGroup.CSSTransition>
       ))}
