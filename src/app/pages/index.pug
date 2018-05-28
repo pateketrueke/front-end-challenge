@@ -25,7 +25,7 @@ mixin Topbar
     .wrapper.flex
       .no-wrap.no-sel.menu BTC / MXN
       .h-scroll.no-sel(data-scrollable='.flex')
-        .flex.push
+        .flex.push(data-component='widgets' data-widget='ticker')
           span Volumen 24 h #[span.light 170.5405818 BTC]
           span Máx. #[span.light 304,934.23 MXN]
           span Mín. #[span.light 274,934.23 MXN]
