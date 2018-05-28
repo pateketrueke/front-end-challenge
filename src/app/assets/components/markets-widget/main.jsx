@@ -56,7 +56,7 @@ class MarketsWidget extends React.Component {
           caption='Mercados 24 h'
           loading={loading}
           data={books}
-        ></Bitso.CustomList>
+        />
       </div>
     );
   }

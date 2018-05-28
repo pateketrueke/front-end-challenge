@@ -68,7 +68,7 @@ export class API {
 
         this.emit('orders', orders);
       }
-    }, 200);
+    }, 1000);
   }
 
   on(event, callback) {
