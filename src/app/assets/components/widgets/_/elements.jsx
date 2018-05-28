@@ -105,16 +105,52 @@ export function Body(props) {
           key={item.key}
           timeout={1000}
         >
-        <tr key={item.key} onClick={toggle(props, item)}>{props.fields.map(field => (
+        <tr
+          key={item.key}
+          onClick={toggle(props, item)}
+          className={props.values.indexOf(item.key) === -1 ? null : 'sel'}
+        >{props.fields.map(field => (
           <td
             key={field.key}
-            className={`pad align-${field.align} ${props.values.indexOf(item.key) === -1 ? '' : 'sel'}`}
+            className={`pad align-${field.align}`}
           ><Value {...item} field={field} />
           </td>
         ))}</tr>
         </ReactTransitionGroup.CSSTransition>
       ))}
     </ReactTransitionGroup.TransitionGroup>
+  );
+}
+
+export function List(props) {
+  if (props.loading) {
+    return (
+      <div>
+        <h4 className='pad caps reset'>{props.caption}...</h4>
+        <div className='pad'>Cargando...</div>
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      <h4 className='pad caps reset'>{props.caption}</h4>
+      <ReactTransitionGroup.TransitionGroup className='reset no-type full-height v-scroll' component='ul'>
+        {(props.items || []).map(item => (
+          <ReactTransitionGroup.CSSTransition
+            classNames={props.grouping || 'data'}
+            key={item.key}
+            timeout={1000}
+          >
+          <li
+            key={item.key}
+            onClick={toggle(props, item)}
+            className={`pad ${props.values.indexOf(item.key) === -1 ? '' : 'sel'}`}
+          >{props.render(item)}</li>
+          </ReactTransitionGroup.CSSTransition>
+        ))}
+      </ReactTransitionGroup.TransitionGroup>
+    </div>
   );
 }
 
@@ -125,4 +161,5 @@ export default {
   Header,
   Value,
   Body,
+  List,
 };
