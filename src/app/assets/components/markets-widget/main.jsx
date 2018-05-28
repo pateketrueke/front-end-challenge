@@ -4,14 +4,16 @@ import { toggle } from '../_/actions';
 function parseData(payload) {
   return payload.map(item => ({
     title: item.book.toUpperCase().replace('_', '/'),
-    maxa: item.maximum_amount,
-    maxp: item.maximum_price,
-    maxv: item.maximum_value,
-    mina: item.minimum_amount,
-    minp: item.minimum_price,
-    minv: item.minimum_value,
     key: item.book,
   }));
+}
+
+function parseInfo(prev, cur) {
+  return {
+    time: cur.date,
+    value: priceFormat(cur.value),
+    diff: cur.value > prev.value ? 'up' : 'down',
+  };
 }
 
 class MarketsWidget extends React.Component {
@@ -30,7 +32,22 @@ class MarketsWidget extends React.Component {
           loading: false,
           books: parseData(result.payload),
         });
-      });
+
+        result.payload.forEach(item => {
+          Bitso.API.getMarkets(item.book, '1month')
+            .then(_result => {
+              this.setState({
+                books: this.state.books.map(_item => {
+                  if (_item.key === item.book) {
+                    Object.assign(_item, parseInfo(_result[0], _result[_result.length - 1]));
+                  }
+
+                  return _item;
+                }),
+              });
+            });
+        });
+      })
   }
 
   render() {
@@ -43,11 +60,11 @@ class MarketsWidget extends React.Component {
             <div>
               <div className='flex'>
                 <span className='hi auto'>{props.title}</span>
-                <span className='down'>{props.maxp}</span>
+                <span className={props.diff}>{props.value}</span>
               </div>
               {props.selected && (
                 <div>
-                  <small className='float-right'>10:23 AM</small>
+                  <small className='float-right'>{props.time}</small>
                   <img className='fit' src='//placehold.it/260x80/161a1e/fff' />
                 </div>
               )}

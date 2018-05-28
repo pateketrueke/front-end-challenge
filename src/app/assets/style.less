@@ -226,11 +226,7 @@ a {
       overflow: auto;
       width: 110%;
       padding-right: 10%;
-      height: ~"calc(100vh - 136px)";
-
-      @media screen and (min-width: @SmallWidth) {
-        height: ~"calc(100vh - 154px)";
-      }
+      height: ~"calc(100vh - 34px)";
     }
   }
 
@@ -318,6 +314,7 @@ a {
 
     &:hover {
       opacity: 1;
+      transition: none;
       background-color: @DarkShadow;
     }
   }

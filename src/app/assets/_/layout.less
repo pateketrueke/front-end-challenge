@@ -102,6 +102,18 @@ body {
     height: auto;
     top: 103px;
     bottom: 0;
+
+    .sidebar {
+      .content {
+        ul {
+          height: ~"calc(100vh - 136px)";
+
+          @media screen and (min-width: @SmallWidth) {
+            height: ~"calc(100vh - 154px)";
+          }
+        }
+      }
+    }
   }
 }
 

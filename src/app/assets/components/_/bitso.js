@@ -97,25 +97,26 @@ export class API {
   }
 
   getBooks() {
-    return this.getData('available_books');
+    return this.getData('api/available_books');
   }
 
   getTrades(book) {
-    return this.getData('trades', { book, limit: 50 });
+    return this.getData('api/trades', { book, limit: 50 });
   }
 
   getOrders(book) {
-    return this.getData('order_book', { book, aggregate: true });
+    return this.getData('api/order_book', { book, aggregate: true });
   }
 
   getTicker(book) {
-    return this.getData('ticker', { book });
+    return this.getData('api/ticker', { book });
   }
 
-  getMarkets() {
+  getMarkets(book, timeframe) {
+    return this.getData(`trade/chartJSON/${book}/${timeframe}`);
   }
 }
 
 export default {
-  API: new API(),
+  API,
 };

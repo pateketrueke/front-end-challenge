@@ -23,6 +23,7 @@ load('widgets/main')
   .then(baseWidgets => {
     window.Bitso = window.Bitso || {};
     Object.assign(window.Bitso, baseWidgets);
+    window.Bitso.API = new window.Bitso.API();
   });
 
 document.currentScript.exports = {
