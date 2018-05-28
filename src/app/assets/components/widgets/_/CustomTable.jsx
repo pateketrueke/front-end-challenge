@@ -8,16 +8,6 @@ export class CustomTable extends React.Component {
     };
   }
 
-  componentDidMount() {
-    this.ref = ReactDOM.findDOMNode(this);
-
-    Bitso.bindScrollers([this.ref]);
-  }
-
-  componentDidUpdate() {
-    Bitso.updateScroller(this.ref);
-  }
-
   unselectItem(key) {
     const offset = this.state.selected.indexOf(key);
     const copy = this.state.selected;

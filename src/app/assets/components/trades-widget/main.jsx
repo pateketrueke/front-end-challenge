@@ -47,7 +47,7 @@ class TradesWidget extends React.Component {
         });
 
         this.setState({
-          trades: [tradeInfo].concat(this.state.trades),
+          trades: [tradeInfo].concat(this.state.trades).slice(-50),
         })
       });
     });

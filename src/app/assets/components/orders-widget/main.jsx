@@ -91,7 +91,7 @@ class OrdersWidget extends React.Component {
 
     Bitso.API.getOrders(book)
       .then(result => {
-        const data = result.payload[this.props.group];
+        const data = result.payload[this.props.group].slice(-50);
         const max = (_.maxBy(data, 'amount') || {}).amount || 1;
 
         this.setState({
@@ -112,7 +112,7 @@ class OrdersWidget extends React.Component {
       const result = mergeData(sequence, payload, this.state.orders)[this.props.group];
 
       if (result) {
-        const data = this.state.orders[this.props.group];
+        const data = this.state.orders[this.props.group].slice(-50);
         const max = (_.maxBy(data, 'amount') || {}).amount || 1;
 
         this.setState({

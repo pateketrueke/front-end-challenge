@@ -1,4 +1,4 @@
-import { getJSON } from './util';
+import { getJSON, throttle } from './util';
 
 const BASE_URL = 'https://api.bitso.com/v3';
 const SOCKETS_URL = 'wss://ws.bitso.com';
@@ -18,7 +18,7 @@ export class API {
       });
     };
 
-    this.ws.onmessage = message => {
+    this.ws.onmessage = throttle(message => {
       const data = JSON.parse(message.data);
 
       if (data.type == 'trades' && data.payload) {
@@ -65,7 +65,7 @@ export class API {
 
         this.emit('orders', orders);
       }
-    };
+    });
   }
 
   on(event, callback) {
@@ -73,7 +73,7 @@ export class API {
       this._events[event] = [];
     }
 
-    this._events[event].push(callback);
+    this._events[event].push(throttle(callback));
   }
 
   off(event, callback) {
