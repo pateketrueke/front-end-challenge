@@ -302,6 +302,7 @@ a {
   left: 0;
 
   tbody tr {
+    background-color: transparent;
     opacity: .8;
 
     &:hover {
@@ -344,6 +345,27 @@ a {
   .btc::after,
   .btc::before {
     content: 'BTC';
+  }
+
+  .asks,
+  .bids {
+    &-exit,
+    &-enter,
+    &-active {
+      transition: all .5s ease-in;
+    }
+
+    &-exit { opacity: .5; }
+    &-exit-active { opacity: .1; }
+    &-enter-active { opacity: 1; }
+  }
+
+  .asks {
+    &-enter { background-color: @DarkRed; }
+  }
+
+  .bids {
+    &-enter { background-color: @DarkGreen; }
   }
 
   .bids::after,

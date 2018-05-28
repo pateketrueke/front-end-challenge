@@ -141,6 +141,7 @@ class OrdersWidget extends React.Component {
           </span>
         )}
         caption={this.props.group === 'bids' ? 'Posturas de compra' : 'Posturas de venta'}
+        grouping={this.props.group}
         loading={loading}
         data={data}
       />

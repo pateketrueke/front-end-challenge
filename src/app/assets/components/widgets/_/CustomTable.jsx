@@ -39,10 +39,10 @@ export class CustomTable extends React.Component {
 
   render() {
     const { selected, trades } = this.state;
-    const { data, fields, caption, loading, className, captionRender } = this.props;
+    const { data, fields, caption, loading, grouping, className, captionRender } = this.props;
 
     return (
-      <Table className={className || ''}>
+      <Table className={`no-sel ${className || ''}`}>
         <Caption caption={caption} loading={loading} suffix={captionRender}/>
         <Header fields={fields}/>
         <Body
@@ -52,6 +52,7 @@ export class CustomTable extends React.Component {
           fields={fields}
           values={selected}
           loading={loading}
+          grouping={grouping}
         />
       </Table>
     );

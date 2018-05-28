@@ -98,15 +98,23 @@ export function Body(props) {
   }
 
   return (
-    <tbody>{props.items.map(item => (
-      <tr key={item.key} onClick={toggle(props, item, 'sel')}>{props.fields.map(field => (
-        <th
-          key={field.key}
-          className={`pad align-${field.align} ${props.values.indexOf(item.key) === -1 ? '' : 'sel'}`}
-        ><Value {...item} field={field} />
-        </th>
-      ))}</tr>
-    ))}</tbody>
+    <ReactTransitionGroup.TransitionGroup component='tbody'>
+      {props.items.map(item => (
+        <ReactTransitionGroup.CSSTransition
+          classNames={props.grouping || 'data'}
+          key={item.key}
+          timeout={700}
+        >
+        <tr key={item.key} onClick={toggle(props, item, 'sel')}>{props.fields.map(field => (
+          <th
+            key={field.key}
+            className={`pad align-${field.align} ${props.values.indexOf(item.key) === -1 ? '' : 'sel'}`}
+          ><Value {...item} field={field} />
+          </th>
+        ))}</tr>
+        </ReactTransitionGroup.CSSTransition>
+      ))}
+    </ReactTransitionGroup.TransitionGroup>
   );
 }
 

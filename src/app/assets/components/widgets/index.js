@@ -8,6 +8,7 @@ const load = document.currentScript.import;
 load([
   '//unpkg.com/react@16.3.1/umd/react.development.js',
   '//unpkg.com/react-dom@16.3.1/umd/react-dom.development.js',
+  '//unpkg.com/react-transition-group@2.3.1/dist/react-transition-group.js',
   '//unpkg.com/classnames@2.2.5/index.js',
   '//unpkg.com/prop-types@15.5.10/prop-types.js',
   '//unpkg.com/moment@2.22.0/moment.js',
