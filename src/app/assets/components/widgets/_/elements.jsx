@@ -103,7 +103,7 @@ export function Body(props) {
         <ReactTransitionGroup.CSSTransition
           classNames={props.grouping || 'data'}
           key={item.key}
-          timeout={700}
+          timeout={1000}
         >
         <tr key={item.key} onClick={toggle(props, item)}>{props.fields.map(field => (
           <td
