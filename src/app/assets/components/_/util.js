@@ -16,9 +16,18 @@ export function formatNumber(values, number) {
   return `$${value}`;
 }
 
+export function fixedNumber(value, length) {
+  return parseFloat(value || 0).toFixed(length);
+}
+
 export function getQuery(params) {
   const query = Object.keys(params)
-    .map(key => `${key}=${params[key]}`)
+    .map(key => (
+      typeof params[key] !== 'undefined'
+        ? `${key}=${params[key]}`
+        : undefined
+    ))
+    .filter(Boolean)
     .join('&');
 
   return query;

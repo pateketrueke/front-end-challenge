@@ -5,24 +5,24 @@ const SOCKETS_URL = 'wss://ws.bitso.com';
 
 export class API {
   constructor() {
-    this.ws = new WebSocket(SOCKETS_URL);
-    this.ws.onopen = () => {
-      this.ws.send(JSON.stringify({ action: 'subscribe', book: 'btc_mxn', type: 'trades' }));
-      this.ws.send(JSON.stringify({ action: 'subscribe', book: 'btc_mxn', type: 'diff-orders' }));
-      this.ws.send(JSON.stringify({ action: 'subscribe', book: 'btc_mxn', type: 'orders' }));
-    };
-
     this._events = {};
 
-    this.diff = [];
-    this.trades = [];
-    this.orders = {};
+    setTimeout(() => this.init(), 1000);
+  }
+
+  init() {
+    this.ws = new WebSocket(SOCKETS_URL);
+    this.ws.onopen = () => {
+      ['trades', 'orders', 'diff-orders'].forEach(event => {
+        this.ws.send(JSON.stringify({ action: 'subscribe', book: 'btc_mxn', type: event }));
+      });
+    };
 
     this.ws.onmessage = message => {
       const data = JSON.parse(message.data);
 
       if (data.type == 'trades' && data.payload) {
-        this.trades = data.payload.map(trade => {
+        const trades = data.payload.map(trade => {
           return {
             operation: trade.t ? 'sell' : 'buy',
             identifier: trade.i,
@@ -32,23 +32,26 @@ export class API {
           };
         });
 
-        this.emit('trades');
+        this.emit('trades', trades);
       } else if (data.type == 'diff-orders' && data.payload) {
-        this.diff = data.payload.map(order => {
+        const diff = data.payload.map(order => {
           return {
             operation: order.t ? 'sell' : 'buy',
             timestamp: order.d,
             rate: order.r,
+            type: order.s,
             amount: order.a,
             value: order.v,
             order: order.o,
           };
         });
 
-        this.emit('diff');
+        this.emit('diff', data.sequence, diff);
       } else if (data.type == 'orders' && data.payload) {
+        const orders = {};
+
         Object.keys(data.payload).forEach(key => {
-          this.orders[key] = data.payload[key].map(order => {
+          orders[key] = data.payload[key].map(order => {
             return {
               operation: order.t ? 'sell' : 'buy',
               timestamp: order.d,
@@ -60,7 +63,7 @@ export class API {
           });
         });
 
-        this.emit('orders');
+        this.emit('orders', orders);
       }
     };
   }
@@ -81,9 +84,9 @@ export class API {
     }
   }
 
-  emit(event) {
+  emit(event, ...args) {
     if (this._events[event]) {
-      this._events[event].forEach(cb => cb());
+      this._events[event].forEach(cb => cb(...args));
     }
   }
 
@@ -91,8 +94,11 @@ export class API {
     return `${BASE_URL}${path}`;
   }
 
-  getBook(book, group) {
-    return getJSON(this.getURL(`/${group}`), { book });
+  getBook(book, group, aggregate) {
+    const path = `/${group}`;
+    const url = this.getURL(path);
+
+    return getJSON(url, { book, aggregate });
   }
 
   getTrades(book) {
@@ -100,7 +106,7 @@ export class API {
   }
 
   getOrders(book) {
-    return this.getBook(book, 'order_book');
+    return this.getBook(book, 'order_book', true);
   }
 }
 

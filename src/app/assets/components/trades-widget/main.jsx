@@ -34,13 +34,13 @@ class TradesWidget extends React.Component {
     Bitso.API.getTrades(book)
       .then(result => {
         this.setState({
-          trades: parseData(result.payload),
           loading: false,
+          trades: parseData(result.payload),
         });
       });
 
-    Bitso.API.on('trades', () => {
-      Bitso.API.trades.forEach(trade => {
+    Bitso.API.on('trades', payload => {
+      payload.forEach(trade => {
         const tradeInfo = parseInfo({
           ...trade,
           book,

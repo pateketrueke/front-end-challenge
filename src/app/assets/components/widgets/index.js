@@ -13,6 +13,7 @@ load([
   '//unpkg.com/moment@2.22.0/moment.js',
   '//unpkg.com/moment@2.22.0/locale/es.js',
   '//unpkg.com/numeral@2.0.6/numeral.js',
+  '//unpkg.com/lodash@4.17.10/lodash.js',
 ]);
 
 load('widgets/main')
