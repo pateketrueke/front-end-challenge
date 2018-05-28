@@ -1,9 +1,11 @@
 const _stats = document.querySelector('.stats');
 
+const MAX_HEIGHT = 667;
+
 let isSticky;
 
 function update() {
-  if (window.innerHeight > 800) {
+  if (window.innerHeight > MAX_HEIGHT) {
     if (!isSticky) {
       isSticky = true;
       _stats.classList.add('is-sticky');
