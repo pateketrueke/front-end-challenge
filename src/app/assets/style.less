@@ -347,17 +347,25 @@ a {
     content: 'BTC';
   }
 
+  .data,
   .asks,
   .bids {
+    &-done,
     &-exit,
     &-enter,
+    &-enter-done,
     &-active {
       transition: all .5s ease-in;
     }
 
     &-exit { opacity: .5; }
     &-exit-active { opacity: .1; }
+    &-enter-done,
     &-enter-active { opacity: 1; }
+  }
+
+  .data {
+    &-enter { background-color: @LightShadow; }
   }
 
   .asks {
