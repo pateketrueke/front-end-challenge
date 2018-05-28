@@ -76,14 +76,6 @@ export class API {
     this._events[event].push(throttle(callback));
   }
 
-  off(event, callback) {
-    if (this._events[event]) {
-      const offset = this._events[event].indexOf(callback);
-
-      this._events.splice(offset, 1);
-    }
-  }
-
   emit(event, ...args) {
     if (this._events[event]) {
       this._events[event].forEach(cb => cb(...args));
