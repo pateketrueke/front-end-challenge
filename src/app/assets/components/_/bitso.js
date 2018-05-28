@@ -94,19 +94,22 @@ export class API {
     return `${BASE_URL}${path}`;
   }
 
-  getBook(book, group, aggregate) {
+  getBook(book, group, params) {
     const path = `/${group}`;
     const url = this.getURL(path);
 
-    return getJSON(url, { book, aggregate });
+    return getJSON(url, {
+      ...params,
+      book,
+    });
   }
 
   getTrades(book) {
-    return this.getBook(book, 'trades');
+    return this.getBook(book, 'trades', { limit: 50 });
   }
 
   getOrders(book) {
-    return this.getBook(book, 'order_book', true);
+    return this.getBook(book, 'order_book', { aggregate: true });
   }
 }
 
