@@ -36,7 +36,13 @@ export function getQuery(params) {
 }
 
 export function getJSON(url, params) {
-  return fetch(`${url}?${getQuery(params)}`)
+  let query;
+
+  if (params) {
+    query = `?${getQuery(params)}`;
+  }
+
+  return fetch(`${url}${query || ''}`)
     .then(resp => resp.json());
 }
 
