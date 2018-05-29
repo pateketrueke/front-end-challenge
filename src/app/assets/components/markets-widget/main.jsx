@@ -50,7 +50,7 @@ class MarketsWidget extends React.Component {
               this.setState({
                 books: this.state.books.map(_item => {
                   if (_item.key === item.book) {
-                    Object.assign(_item, parseInfo(_result.slice(-7)));
+                    Object.assign(_item, parseInfo(_result.slice(-30)));
                   }
 
                   return _item;
@@ -81,7 +81,7 @@ class MarketsWidget extends React.Component {
               )}
             </div>
           )}
-          caption='Mercados 7 días'
+          caption='Mercados 30 días'
           loading={loading}
           data={books}
         />
