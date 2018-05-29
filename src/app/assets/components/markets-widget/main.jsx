@@ -78,7 +78,7 @@ class MarketsWidget extends React.Component {
               {props.selected && (
                 <div>
                   <small className='float-right'>{props.time}</small>
-                  <Bitso.CustomChart className={`fit ${props.diff}`} type='lines' data={props.data}/>
+                  <Bitso.LineChart className={`fit ${props.diff}`} type='lines' data={props.data}/>
                 </div>
               )}
             </div>

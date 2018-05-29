@@ -1,11 +1,11 @@
 import CustomTable from './_/CustomTable';
 import CustomList from './_/CustomList';
-import CustomChart from './_/CustomChart';
+import LineChart from './_/LineChart';
 
 import './_/scripts';
 
 document.currentScript.exports = {
   CustomTable,
   CustomList,
-  CustomChart,
+  LineChart,
 };

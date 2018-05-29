@@ -1,6 +1,6 @@
 /* global Chartist */
 
-export class CustomChart extends React.Component {
+export class LineChart extends React.Component {
   componentWillUnmount() {
     if (this._ref) {
       this._ref.detach();
@@ -40,4 +40,4 @@ export class CustomChart extends React.Component {
 }
 
 
-export default CustomChart;
+export default LineChart;
