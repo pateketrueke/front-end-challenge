@@ -9,7 +9,7 @@ class ChartsWidget extends React.Component {
 
   componentDidMount() {
     const book = 'btc_mxn';
-    const range = '1month';
+    const range = '3months';
 
     Bitso.API.getMarkets(book, range)
       .then(_result => {
