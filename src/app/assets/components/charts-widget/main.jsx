@@ -32,7 +32,12 @@ class ChartsWidget extends React.Component {
     }
 
     return (
-      <Bitso.CandleChart data={data}/>
+      <div className='v-flex'>
+        <div>TOOLBAR</div>
+        <div className='auto'>
+          <Bitso.CandleChart data={data}/>
+        </div>
+      </div>
     );
   }
 }
