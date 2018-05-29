@@ -55,6 +55,10 @@ export class LineChart extends React.Component {
         animation: {
           duration: 0,
         },
+        tooltips: {
+          position: 'nearest',
+          mode: 'index',
+        },
         legend: {
           display: false,
         },
