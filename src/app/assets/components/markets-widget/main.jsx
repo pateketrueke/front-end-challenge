@@ -15,13 +15,11 @@ function parseInfo(payload) {
   const cur = payload[payload.length - 1];
   const volume = payload.map(item => parseFloat(item.volume));
   const mostHigh = _.maxBy(payload, 'high').high;
-  const mostLow = _.maxBy(payload, 'low').low;
+  const mostLow = _.minBy(payload, 'low').low;
 
   return {
     time: `${moment(prev.date).format('MMMM D')} - ${moment(cur.date).format('MMMM D')}`,
-    data: [
-      volume,
-    ],
+    data: volume,
     low: parseFloat(mostLow),
     high: parseFloat(mostHigh),
     value: priceFormat(cur.value),
@@ -52,7 +50,7 @@ class MarketsWidget extends React.Component {
               this.setState({
                 books: this.state.books.map(_item => {
                   if (_item.key === item.book) {
-                    Object.assign(_item, parseInfo(_result));
+                    Object.assign(_item, parseInfo(_result.slice(-7)));
                   }
 
                   return _item;
@@ -78,12 +76,12 @@ class MarketsWidget extends React.Component {
               {props.selected && (
                 <div>
                   <small className='float-right'>{props.time}</small>
-                  <Bitso.LineChart className={`fit ${props.diff}`} type='lines' data={props.data}/>
+                  <Bitso.LineChart shown={props.diff} type='lines' data={props.data}/>
                 </div>
               )}
             </div>
           )}
-          caption='Mercados'
+          caption='Mercados 7 días'
           loading={loading}
           data={books}
         />
