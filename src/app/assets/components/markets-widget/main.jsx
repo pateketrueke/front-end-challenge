@@ -1,3 +1,5 @@
+/* global _ */
+
 import { formatNumber, priceFormat } from '../_/util';
 import { toggle } from '../_/actions';
 
@@ -8,9 +10,20 @@ function parseData(payload) {
   }));
 }
 
-function parseInfo(prev, cur) {
+function parseInfo(payload) {
+  const prev = payload[0];
+  const cur = payload[payload.length - 1];
+  const volume = payload.map(item => parseFloat(item.volume));
+  const mostHigh = _.maxBy(payload, 'high').high;
+  const mostLow = _.maxBy(payload, 'low').low;
+
   return {
-    time: cur.date,
+    time: `${moment(prev.date).format('MMMM D')} - ${moment(cur.date).format('MMMM D')}`,
+    data: [
+      volume,
+    ],
+    low: parseFloat(mostLow),
+    high: parseFloat(mostHigh),
     value: priceFormat(cur.value),
     diff: cur.value > prev.value ? 'up' : 'down',
   };
@@ -39,7 +52,7 @@ class MarketsWidget extends React.Component {
               this.setState({
                 books: this.state.books.map(_item => {
                   if (_item.key === item.book) {
-                    Object.assign(_item, parseInfo(_result[0], _result[_result.length - 1]));
+                    Object.assign(_item, parseInfo(_result));
                   }
 
                   return _item;
@@ -65,12 +78,12 @@ class MarketsWidget extends React.Component {
               {props.selected && (
                 <div>
                   <small className='float-right'>{props.time}</small>
-                  <img className='fit' src='//placehold.it/260x80/161a1e/fff' />
+                  <Bitso.CustomChart className={`fit ${props.diff}`} type='lines' data={props.data}/>
                 </div>
               )}
             </div>
           )}
-          caption='Mercados 24 h'
+          caption='Mercados'
           loading={loading}
           data={books}
         />

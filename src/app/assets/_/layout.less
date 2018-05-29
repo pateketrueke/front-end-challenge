@@ -63,6 +63,32 @@ body {
   }
 }
 
+.chart {
+  .ct-line {
+    stroke-width: 1px;
+  }
+
+  .ct-grid {
+    stroke: @RegularNavy;
+  }
+
+  .ct-series-a .ct-line {
+    stroke: @DarkText;
+  }
+
+  &.up {
+    .ct-series-a .ct-line {
+      stroke: @LightGreen;
+    }
+  }
+
+  &.down {
+    .ct-series-a .ct-line {
+      stroke: @LightRed;
+    }
+  }
+}
+
 .stats {
   height: 100%;
 
@@ -141,6 +167,11 @@ body {
 .fit {
   max-width: 100%;
   height: auto;
+
+  > svg {
+    max-width: 100%;
+    height: auto !important;
+  }
 }
 
 .sp {
