@@ -65,7 +65,7 @@ class MarketsWidget extends React.Component {
     const { books, loading } = this.state;
 
     return (
-      <div className='content'>
+      <div className='content no-sel'>
         <Bitso.CustomList
           itemRender={props => (
             <div>
