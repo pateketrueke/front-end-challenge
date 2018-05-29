@@ -18,8 +18,7 @@ load([
   '//unpkg.com/numeral@2.0.6/numeral.js',
   '//unpkg.com/lodash@4.17.10/lodash.js',
   '//www.chartjs.org/chartjs-chart-financial/Chart.js',
-  // '//www.chartjs.org/chartjs-chart-financial/Chart.Financial.js',
-  '//localhost:8080/Chart.Financial.js',
+  '//www.chartjs.org/chartjs-chart-financial/Chart.Financial.js',
 ]);
 
 load('widgets/main')
