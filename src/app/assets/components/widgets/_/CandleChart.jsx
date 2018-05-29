@@ -1,4 +1,14 @@
-/* global Chart */
+/* global _, Chart */
+
+function parseData(payload) {
+  return payload.map(item => ({
+    c: parseFloat(item.close),
+    h: parseFloat(item.high),
+    l: parseFloat(item.low),
+    o: parseFloat(item.open),
+    t: item.date,
+  }));
+}
 
 export class LineChart extends React.Component {
   componentWillUnmount() {
@@ -20,20 +30,27 @@ export class LineChart extends React.Component {
     const data = this.props.data || [];
 
     this._ref = new Chart(ctx, {
-      type: 'line',
+      type: 'candlestick',
       data: {
-        labels: Array.from({ length: data.length }),
         datasets: [{
-          borderColor: this.props.shown === 'up' ? '#34CF33' : '#AD002C',
-          pointRadius: 0,
-          lineTension: 0,
-          borderWidth: 1.5,
-          showLine: true,
+          color: {
+            up: 'rgba(52, 207, 51, 0.5)',
+            down: 'rgba(173, 0, 44, 0.5)',
+            unchanged: '#747f89',
+          },
+          border: {
+            up: '#34CF33',
+            down: '#AD002C',
+            unchanged: '#747f89',
+          },
           fill: false,
-          data,
-        }]
+          borderWidth: 1.5,
+          borderColor: 'rgba(255, 255, 255, .2)',
+          data: parseData(data),
+        }],
       },
       options: {
+        maintainAspectRatio: false,
         responsive: true,
         animation: {
           duration: 0,
