@@ -11,7 +11,7 @@ export class LineChart extends React.Component {
     if (this._ref && props.data) {
       this._ref.data.labels = Array.from({ length: props.data.length });
       this._ref.data.datasets[0].data = props.data;
-      this._ref.update();
+      this._ref.update(0);
     }
   }
 
@@ -56,7 +56,7 @@ export class LineChart extends React.Component {
 
   render() {
     return (
-      <canvas className={`fit chart ${this.props.shown || ''}`} />
+      <canvas className={`fit ${this.props.shown || ''}`}/>
     );
   }
 }
