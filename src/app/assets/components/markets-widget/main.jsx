@@ -5,7 +5,7 @@ import { toggle } from '../_/actions';
 
 function parseData(payload) {
   return payload.map(item => ({
-    title: item.book.toUpperCase().replace('_', '/'),
+    title: item.book.toUpperCase().replace('_', ' / '),
     key: item.book,
   }));
 }
