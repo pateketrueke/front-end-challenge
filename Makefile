@@ -8,6 +8,9 @@ help: Makefile ## Show this help
 dev: all ## Start dev environment
 	@cd src && npm run dev
 
+lint: all ## Run linter on all .jsx? files
+	@cd src && npm run lint
+
 open: all ## Run dev and open the browser :wink:
 	@cd src && npm run dev -- -o
 
