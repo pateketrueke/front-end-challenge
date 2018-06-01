@@ -13,6 +13,7 @@ function parseData(payload) {
 const {
   discontinuousTimeScaleProvider,
   last,
+  fitWidth,
   LineSeries,
   ChartCanvas,
   Chart,
@@ -35,9 +36,9 @@ class LineChart extends React.Component {
         type='hybrid'
         seriesName='timeline'
         margin={{left:0,top:10,right:0,bottom:0}}
-        width={200}
-        height={90}
-        ratio={1}
+        width={this.props.width}
+        height={this.props.height}
+        ratio={this.props.ratio}
         data={data}
         xScale={xScale}
         xExtents={xExtents}
@@ -58,4 +59,10 @@ class LineChart extends React.Component {
   }
 }
 
-export default LineChart;
+LineChart.defaultProps = {
+  ratio: 1,
+  width: 200,
+  height: 90,
+};
+
+export default fitWidth(LineChart);

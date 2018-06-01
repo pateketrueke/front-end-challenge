@@ -1,85 +1,83 @@
-/* global _, Chart */
+/* global _ */
 
 function parseData(payload) {
   return payload.map(item => ({
-    c: parseFloat(item.close),
-    h: parseFloat(item.high),
-    l: parseFloat(item.low),
-    o: parseFloat(item.open),
-    t: item.date,
+    volume: parseFloat(item.volume),
+    close: parseFloat(item.close),
+    high: parseFloat(item.high),
+    low: parseFloat(item.low),
+    open: parseFloat(item.open),
+    date: new Date(item.date),
   }));
 }
 
-export class LineChart extends React.Component {
-  componentWillUnmount() {
-    if (this._ref) {
-      this._ref.destroy();
-    }
-  }
+const {
+  discontinuousTimeScaleProvider,
+  fitDimensions,
+  last,
+  BarSeries,
+  CandlestickSeries,
+  ChartCanvas,
+  Chart,
+} = Bitso.ReactStockcharts;
 
-  componentWillUpdate(props) {
-    if (this._ref && props.data) {
-      this._ref.data.labels = Array.from({ length: props.data.length });
-      this._ref.data.datasets[0].data = props.data;
-      this._ref.update(0);
-    }
-  }
+class CandleChart extends React.Component {
+  render () {
+    const initialData = parseData(this.props.data);
+    const xScaleProvider = discontinuousTimeScaleProvider.inputDateAccessor(d => d.date)
+    const { data, xScale, xAccessor, displayXAccessor } = xScaleProvider(initialData)
 
-  componentDidMount() {
-    const ctx = ReactDOM.findDOMNode(this).getContext('2d');
-    const data = this.props.data || [];
+    const lastData = last(data)
+    const highest = data[Math.max(0, data.length - 150)]
+    const start = xAccessor(lastData)
+    const end = xAccessor(highest)
+    const xExtents = [start, end]
 
-    this._ref = new Chart(ctx, {
-      type: 'candlestick',
-      data: {
-        datasets: [{
-          color: {
-            up: 'rgba(52, 207, 51, 0.5)',
-            down: 'rgba(173, 0, 44, 0.5)',
-            unchanged: '#747f89',
-          },
-          border: {
-            up: '#34CF33',
-            down: '#AD002C',
-            unchanged: '#747f89',
-          },
-          fill: false,
-          borderWidth: 1.5,
-          borderColor: 'rgba(255, 255, 255, .2)',
-          data: parseData(data),
-        }],
-      },
-      options: {
-        maintainAspectRatio: false,
-        responsive: true,
-        animation: {
-          duration: 0,
-        },
-        tooltips: {
-          position: 'nearest',
-          mode: 'index',
-        },
-        legend: {
-          display: false,
-        },
-        scales: {
-          xAxes: [{
-            display: false,
-          }],
-          yAxes: [{
-            display: false,
-          }],
-        },
-      },
-    });
-  }
-
-  render() {
     return (
-      <canvas className={`fit ${this.props.shown || ''}`}/>
-    );
+      <ChartCanvas
+        type='hybrid'
+        seriesName='timeline'
+        margin={{left:0,top:10,right:0,bottom:0}}
+        width={this.props.width}
+        height={this.props.height}
+        ratio={this.props.ratio}
+        data={data}
+        xScale={xScale}
+        xExtents={xExtents}
+        xAccessor={xAccessor}
+        displayXAccessor={displayXAccessor}
+      >
+        <Chart
+          id={1}
+          yExtents={[d => [d.high, d.low]]}
+          height={230}
+        >
+          <CandlestickSeries
+            fill={d => (d.close > d.open ? 'rgba(134, 175, 107, .4)' : 'rgba(186, 48, 64, .4)')}
+            stroke={d => (d.close > d.open ? '#80C156' : '#BA3040')}
+            wickStroke={d => (d.close > d.open ? '#80C156' : '#BA3040')}
+          />
+        </Chart>
+        <Chart
+          id={2}
+          yExtents={[d => d.volume]}
+          height={50}
+          origin={(w, h) => [0, h - 50]}
+        >
+          <BarSeries
+            yAccessor={d => d.volume}
+            fill='rgba(56, 69, 85, .4)'
+          />
+        </Chart>
+      </ChartCanvas>
+    )
   }
 }
 
+CandleChart.defaultProps = {
+  ratio: 1,
+  width: 800,
+  height: 335,
+};
 
-export default LineChart;
+export default fitDimensions(CandleChart);
