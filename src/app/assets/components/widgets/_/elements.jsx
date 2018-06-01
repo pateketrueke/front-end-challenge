@@ -144,9 +144,12 @@ export function List(props) {
           >
           <li
             key={item.key}
-            onClick={toggle(props, item)}
             className={`pad ${props.values.indexOf(item.key) === -1 ? '' : 'sel'}`}
-          >{props.render({ ...item, selected: props.values.indexOf(item.key) > -1 })}</li>
+          >{props.render({
+            ...item,
+            itemToggle: toggle(props, item),
+            selected: props.values.indexOf(item.key) > -1,
+          })}</li>
           </ReactTransitionGroup.CSSTransition>
         ))}
       </ReactTransitionGroup.TransitionGroup>

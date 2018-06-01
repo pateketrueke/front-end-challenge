@@ -29,10 +29,11 @@ export class CustomList extends React.Component {
 
   render() {
     const { selected } = this.state;
-    const { data, caption, loading, grouping, className, itemRender } = this.props;
+    const { data, caption, loading, grouping, className, itemRender, itemToggle } = this.props;
 
     return (
       <List
+        toggle={itemToggle}
         render={itemRender}
         className={`no-sel ${className || ''}`}
         set={item => this.selectItem(item.key)}

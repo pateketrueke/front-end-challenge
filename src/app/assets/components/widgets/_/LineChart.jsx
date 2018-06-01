@@ -1,64 +1,61 @@
-/* global Chart */
+/* global _ */
 
-export class LineChart extends React.Component {
-  componentWillUnmount() {
-    if (this._ref) {
-      this._ref.destroy();
-    }
-  }
-
-  componentWillUpdate(props) {
-    if (this._ref && props.data) {
-      this._ref.data.labels = Array.from({ length: props.data.length });
-      this._ref.data.datasets[0].data = props.data;
-      this._ref.update(0);
-    }
-  }
-
-  componentDidMount() {
-    const ctx = ReactDOM.findDOMNode(this).getContext('2d');
-    const data = this.props.data || [];
-
-    this._ref = new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: Array.from({ length: data.length }),
-        datasets: [{
-          borderColor: this.props.shown === 'up' ? '#34CF33' : '#AD002C',
-          pointRadius: 0,
-          lineTension: 0,
-          borderWidth: 1.5,
-          showLine: true,
-          fill: false,
-          data,
-        }]
-      },
-      options: {
-        responsive: true,
-        animation: {
-          duration: 0,
-        },
-        legend: {
-          display: false,
-        },
-        scales: {
-          xAxes: [{
-            display: false,
-          }],
-          yAxes: [{
-            display: false,
-          }],
-        },
-      },
-    });
-  }
-
-  render() {
-    return (
-      <canvas className={`fit ${this.props.shown || ''}`}/>
-    );
-  }
+function parseData(payload) {
+  return payload.map(item => ({
+    close: parseFloat(item.close),
+    high: parseFloat(item.high),
+    low: parseFloat(item.low),
+    open: parseFloat(item.open),
+    date: new Date(item.date),
+  }));
 }
 
+const {
+  discontinuousTimeScaleProvider,
+  last,
+  LineSeries,
+  ChartCanvas,
+  Chart,
+} = Bitso.ReactStockcharts;
+
+class LineChart extends React.Component {
+  render () {
+    const initialData = parseData(this.props.data);
+    const xScaleProvider = discontinuousTimeScaleProvider.inputDateAccessor(d => d.date)
+    const { data, xScale, xAccessor, displayXAccessor } = xScaleProvider(initialData)
+
+    const lastData = last(data)
+    const highest = data[Math.max(0, data.length - 150)]
+    const start = xAccessor(lastData)
+    const end = xAccessor(highest)
+    const xExtents = [start, end]
+
+    return (
+      <ChartCanvas
+        type='hybrid'
+        seriesName='timeline'
+        margin={{left:0,top:10,right:0,bottom:0}}
+        width={200}
+        height={90}
+        ratio={1}
+        data={data}
+        xScale={xScale}
+        xExtents={xExtents}
+        xAccessor={xAccessor}
+        displayXAccessor={displayXAccessor}
+      >
+        <Chart
+          id={1}
+          yExtents={[d => [d.high, d.low]]}
+          height={80}
+        >
+          <LineSeries
+            yAccessor={d => d.close}
+          />
+        </Chart>
+      </ChartCanvas>
+    )
+  }
+}
 
 export default LineChart;
