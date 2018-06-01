@@ -21,7 +21,7 @@ export class API {
       });
     };
 
-    this.ws.onmessage = _.throttle(message => {
+    this.ws.onmessage = _.debounce(message => {
       const data = JSON.parse(message.data);
 
       if (data.type === 'trades' && data.payload) {
@@ -68,7 +68,7 @@ export class API {
 
         this.emit('orders', orders);
       }
-    }, 1000);
+    }, 200);
   }
 
   on(event, callback) {
@@ -76,7 +76,7 @@ export class API {
       this._events[event] = [];
     }
 
-    this._events[event].push(_.throttle(callback, 200));
+    this._events[event].push(_.debounce(callback, 200));
   }
 
   emit(event, ...args) {
@@ -101,7 +101,7 @@ export class API {
   }
 
   getTrades(book) {
-    return this.getData('api/trades', { book, limit: 50 });
+    return this.getData('api/trades', { book, limit: 30 });
   }
 
   getOrders(book) {
