@@ -85,10 +85,12 @@ function loadScript(fromSrc) {
 
     // The injected script is able to use this symbol
     // as `document.currentScript.import`
-    script.import = src => {
+    script.import = (src, cb) => {
       // This function is very similar to `System.import()`
       // or NodeJS's `import()` call but instead it will
       // try to load known resources from BASE_URL
+
+      const results = [];
 
       const p = () => Promise.resolve()
         .then(() => {
@@ -106,9 +108,19 @@ function loadScript(fromSrc) {
               }
 
               return (cur.indexOf('.css') > -1 ? loadStyle(cur) : loadScript(cur))
+                .then(result => {
+                  if (results) {
+                    results.push(result);
+
+                    if (typeof cb === 'function') {
+                      cb(result);
+                    }
+                  }
+                })
                 .catch(() => debugLog('ERROR LOADING', cur));
             }), Promise.resolve());
-        });
+        })
+        .then(() => results.length === 1 ? results[0] : results);
 
       _deferred = _deferred.then(() => p());
 
