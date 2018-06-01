@@ -1,3 +1,5 @@
+/* global _ */
+
 const _stats = document.querySelector('.stats');
 
 const MAX_HEIGHT = 667;

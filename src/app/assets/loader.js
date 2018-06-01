@@ -120,7 +120,7 @@ function loadScript(fromSrc) {
                 .catch(() => debugLog('ERROR LOADING', cur));
             }), Promise.resolve());
         })
-        .then(() => results.length === 1 ? results[0] : results);
+        .then(() => (results.length === 1 ? results[0] : results));
 
       _deferred = _deferred.then(() => p());
 

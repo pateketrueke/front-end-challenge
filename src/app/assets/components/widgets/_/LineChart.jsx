@@ -22,14 +22,14 @@ const {
 class LineChart extends React.Component {
   render () {
     const initialData = parseData(this.props.data);
-    const xScaleProvider = discontinuousTimeScaleProvider.inputDateAccessor(d => d.date)
-    const { data, xScale, xAccessor, displayXAccessor } = xScaleProvider(initialData)
+    const xScaleProvider = discontinuousTimeScaleProvider.inputDateAccessor(d => d.date);
+    const { data, xScale, xAccessor, displayXAccessor } = xScaleProvider(initialData);
 
-    const lastData = last(data)
-    const highest = data[Math.max(0, data.length - 150)]
-    const start = xAccessor(lastData)
-    const end = xAccessor(highest)
-    const xExtents = [start, end]
+    const lastData = last(data);
+    const highest = data[Math.max(0, data.length - 150)];
+    const start = xAccessor(lastData);
+    const end = xAccessor(highest);
+    const xExtents = [start, end];
 
     return (
       <ChartCanvas
@@ -52,10 +52,11 @@ class LineChart extends React.Component {
         >
           <LineSeries
             yAccessor={d => d.close}
+            stroke={this.props.shown == 'up' ? '#80C156' : '#BA3040'}
           />
         </Chart>
       </ChartCanvas>
-    )
+    );
   }
 }
 

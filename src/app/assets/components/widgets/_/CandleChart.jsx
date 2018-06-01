@@ -21,23 +21,24 @@ const {
   Chart,
 } = Bitso.ReactStockcharts;
 
+// FIXME: avoid duplicated code from LineChart
 class CandleChart extends React.Component {
   render () {
     const initialData = parseData(this.props.data);
-    const xScaleProvider = discontinuousTimeScaleProvider.inputDateAccessor(d => d.date)
-    const { data, xScale, xAccessor, displayXAccessor } = xScaleProvider(initialData)
+    const xScaleProvider = discontinuousTimeScaleProvider.inputDateAccessor(d => d.date);
+    const { data, xScale, xAccessor, displayXAccessor } = xScaleProvider(initialData);
 
-    const lastData = last(data)
-    const highest = data[Math.max(0, data.length - 150)]
-    const start = xAccessor(lastData)
-    const end = xAccessor(highest)
-    const xExtents = [start, end]
+    const lastData = last(data);
+    const highest = data[Math.max(0, data.length - 150)];
+    const start = xAccessor(lastData);
+    const end = xAccessor(highest);
+    const xExtents = [start, end];
 
     return (
       <ChartCanvas
         type='hybrid'
         seriesName='timeline'
-        margin={{left:0,top:10,right:0,bottom:0}}
+        margin={{left:0,top:20,right:0,bottom:0}}
         width={this.props.width}
         height={this.props.height}
         ratio={this.props.ratio}
@@ -66,18 +67,19 @@ class CandleChart extends React.Component {
         >
           <BarSeries
             yAccessor={d => d.volume}
-            fill='rgba(56, 69, 85, .4)'
+            fill='rgba(55, 70, 85, .4)'
+
           />
         </Chart>
       </ChartCanvas>
-    )
+    );
   }
 }
 
 CandleChart.defaultProps = {
   ratio: 1,
   width: 800,
-  height: 335,
+  height: 300,
 };
 
 export default fitDimensions(CandleChart);

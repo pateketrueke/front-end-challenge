@@ -327,7 +327,7 @@ a {
     transition: all .5s ease-in;
     opacity: .8;
 
-    &:hover {
+    &:hover:not(.sel) {
       opacity: 1;
       transition: none;
       background-color: @DarkShadow;
@@ -422,10 +422,6 @@ a {
     }
   }
 
-  .sel {
-    background-color: @Sidebar;
-  }
-
   .hi {
     color: @SidebarText;
   }
@@ -439,6 +435,9 @@ a {
   }
 
   .sel {
+    background-color: @Sidebar;
+    transition: none;
+
     .hi {
       color: @LightText;
       color: #E4E8E5;
@@ -515,6 +514,8 @@ a {
     }
 
     .sel {
+      background-color: @DarkRed;
+
       .bar > * {
         background-color: @LightRed;
       }
