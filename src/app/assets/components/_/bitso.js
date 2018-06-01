@@ -8,9 +8,12 @@ const SOCKETS_URL = 'wss://ws.bitso.com';
 
 export class API {
   constructor() {
+    this._cache = {};
     this._events = {};
 
-    setTimeout(() => this.init(), 1000);
+    this.fetchData('btc_mxn');
+
+    setTimeout(() => this.init(), 3000);
   }
 
   init() {
@@ -76,6 +79,10 @@ export class API {
       this._events[event] = [];
     }
 
+    if (this._cache[event]) {
+      callback(this._cache[event]);
+    }
+
     this._events[event].push(_.debounce(callback, 200));
   }
 
@@ -83,6 +90,20 @@ export class API {
     if (this._events[event]) {
       this._events[event].forEach(cb => cb(...args));
     }
+  }
+
+  fetchData(book) {
+    this.resolve('books', this.getBooks(book));
+    this.resolve('ticker', this.getTicker(book));
+    this.resolve('trades', this.getTrades(book));
+    this.resolve('orders', this.getOrders(book));
+  }
+
+  resolve(event, deferred) {
+    deferred.then(result => {
+      this.emit(event, result);
+      this._cache[event] = result;
+    });
   }
 
   getURL(path) {
