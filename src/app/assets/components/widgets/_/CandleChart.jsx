@@ -35,11 +35,12 @@ class CandleChart extends React.Component {
         xExtents={xExtents}
         xAccessor={xAccessor}
         displayXAccessor={displayXAccessor}
+        clamp
       >
         <Chart
           id={1}
           yExtents={[d => [d.high, d.low]]}
-          height={230}
+          height={this.props.height - 70}
         >
           <CandlestickSeries
             fill={d => (d.close > d.open ? 'rgba(134, 175, 107, .4)' : 'rgba(186, 48, 64, .4)')}
@@ -67,7 +68,7 @@ class CandleChart extends React.Component {
 CandleChart.defaultProps = {
   ratio: 1,
   width: 800,
-  height: 300,
+  height: 280,
 };
 
 export default fitDimensions(CandleChart);
