@@ -1,25 +1,3 @@
-import { formatNumber, priceFormat } from '../_/util';
-
-function parseData(payload) {
-  return payload.map(item => ({
-    key: item.tid,
-    side: item.maker_side,
-    time: moment(item.created_at).format('H:mm:ss'),
-    price: formatNumber(item.book, item.price),
-    amount: priceFormat(item.amount),
-  }));
-}
-
-function parseInfo(item) {
-  return {
-    key: item.identifier,
-    side: item.operation,
-    time: moment().format('H:mm:ss'),
-    price: formatNumber(item.book, item.rate),
-    amount: priceFormat(item.amount),
-  };
-}
-
 class TradesWidget extends React.Component {
   constructor(props) {
     super(props);
@@ -29,26 +7,10 @@ class TradesWidget extends React.Component {
   }
 
   componentDidMount() {
-    const book = 'btc_mxn';
-
-    Bitso.API.getTrades(book)
-      .then(result => {
-        this.setState({
-          loading: false,
-          trades: parseData(result.payload),
-        });
-      });
-
     Bitso.API.on('trades', payload => {
-      payload.forEach(trade => {
-        const tradeInfo = parseInfo({
-          ...trade,
-          book,
-        });
-
-        this.setState({
-          trades: [tradeInfo].concat(this.state.trades).slice(0, 50),
-        })
+      this.setState({
+        loading: false,
+        trades: payload,
       });
     });
   }

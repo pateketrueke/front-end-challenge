@@ -1,16 +1,5 @@
 /* global _ */
 
-function parseData(payload) {
-  return payload.map(item => ({
-    volume: parseFloat(item.volume),
-    close: parseFloat(item.close),
-    high: parseFloat(item.high),
-    low: parseFloat(item.low),
-    open: parseFloat(item.open),
-    date: new Date(item.date),
-  }));
-}
-
 const {
   discontinuousTimeScaleProvider,
   fitDimensions,
@@ -24,9 +13,8 @@ const {
 // FIXME: avoid duplicated code from LineChart
 class CandleChart extends React.Component {
   render () {
-    const initialData = parseData(this.props.data);
     const xScaleProvider = discontinuousTimeScaleProvider.inputDateAccessor(d => d.date);
-    const { data, xScale, xAccessor, displayXAccessor } = xScaleProvider(initialData);
+    const { data, xScale, xAccessor, displayXAccessor } = xScaleProvider(this.props.data);
 
     const lastData = last(data);
     const highest = data[Math.max(0, data.length - 150)];

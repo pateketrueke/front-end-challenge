@@ -1,27 +1,3 @@
-/* global _ */
-
-import { formatNumber, priceFormat } from '../_/util';
-import { toggle } from '../_/actions';
-
-function parseData(payload) {
-  return payload.map(item => ({
-    title: item.book.toUpperCase().replace('_', ' / '),
-    key: item.book,
-  }));
-}
-
-function parseInfo(payload) {
-  const prev = payload[0];
-  const cur = payload[payload.length - 1];
-
-  return {
-    time: `${moment(prev.date).format('MMMM D')} - ${moment(cur.date).format('MMMM D')}`,
-    data: payload,
-    value: priceFormat(cur.value),
-    diff: cur.value > prev.value ? 'up' : 'down',
-  };
-}
-
 class MarketsWidget extends React.Component {
   constructor(props) {
     super(props);
@@ -32,28 +8,12 @@ class MarketsWidget extends React.Component {
   }
 
   componentDidMount() {
-    Bitso.API.getBooks()
-      .then(result => {
-        this.setState({
-          loading: false,
-          books: parseData(result.payload),
-        });
-
-        result.payload.forEach(item => {
-          Bitso.API.getMarkets(item.book, '1month')
-            .then(_result => {
-              this.setState({
-                books: this.state.books.map(_item => {
-                  if (_item.key === item.book) {
-                    Object.assign(_item, parseInfo(_result.slice(-30)));
-                  }
-
-                  return _item;
-                }),
-              });
-            });
-        });
-      })
+    Bitso.API.on('books', payload => {
+      this.setState({
+        loading: false,
+        books: payload,
+      });
+    });
   }
 
   render() {

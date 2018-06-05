@@ -1,25 +1,3 @@
-import { formatNumber, priceFormat } from '../_/util';
-
-function parseInfo(data) {
-  const media = ((data.high - data.low) / 2) + parseFloat(data.low);
-  const variation = (data.last * 100) / media;
-
-  const sign = data.last > media ? '+' : '';
-  const percent = ((data.last - media) * 100) / data.last;
-  const parts = data.book.toUpperCase().split('_');
-
-  return {
-    time: moment(data.created_at).format('H:mm:ss'),
-    vol: priceFormat(data.volume),
-    max: formatNumber(data.book, data.high),
-    min: formatNumber(data.book, data.low),
-    vary: `${sign}${formatNumber(data.book, variation)}`,
-    percent: percent.toFixed(2),
-    source: parts[0],
-    target: parts[1],
-  };
-}
-
 class TickerWidget extends React.Component {
   constructor(props) {
     super(props);
@@ -29,21 +7,12 @@ class TickerWidget extends React.Component {
   }
 
   componentDidMount() {
-    this.updateTicker();
-  }
-
-  updateTicker() {
-    const book = 'btc_mxn';
-
-    Bitso.API.getTicker(book)
-      .then(result => {
-        this.setState({
-          loading: false,
-          ticker: parseInfo(result.payload),
-        });
-
-        setTimeout(() => this.updateTicker(), 60000);
+    Bitso.API.on('ticker', payload => {
+      this.setState({
+        loading: false,
+        ticker: payload,
       });
+    });
   }
 
   render() {

@@ -4,24 +4,30 @@ class ChartsWidget extends React.Component {
     this.state = {
       loading: true,
       data: [],
+      bids: [],
+      asks: [],
     };
   }
 
   componentDidMount() {
-    const book = 'btc_mxn';
-    const range = '3months';
-
-    Bitso.API.getMarkets(book, range)
-      .then(_result => {
-        this.setState({
-          loading: false,
-          data: _result,
-        });
+    Bitso.API.on('markets', payload => {
+      this.setState({
+        loading: false,
+        data: payload,
       });
+    });
+
+    Bitso.API.on('orders', payload => {
+      this.setState({
+        loading: false,
+        asks: payload.asks.data,
+        bids: payload.bids.data,
+      });
+    });
   }
 
   render() {
-    const { data, loading } = this.state;
+    const { bids, asks, data, loading } = this.state;
 
     if (loading) {
       return (
@@ -34,8 +40,9 @@ class ChartsWidget extends React.Component {
     return (
       <div className='v-flex'>
         <div>TOOLBAR</div>
-        <div className='auto'>
-          <Bitso.CandleChart data={data}/>
+        <div className='auto flex'>
+          <Bitso.CandleChart data={data} />
+          <Bitso.DeepChart asks={asks} bids={bids} />
         </div>
       </div>
     );
