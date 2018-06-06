@@ -37,16 +37,19 @@ class ChartsWidget extends React.Component {
       );
     }
 
+    // FIXME: turn menu(s) into a Component and reuse it!
     return (
       <div className='v-flex'>
         <div>
           <div className='pad flex'>
             <div className='auto flex'>
               <div className='push menu'>
-                <span className='menu-pin'>A</span>
+                <span className='menu-pin'>
+                  <i className='x-icon_candles'/>
+                </span>
                 <ul className='menu-sub reset no-type no-wrap'>
-                  <li><a href='#'>ITEM</a></li>
-                  <li><a href='#'>ITEM</a></li>
+                  <li><a href='#'><i className='x-icon_candles'/></a></li>
+                  <li><a href='#'><i className='x-icon_deep'/></a></li>
                 </ul>
               </div>
               <div className='push menu'>
