@@ -584,10 +584,71 @@ a {
 
 .menu {
   cursor: pointer;
+  margin-right: @Pad2;
 
-  &::after {
-    content: '▾';
-    margin-left: @Pad1;
+  &-pin {
+    position: relative;
+
+    &::after {
+      transition: all .3s;
+      position: absolute;
+      content: '▾';
+      right: -@Pad2;
+    }
+  }
+
+  ul {
+    opacity: 0;
+    z-index: 7;
+    position: absolute;
+    visibility: hidden;
+    transition: all .3s;
+    background-color: @DarkNavy;
+    box-shadow: 0 0 3px @DarkShadow;
+  }
+
+  &-sub {
+    a {
+      text-decoration: none;
+      display: inline-block;
+      padding: @Pad1;
+      width: 100%;
+
+      &:hover {
+        background-color: @RegularNavy;
+      }
+    }
+
+    > li {
+      position: relative;
+
+      ul {
+        position: absolute;
+        visibility: hidden;
+        right: -100%;
+        top: 0;
+      }
+
+      &:hover {
+        ul {
+          opacity: 1;
+          visibility: visible;
+        }
+      }
+    }
+  }
+
+  &:hover {
+    .menu-pin::after {
+      transform: rotate(180deg);
+      transform-origin: center;
+      margin-top: 5px;
+    }
+
+    .menu-sub {
+      opacity: 1;
+      visibility: visible;
+    }
   }
 }
 

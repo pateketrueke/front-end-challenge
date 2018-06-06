@@ -1,19 +1,41 @@
+mixin Submenu
+  ul.menu-sub.reset.no-type.no-wrap
+    li: a(href='#') ITEM A
+    li: a(href='#') ITEM B
+    li: a(href='#') ITEM C
+
 mixin Header
   .header
     .wrapper
       .flex.center.navigation
-        .sp.pad.no-sel.flex.center.sm-auto
-          |[![icon "bitso_logo"]]
-          span.md-hide.menu
+        .sp.pad.no-sel.sm-auto.menu
+          .flex.center.menu-pin [![icon "bitso_logo"]]
+          ul.menu-sub.reset.no-type.no-wrap
+            li
+              a(href='#') Wallet
+              ul.reset.no-type.no-wrap
+                li: a(href='#') Sub item 1
+                li: a(href='#') Sub item 2
+            li
+              a(href='#') Exchange
+              ul.reset.no-type.no-wrap
+                li: a(href='#') Sub item 1
+                li: a(href='#') Sub item 2
+            li: a(href='#') Ayuda
         .sp.pad.no-sel.auto.sm-show Exchange
         .pad.no-sel.auto.align-right.lg-show 1 BTC = 000,000.00 MXN
-        .sp.pad.no-sel.menu.md-show Wallet
-        .pad.no-sel.menu.md-show Exchange
+        .sp.pad.no-sel.menu.md-show
+          span.menu-pin Wallet
+          +Submenu
+        .pad.no-sel.menu.md-show
+          span.menu-pin Exchange
+          +Submenu
         .pad.no-sel.md-show Ayuda
         .no-sel.user-menu
           img(src='//placehold.it/45/4e5863/4e5863')
-        .pad.no-sel.sm-flex
-          span.menu Usuario
+        .pad.no-sel.menu
+          span.menu-pin Usuario
+          +Submenu
         .toggler
           input#themeDark.tgl-in(type='checkbox' checked)
           label.tgl-btn(for='themeDark')
@@ -23,7 +45,9 @@ mixin Header
 mixin Topbar
   .topbar
     .wrapper.flex
-      .no-wrap.no-sel.menu BTC / MXN
+      .no-wrap.no-sel.menu
+        span.menu-pin BTC / MXN
+        +Submenu
       .h-scroll.no-sel(data-scrollable='.flex')
         .flex.push(data-component='widgets' data-widget='ticker')
           span Volumen 24 h #[span.light 170.5405818 BTC]
