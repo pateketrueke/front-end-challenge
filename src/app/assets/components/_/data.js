@@ -102,18 +102,7 @@ export function fixGroup(groupName, bookName, response) {
   const offset = parseInt(response.payload.sequence, 10);
   const max = (_.maxBy(payload, 'amount') || {}).amount || 1;
 
-  return fixItems(groupName, bookName, payload.slice(0, 15), offset, max);
-}
-
-export function fixOrders(bookName, response) {
-  return ['asks', 'bids'].reduce((prev, cur) => {
-    prev[cur] = {
-      data: fixGroup(cur, bookName, response),
-      sum: average(response.payload[cur], 'price'),
-    };
-
-    return prev;
-  }, {});
+  return fixItems(groupName, bookName, payload.reverse().slice(0, 15), offset, max);
 }
 
 export function sumOrders(payload) {
@@ -126,6 +115,17 @@ export function sumOrders(payload) {
   });
 
   return payload;
+}
+
+export function fixOrders(fieldName, bookName, response) {
+  return ['asks', 'bids'].reduce((prev, cur) => {
+    prev[cur] = {
+      data: sumOrders(fixGroup(cur, bookName, response)),
+      sum: priceFormat(average(response.payload[cur], fieldName)),
+    };
+
+    return prev;
+  }, {});
 }
 
 export function mergeOrders(payload, orders) {

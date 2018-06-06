@@ -8,6 +8,7 @@ import {
   fixGroup,
   fixTrades,
   fixOrders,
+  sumOrders,
   tradeInfo,
   orderInfo,
   mergeOrders,
@@ -50,21 +51,17 @@ export class API {
           this._cache[data.type].unshift(tradeInfo(this._bookName, item));
         });
       } else if (data.type === 'diff-orders' && data.payload) {
-        ['asks', 'bids'].forEach(key => {
-          const payload = mergeOrders(data.payload[key], this._cache[data.type]);
+        const ordersKey = 'orders';
 
-          this._cache[data.type][key] = fixGroup(key, this._bookName, {
-            sequence: data.sequence,
-            ...payload,
-          });
+        ['asks', 'bids'].forEach(key => {
+          this._cache[ordersKey][key] = mergeOrders(data.payload[key], this._cache[ordersKey][key]);
         });
       } else if (data.type === 'orders' && data.payload) {
-        this._cache[data.type] = {};
-
         ['asks', 'bids'].forEach(key => {
-          data.payload[key] = data.payload[key].map(orderInfo);
-          this._cache[data.type][key] = fixGroup(key, this._bookName, data);
+          data.payload[key] = sumOrders(data.payload[key].map(orderInfo));
         });
+
+        this._cache[data.type] = fixOrders('rate', this._bookName, data);
       }
 
       this.emit(data.type, this._cache[data.type]);
@@ -95,14 +92,14 @@ export class API {
     this.resolve('books', this.getBooks(book).then(response => {
       return Promise.all(response.payload.map((item, key) => {
         return this.getMarkets(item.book, this._timeFrame)
-          .then(result => Object.assign(response.payload[key], bookInfo(result.slice(-30))));
+          .then(result => Object.assign(response.payload[key], bookInfo(result.slice(0, 30))));
       }))
       .then(() => fixBooks(response));
     }));
 
     this.resolve('trades', this.getTrades(book).then(fixTrades));
     this.resolve('ticker', this.getTicker(book).then(response => fixTicker(this._bookName, response)));
-    this.resolve('orders', this.getOrders(book).then(response => fixOrders(this._bookName, response)));
+    this.resolve('orders', this.getOrders(book).then(response => fixOrders('price', this._bookName, response)));
   }
 
   resolve(event, deferred) {
