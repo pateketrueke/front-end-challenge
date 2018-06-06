@@ -2,7 +2,13 @@
 
 export function priceFormat(number) {
   if (number < 1) {
-    return numeral(number).format('0.00000000');
+    const value = numeral(number).format('0.00000000');
+
+    if (value === 'NaN') {
+      return number;
+    }
+
+    return value;
   }
 
   return numeral(number).format('0,0.00');
