@@ -44,6 +44,10 @@ class LineChart extends React.Component {
         xExtents={xExtents}
         xAccessor={xAccessor}
         displayXAccessor={displayXAccessor}
+        mouseMoveEvent={false}
+        panEvent={false}
+        zoomEvent={false}
+        clamp
       >
         <Chart
           id={1}
