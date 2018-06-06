@@ -39,10 +39,42 @@ class ChartsWidget extends React.Component {
 
     return (
       <div className='v-flex'>
-        <div>TOOLBAR</div>
+        <div>
+          <div className='pad flex'>
+            <div className='auto flex'>
+              <div className='push menu'>
+                <span className='menu-pin'>A</span>
+                <ul className='menu-sub reset no-type no-wrap'>
+                  <li><a href='#'>ITEM</a></li>
+                  <li><a href='#'>ITEM</a></li>
+                </ul>
+              </div>
+              <div className='push menu'>
+                <span className='menu-lb'>Periodo</span>
+                <span className='menu-pin'>B</span>
+                <ul className='menu-sub reset no-type no-wrap'>
+                  <li><a href='#'>ITEM</a></li>
+                  <li><a href='#'>ITEM</a></li>
+                </ul>
+              </div>
+              <div className='menu'>
+                <span className='menu-lb'>Intervalo</span>
+                <span className='menu-pin'>C</span>
+                <ul className='menu-sub reset no-type no-wrap'>
+                  <li><a href='#'>ITEM</a></li>
+                  <li><a href='#'>ITEM</a></li>
+                </ul>
+              </div>
+            </div>
+            <div className='round menu flex'>
+              <button>-</button>
+              <button>+</button>
+            </div>
+          </div>
+        </div>
         <div className='auto flex'>
           <Bitso.CandleChart data={data} />
-          <Bitso.DeepChart asks={asks} bids={bids} />
+          {/*<Bitso.DeepChart asks={asks} bids={bids} />*/}
         </div>
       </div>
     );

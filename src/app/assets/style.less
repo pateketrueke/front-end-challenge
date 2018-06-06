@@ -584,10 +584,20 @@ a {
 
 .menu {
   cursor: pointer;
-  margin-right: @Pad2;
+
+  + .menu {
+    margin-left: @Pad2;
+  }
+
+  &.round {
+    min-width: 40px;
+    border-radius: 10px;
+    border: 1px solid @Sidebar;
+  }
 
   &-pin {
     position: relative;
+    cursor: inherit;
 
     &::after {
       transition: all .3s;
@@ -597,9 +607,37 @@ a {
     }
   }
 
+  &-lb {
+    margin-right: @Pad1;
+  }
+
+  button {
+    border: 0;
+    padding: 0;
+    width: 50%;
+    font-size: 16px;
+    line-height: 16px;
+    cursor: inherit;
+    color: @DarkText;
+    border-radius: 10px 0 0 10px;
+    background-color: transparent;
+
+    + button {
+      border-radius: 0 10px 10px 0;
+      border-left: 1px solid @Sidebar;
+    }
+
+    &:focus {
+      outline: none;
+      color: @DarkNavy;
+      background-color: @LightText;
+    }
+  }
+
   ul {
     opacity: 0;
     z-index: 7;
+    cursor: inherit;
     position: absolute;
     visibility: hidden;
     transition: all .3s;
@@ -642,7 +680,7 @@ a {
     .menu-pin::after {
       transform: rotate(180deg);
       transform-origin: center;
-      margin-top: 5px;
+      margin-top: 4px;
     }
 
     .menu-sub {

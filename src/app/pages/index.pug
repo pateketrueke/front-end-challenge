@@ -9,7 +9,7 @@ mixin Header
     .wrapper
       .flex.center.navigation
         .sp.pad.no-sel.sm-auto.menu
-          .flex.center.menu-pin [![icon "bitso_logo"]]
+          span.menu-pin [![icon "bitso_logo"]]
           ul.menu-sub.reset.no-type.no-wrap
             li
               a(href='#') Wallet
@@ -27,13 +27,13 @@ mixin Header
         .sp.pad.no-sel.menu.md-show
           span.menu-pin Wallet
           +Submenu
-        .pad.no-sel.menu.md-show
+        .pad.push.no-sel.menu.md-show
           span.menu-pin Exchange
           +Submenu
         .pad.no-sel.md-show Ayuda
         .no-sel.user-menu
           img(src='//placehold.it/45/4e5863/4e5863')
-        .pad.no-sel.menu
+        .pad.push.no-sel.menu
           span.menu-pin Usuario
           +Submenu
         .toggler
