@@ -5,6 +5,7 @@ class ChartsWidget extends React.Component {
     super(props);
     this.state = {
       isCandles: true,
+      hasError: false,
       loading: true,
       data: [],
       bids: [],
@@ -29,6 +30,12 @@ class ChartsWidget extends React.Component {
     });
   }
 
+  componentDidCatch() {
+    this.setState({
+      hasError: true,
+    });
+  }
+
   selectChart(value) {
     this.setState({
       isCandles: value === 'candles',
@@ -36,11 +43,17 @@ class ChartsWidget extends React.Component {
   }
 
   render() {
-    const { bids, asks, data, loading, isCandles } = this.state;
+    const { bids, asks, data, loading, isCandles, hasError } = this.state;
+
+    if (hasError) {
+      return (
+        <div>Oops!</div>
+      );
+    }
 
     if (loading) {
       return (
-        <div>
+        <div className='pad'>
           <span>Cargando...</span>
         </div>
       );
