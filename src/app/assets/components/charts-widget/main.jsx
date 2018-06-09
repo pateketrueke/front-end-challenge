@@ -1,7 +1,10 @@
+import Menu from '../_/Menu';
+
 class ChartsWidget extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      isCandles: true,
       loading: true,
       data: [],
       bids: [],
@@ -26,8 +29,14 @@ class ChartsWidget extends React.Component {
     });
   }
 
+  selectChart(value) {
+    this.setState({
+      isCandles: value === 'candles',
+    });
+  }
+
   render() {
-    const { bids, asks, data, loading } = this.state;
+    const { bids, asks, data, loading, isCandles } = this.state;
 
     if (loading) {
       return (
@@ -37,46 +46,53 @@ class ChartsWidget extends React.Component {
       );
     }
 
-    // FIXME: turn menu(s) into a Component and reuse it!
     return (
       <div className='v-flex'>
         <div>
           <div className='pad flex'>
-            <div className='auto flex'>
-              <div className='push menu'>
-                <span className='menu-pin'>
-                  <i className='x-icon_candles'/>
-                </span>
-                <ul className='menu-sub reset no-type no-wrap'>
-                  <li><a href='#'><i className='x-icon_candles'/></a></li>
-                  <li><a href='#'><i className='x-icon_deep'/></a></li>
-                </ul>
-              </div>
-              <div className='push menu'>
-                <span className='menu-lb'>Periodo</span>
-                <span className='menu-pin'>B</span>
-                <ul className='menu-sub reset no-type no-wrap'>
-                  <li><a href='#'>ITEM</a></li>
-                  <li><a href='#'>ITEM</a></li>
-                </ul>
-              </div>
-              <div className='menu'>
-                <span className='menu-lb'>Intervalo</span>
-                <span className='menu-pin'>C</span>
-                <ul className='menu-sub reset no-type no-wrap'>
-                  <li><a href='#'>ITEM</a></li>
-                  <li><a href='#'>ITEM</a></li>
-                </ul>
-              </div>
+            <div className='auto flex push'>
+              <Menu
+                unique
+                value='candles'
+                onChange={selectedItem => this.selectChart(selectedItem.value)}
+                renderValue={currentValue => (
+                  <i className={`x-icon_${currentValue}`}/>
+                )}
+                items={[
+                  { label: <i className='x-icon_candles'/>, value: 'candles' },
+                  { label: <i className='x-icon_deep'/>, value: 'deep' },
+                ]}
+              />
+              {isCandles && (
+                <Menu label='Periodo' value='3m' items={[
+                  { label: 'Cada 3 días', value: '3d' },
+                  { label: '1 semana', value: '1w' },
+                  { label: '1 mes', value: '1m' },
+                  { label: '3 meses', value: '3m' },
+                  { label: '1 año', value: '1y' },
+                ]} />
+              )}
+              {isCandles && (
+                <Menu label='Intervalo' value='1h' items={[
+                  { label: '1 hora', value: '1h' },
+                  { label: '3 horas', value: '3h' },
+                  { label: '12 horas', value: '12h' },
+                  { label: '24 horas', value: '24h' },
+                ]} />
+              )}
             </div>
-            <div className='round menu flex'>
-              <button>-</button>
-              <button>+</button>
-            </div>
+            {isCandles && (
+              <div className='round menu flex'>
+                <button>-</button>
+                <button>+</button>
+              </div>
+            )}
           </div>
         </div>
         <div className='auto flex'>
-          <Bitso.CandleChart data={data} />
+          {isCandles && (
+            <Bitso.CandleChart data={data} />
+          )}
           {/*<Bitso.DeepChart asks={asks} bids={bids} />*/}
         </div>
       </div>

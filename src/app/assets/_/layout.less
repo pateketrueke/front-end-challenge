@@ -129,8 +129,14 @@ body {
     align-items: center;
   }
 
-  .push {
-    margin-right: @Pad2;
+  &.push {
+    > * {
+      margin-right: @Pad2;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
   }
 
   > .auto {
@@ -247,6 +253,10 @@ body {
   }
 }
 
+.sm-hide-pin {
+  margin-right: @Pad2;
+}
+
 @media screen and (min-width: @SmallWidth) {
   #app {
     grid-template-rows: 260px auto auto;
@@ -276,6 +286,12 @@ body {
     height: 100%;
     margin: @Pad1;
     position: relative;
+  }
+
+  .sm-hide-pin {
+    &::after {
+      display: none;
+    }
   }
 
   .auto {

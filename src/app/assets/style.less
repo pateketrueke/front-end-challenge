@@ -297,6 +297,10 @@ a {
     padding: @Pad1;
   }
 
+  .h-scroll {
+    margin-left: @Pad2;
+  }
+
   @media screen and (min-width: @SmallWidth) {
     .h-scroll {
       height: 48px;
@@ -309,14 +313,6 @@ a {
     .menu,
     .h-scroll .flex > * {
       padding: @Pad2;
-    }
-  }
-
-  .push > * {
-    margin-left: @Pad3;
-
-    &:last-child {
-      padding-right: @Pad2;
     }
   }
 
@@ -599,7 +595,12 @@ a {
     position: relative;
     cursor: inherit;
 
+    &.hi {
+      color: @LightText;
+    }
+
     &::after {
+      pointer-events: none;
       transition: all .3s;
       position: absolute;
       content: '▾';
@@ -609,6 +610,12 @@ a {
 
   &-lb {
     margin-right: @Pad1;
+  }
+
+  .x-icon_candles,
+  .x-icon_deep {
+    width: 24px;
+    height: 16px;
   }
 
   button {
