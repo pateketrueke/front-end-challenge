@@ -636,6 +636,12 @@ a {
     &:focus {
       outline: none;
     }
+
+    &[disabled] {
+      opacity: .5;
+      cursor: default;
+      background-color: transparent;
+    }
   }
 
   ul {

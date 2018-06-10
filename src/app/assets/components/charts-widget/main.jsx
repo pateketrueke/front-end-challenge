@@ -58,6 +58,18 @@ class ChartsWidget extends React.Component {
     });
   }
 
+  incDays() {
+    this.setState({
+      days: Math.min(365, this.state.days + Math.round(this.state.days * 2)),
+    });
+  }
+
+  decDays() {
+    this.setState({
+      days: Math.max(0, this.state.days - Math.round(this.state.days / 2)),
+    });
+  }
+
   render() {
     const { bids, asks, data, loading, isCandles, hasError } = this.state;
 
@@ -120,8 +132,16 @@ class ChartsWidget extends React.Component {
             </div>
             {isCandles && (
               <div className='round menu flex'>
-                <button><i className='x-minus' /></button>
-                <button><i className='x-plus' /></button>
+                <button
+                  onClick={() => this.decDays()}
+                  disabled={this.state.days === 1}
+                ><i className='x-minus' />
+                </button>
+                <button
+                  onClick={() => this.incDays()}
+                  disabled={this.state.days === 365}
+                ><i className='x-plus' />
+                </button>
               </div>
             )}
           </div>
