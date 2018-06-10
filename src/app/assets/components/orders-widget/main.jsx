@@ -18,15 +18,17 @@ class OrdersWidget extends React.Component {
   }
 
   render() {
+    const currencies = Bitso.API._bookName.toUpperCase().split('_');
+
     const { loading, data, sum } = this.state;
 
     return (
       <Bitso.CustomTable
         fields={[
           { key: 'sum', label: 'SUM', align: 'right' },
-          { key: 'amount', label: 'Monto', align: 'right', classes: 'coin btc' },
-          { key: 'value', label: 'Valor', align: 'right', classes: 'coin mxn' },
-          { key: 'price', label: 'Precio', align: 'right', classes: 'coin mxn' },
+          { key: 'amount', label: 'Monto', align: 'right', classes: 'coin', currency: currencies[0] },
+          { key: 'value', label: 'Valor', align: 'right', classes: 'coin', currency: currencies[1] },
+          { key: 'price', label: 'Precio', align: 'right', classes: 'coin', currency: currencies[1] },
         ]}
         className={this.props.group === 'bids' ? 'left' : 'right'}
         titleRender={(

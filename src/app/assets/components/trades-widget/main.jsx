@@ -16,14 +16,16 @@ class TradesWidget extends React.Component {
   }
 
   render() {
+    const currencies = Bitso.API._bookName.toUpperCase().split('_');
+
     const { loading, trades } = this.state;
 
     return (
       <Bitso.CustomTable
         fields={[
           { key: 'time', label: 'Hora', align: 'left' },
-          { key: 'price', label: 'Precio', align: 'right', classes: 'coin mxn' },
-          { key: 'amount', label: 'Monto', align: 'right', classes: 'coin btc' },
+          { key: 'price', label: 'Precio', align: 'right', classes: 'coin', currency: currencies[1] },
+          { key: 'amount', label: 'Monto', align: 'right', classes: 'coin', currency: currencies[0] },
         ]}
         caption='Últimos trades'
         loading={loading}

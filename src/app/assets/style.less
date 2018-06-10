@@ -356,11 +356,13 @@ a {
       display: none;
       color: @DarkText;
       margin-left: @Pad1 / 2;
+      content: attr(data-currency);
     }
 
     &::before {
       color: @DarkText;
       margin-right: @Pad1 / 2;
+      content: attr(data-currency);
     }
   }
 
@@ -373,16 +375,6 @@ a {
     &::before {
       margin-right: @Pad1;
     }
-  }
-
-  .mxn::after,
-  .mxn::before {
-    content: 'MXN';
-  }
-
-  .btc::after,
-  .btc::before {
-    content: 'BTC';
   }
 
   .data,

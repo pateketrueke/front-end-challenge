@@ -53,7 +53,11 @@ export function Header(props) {
   return (
     <thead>
       <tr className='caps'>{props.fields.map(field => (
-        <th key={field.key} className={`pad align-${field.align} ${field.classes || ''}`}>{field.label}</th>
+        <th
+          key={field.key}
+          data-currency={field.currency || undefined}
+          className={`pad align-${field.align} ${field.classes || ''}`}
+        >{field.label}</th>
       ))}</tr>
     </thead>
   );

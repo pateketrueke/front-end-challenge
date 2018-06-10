@@ -27,10 +27,9 @@ export class API {
     };
 
     this._events = {};
-    this._bookName = 'btc_mxn';
-    this._timeFrame = '1year';
+    this._bookName = window.localStorage.BOOK_NAME || 'btc_mxn';
 
-    this.fetchData(this._bookName);
+    this.fetchAll();
 
     this.on('changeBook', bookInfo => {
       ['trades', 'orders', 'diff-orders'].forEach(event => {
@@ -38,8 +37,10 @@ export class API {
         this.ws.send(JSON.stringify({ action: 'subscribe', book: bookInfo.value, type: event }));
       });
 
-      this.fetchData(bookInfo.value);
+      window.localStorage.BOOK_NAME = bookInfo.value;
+
       this._bookName = bookInfo.value;
+      this.fetchData();
     });
 
     setTimeout(() => this.init(), 3000);
@@ -96,20 +97,23 @@ export class API {
     }
   }
 
-  fetchData(book) {
-    this.resolve('markets', this.getMarkets(this._bookName, this._timeFrame).then(fixMarkets));
-
-    this.resolve('books', this.getBooks(book).then(response => {
+  fetchAll() {
+    this.resolve('books', this.getBooks().then(response => {
       return Promise.all(response.payload.map((item, key) => {
-        return this.getMarkets(item.book, this._timeFrame)
+        return this.getMarkets(item.book, '1month')
           .then(result => Object.assign(response.payload[key], bookInfo(result.slice(0, 30))));
       }))
       .then(() => fixBooks(response));
     }));
 
-    this.resolve('trades', this.getTrades(book).then(fixTrades));
-    this.resolve('ticker', this.getTicker(book).then(response => fixTicker(this._bookName, response)));
-    this.resolve('orders', this.getOrders(book).then(response => fixOrders('price', this._bookName, response)));
+    this.fetchData();
+  }
+
+  fetchData() {
+    this.resolve('markets', this.getMarkets(this._bookName, '1year').then(fixMarkets));
+    this.resolve('trades', this.getTrades(this._bookName).then(fixTrades));
+    this.resolve('ticker', this.getTicker(this._bookName).then(response => fixTicker(this._bookName, response)));
+    this.resolve('orders', this.getOrders(this._bookName).then(response => fixOrders('price', this._bookName, response)));
   }
 
   resolve(event, deferred) {
