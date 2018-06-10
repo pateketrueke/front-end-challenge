@@ -1,0 +1,64 @@
+i[class^="x-"], i[class*=" x-"] {
+  display: inline-block;
+  background-image: url(sprites.png);
+  font-size: 0;
+  background-repeat: no-repeat;
+  background-size: 93px 67px;
+}
+
+i.x-bitso_logo {
+  width: 93px; height: 31px;
+  background-position: -0px -0px;
+}
+i.x-icon_candles {
+  width: 23px; height: 16px;
+  background-position: -0px -33px;
+}
+i.x-icon_deep {
+  width: 24px; height: 11px;
+  background-position: -25px -33px;
+}
+i.x-minus {
+  width: 12px; height: 12px;
+  background-position: -36px -51px;
+}
+i.x-moon {
+  width: 16px; height: 16px;
+  background-position: -0px -51px;
+}
+i.x-plus {
+  width: 12px; height: 12px;
+  background-position: -50px -51px;
+}
+i.x-sun {
+  width: 16px; height: 16px;
+  background-position: -18px -51px;
+}
+
+
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2),
+only screen and (min--moz-device-pixel-ratio: 2),
+only screen and (-o-min-device-pixel-ratio: 2/1),
+only screen and (min-device-pixel-ratio: 2),
+only screen and (min-resolution: 192dpi),
+only screen and (min-resolution: 1.25dppx) {
+  i[class^="x-"], i[class*=" x-"] {
+    background-image: url(sprites@2x.png);
+  }
+}
+
+
+
+@media screen and (max-width: 767px) {
+
+}
+
+@media screen and (max-width: 519px) {
+
+}
+
+@media screen and (max-width: 319px) {
+
+}
+
