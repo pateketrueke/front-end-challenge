@@ -14,8 +14,18 @@ const {
 
 class CandleChart extends React.Component {
   render () {
+    const inputData = this.props.data.slice(-(this.props.days));
+
+    const fixedData = inputData.reduce((prev, cur, i) => {
+      if (!(i % this.props.pad)) {
+        prev.push(cur);
+      }
+
+      return prev;
+    }, []);
+
     const xScaleProvider = discontinuousTimeScaleProvider.inputDateAccessor(d => d.date);
-    const { data, xScale, xAccessor, displayXAccessor } = xScaleProvider(this.props.data);
+    const { data, xScale, xAccessor, displayXAccessor } = xScaleProvider(fixedData);
 
     const lastData = last(data);
     const highest = data[Math.max(0, data.length - 150)];

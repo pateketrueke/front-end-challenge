@@ -5,6 +5,8 @@ class ChartsWidget extends React.Component {
       isCandles: true,
       hasError: false,
       loading: true,
+      days: 365,
+      pad: 1,
       data: [],
       bids: [],
       asks: [],
@@ -44,6 +46,18 @@ class ChartsWidget extends React.Component {
     });
   }
 
+  setDays(value) {
+    this.setState({
+      days: value,
+    });
+  }
+
+  setPad(value) {
+    this.setState({
+      pad: value,
+    });
+  }
+
   render() {
     const { bids, asks, data, loading, isCandles, hasError } = this.state;
 
@@ -79,21 +93,29 @@ class ChartsWidget extends React.Component {
                 ]}
               />
               {isCandles && (
-                <Bitso.Menu label='Periodo' value='1y' items={[
-                  { label: 'Cada 3 días', value: '3d' },
-                  { label: '1 semana', value: '1w' },
-                  { label: '1 mes', value: '1m' },
-                  { label: '3 meses', value: '3m' },
-                  { label: '1 año', value: '1y' },
-                ]} />
+                <Bitso.Menu
+                  label='Periodo'
+                  onChange={selectedItem => this.setDays(selectedItem.days)}
+                  value='1y'
+                  items={[
+                    { label: '1 semana', value: '1w', days: 7 },
+                    { label: '1 mes', value: '1m', days: 30 },
+                    { label: '3 meses', value: '3m', days: 90 },
+                    { label: '1 año', value: '1y' },
+                  ]}
+                />
               )}
               {isCandles && (
-                <Bitso.Menu label='Intervalo' value='24h' items={[
-                  { label: '1 hora', value: '1h' },
-                  { label: '3 horas', value: '3h' },
-                  { label: '12 horas', value: '12h' },
-                  { label: '24 horas', value: '24h' },
-                ]} />
+                <Bitso.Menu
+                  onChange={selectedItem => this.setPad(selectedItem.pad)}
+                  label='Intervalo'
+                  value='24h'
+                  items={[
+                    { label: '24h', value: '24h', pad: 1 },
+                    { label: 'Cada 3 días', value: '72h', pad: 3 },
+                    { label: 'Cada 15 días', value: '15d', pad: 15 },
+                  ]}
+                />
               )}
             </div>
             {isCandles && (
@@ -106,7 +128,7 @@ class ChartsWidget extends React.Component {
         </div>
         <div className='auto flex'>
           {isCandles && (
-            <Bitso.CandleChart data={data} />
+            <Bitso.CandleChart data={data} pad={this.state.pad} days={this.state.days} />
           )}
           {/*<Bitso.DeepChart asks={asks} bids={bids} />*/}
         </div>
