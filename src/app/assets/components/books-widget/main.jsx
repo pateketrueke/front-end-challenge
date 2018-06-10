@@ -4,7 +4,10 @@ class BooksWidget extends React.Component {
     this.state = {
       books: [],
       loading: true,
-      currentBook: null,
+      currentBook: {
+        value: Bitso.API._bookName,
+        label: Bitso.API._bookName.toUpperCase().split('_').join(' / '),
+      },
     };
   }
 
@@ -17,10 +20,6 @@ class BooksWidget extends React.Component {
             value: bookinfo.book,
             label: bookinfo.title,
           })),
-          currentBook: {
-            value: payload[0].book,
-            label: payload[0].title,
-          },
         });
       }
     });
@@ -30,6 +29,8 @@ class BooksWidget extends React.Component {
     this.setState({
       currentBook: bookInfo,
     });
+
+    Bitso.API.emit('changeBook', bookInfo);
   }
 
   render() {

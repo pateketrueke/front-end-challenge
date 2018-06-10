@@ -28,9 +28,19 @@ export class API {
 
     this._events = {};
     this._bookName = 'btc_mxn';
-    this._timeFrame = '1month';
+    this._timeFrame = '1year';
 
     this.fetchData(this._bookName);
+
+    this.on('changeBook', bookInfo => {
+      ['trades', 'orders', 'diff-orders'].forEach(event => {
+        this.ws.send(JSON.stringify({ action: 'unsubscribe', book: this._bookName, type: event }));
+        this.ws.send(JSON.stringify({ action: 'subscribe', book: bookInfo.value, type: event }));
+      });
+
+      this.fetchData(bookInfo.value);
+      this._bookName = bookInfo.value;
+    });
 
     setTimeout(() => this.init(), 3000);
   }
