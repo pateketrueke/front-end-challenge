@@ -1,5 +1,7 @@
 import * as ReactStockcharts from 'react-stockcharts';
 
+import { XAxis, YAxis } from 'react-stockcharts/es/lib/axes'
+
 import {
   BarSeries,
   LineSeries,
@@ -21,5 +23,7 @@ document.currentScript.exports = {
     fitWidth,
     fitDimensions,
     last,
+    XAxis,
+    YAxis,
   },
 };

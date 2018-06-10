@@ -8,9 +8,10 @@ const {
   CandlestickSeries,
   ChartCanvas,
   Chart,
+  XAxis,
+  YAxis,
 } = Bitso.ReactStockcharts;
 
-// FIXME: avoid duplicated code from LineChart
 class CandleChart extends React.Component {
   render () {
     const xScaleProvider = discontinuousTimeScaleProvider.inputDateAccessor(d => d.date);
@@ -45,6 +46,22 @@ class CandleChart extends React.Component {
           yExtents={[d => [d.high, d.low]]}
           height={this.props.height - 70}
         >
+          <XAxis
+            axisAt='top'
+            orient='top'
+            stroke='rgba(56, 69, 85, .6)'
+            tickStroke='rgba(56, 69, 85, .8)'
+            innerTickSize={-this.props.height / 2}
+          />
+
+          <YAxis
+            axisAt='right'
+            orient='right'
+            stroke='#191e23'
+            tickStroke='rgba(56, 69, 85, .8)'
+            innerTickSize={-this.props.width}
+          />
+
           <CandlestickSeries
             fill={d => (d.close > d.open ? 'rgba(134, 175, 107, .4)' : 'rgba(186, 48, 64, .4)')}
             stroke={d => (d.close > d.open ? '#80C156' : '#BA3040')}
