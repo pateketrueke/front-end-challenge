@@ -96,8 +96,8 @@ class ChartsWidget extends React.Component {
             </div>
             {isCandles && (
               <div className='round menu flex'>
-                <button>-</button>
-                <button>+</button>
+                <button><i className='x-minus' /></button>
+                <button><i className='x-plus' /></button>
               </div>
             )}
           </div>
