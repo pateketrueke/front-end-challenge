@@ -30,7 +30,3 @@ $ make open
 > Ejecuta `make` sin argumentos para listar las tareas disponibles.
 
 En menos de 1 minuto se habrá construído la aplicación y con un poco de suerte tu navegador favorito apuntará a [localhost:3000](http://localhost:3000).
-
-## Créditos
-
-> WIP
