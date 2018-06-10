@@ -611,6 +611,7 @@ a {
   .x-icon_deep {
     width: 24px;
     height: 16px;
+    vertical-align: middle;
   }
 
   button {
@@ -620,7 +621,6 @@ a {
     font-size: 16px;
     line-height: 16px;
     cursor: inherit;
-    color: @DarkText;
     border-radius: 10px 0 0 10px;
     background-color: transparent;
 
@@ -629,10 +629,12 @@ a {
       border-left: 1px solid @Sidebar;
     }
 
+    &:hover {
+      background-color: @Sidebar;
+    }
+
     &:focus {
       outline: none;
-      color: @DarkNavy;
-      background-color: @Sidebar;
     }
   }
 
