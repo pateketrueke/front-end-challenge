@@ -45,9 +45,10 @@ mixin Header
 mixin Topbar
   .topbar
     .wrapper.flex
-      .no-wrap.no-sel.menu
-        span.menu-pin BTC / MXN
-        +Submenu
+      div(data-component='widgets' data-widget='books')
+        .no-wrap.no-sel.menu
+          span.menu-pin BTC / MXN
+          +Submenu
       .h-scroll.no-sel(data-scrollable='.flex')
         .flex.push(data-component='widgets' data-widget='ticker')
           span Volumen 24 h #[span.light 170.5405818 BTC]

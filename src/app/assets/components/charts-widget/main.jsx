@@ -1,5 +1,3 @@
-import Menu from '../_/Menu';
-
 class ChartsWidget extends React.Component {
   constructor(props) {
     super(props);
@@ -15,18 +13,22 @@ class ChartsWidget extends React.Component {
 
   componentDidMount() {
     Bitso.API.on('markets', payload => {
-      this.setState({
-        loading: false,
-        data: payload,
-      });
+      if (this.state.isCandles) {
+        this.setState({
+          loading: false,
+          data: payload,
+        });
+      }
     });
 
     Bitso.API.on('orders', payload => {
-      this.setState({
-        loading: false,
-        asks: payload.asks.data,
-        bids: payload.bids.data,
-      });
+      if (!this.state.isCandles) {
+        this.setState({
+          loading: false,
+          asks: payload.asks.data,
+          bids: payload.bids.data,
+        });
+      }
     });
   }
 
@@ -64,7 +66,7 @@ class ChartsWidget extends React.Component {
         <div>
           <div className='pad flex'>
             <div className='auto flex push'>
-              <Menu
+              <Bitso.Menu
                 unique
                 value='candles'
                 onChange={selectedItem => this.selectChart(selectedItem.value)}
@@ -77,7 +79,7 @@ class ChartsWidget extends React.Component {
                 ]}
               />
               {isCandles && (
-                <Menu label='Periodo' value='3m' items={[
+                <Bitso.Menu label='Periodo' value='3m' items={[
                   { label: 'Cada 3 días', value: '3d' },
                   { label: '1 semana', value: '1w' },
                   { label: '1 mes', value: '1m' },
@@ -86,7 +88,7 @@ class ChartsWidget extends React.Component {
                 ]} />
               )}
               {isCandles && (
-                <Menu label='Intervalo' value='1h' items={[
+                <Bitso.Menu label='Intervalo' value='1h' items={[
                   { label: '1 hora', value: '1h' },
                   { label: '3 horas', value: '3h' },
                   { label: '12 horas', value: '12h' },

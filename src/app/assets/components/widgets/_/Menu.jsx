@@ -27,7 +27,7 @@ export default class Menu extends React.Component {
         {this.props.label && (
           <span className='menu-lb'>{this.props.label}</span>
         )}
-        <span className='menu-pin hi'>
+        <span className='menu-pin no-wrap'>
           {this.props.renderValue
             ? this.props.renderValue(this.state.currentValue)
             : this.state.currentValue}

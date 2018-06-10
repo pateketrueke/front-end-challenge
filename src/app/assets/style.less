@@ -325,7 +325,9 @@ a {
   }
 
   .menu {
-    color: @LightGreen;
+    .menu-pin {
+      color: @LightGreen;
+    }
   }
 }
 
@@ -598,10 +600,7 @@ a {
   &-pin {
     position: relative;
     cursor: inherit;
-
-    &.hi {
-      color: @LightText;
-    }
+    color: @LightText;
 
     &::after {
       pointer-events: none;
@@ -683,6 +682,10 @@ a {
           opacity: 1;
           visibility: visible;
         }
+      }
+
+      &.sel {
+        background-color: @Sidebar;
       }
     }
   }
