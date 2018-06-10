@@ -1,0 +1,161 @@
+.sidebar {
+  top: 0;
+  right: 0;
+  z-index: 7;
+  height: 100%;
+  min-width: 32px;
+  overflow: hidden;
+  position: absolute;
+  background-color: @SidebarBackground;
+
+  .react-stockchart {
+    &::after {
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      content: ' ';
+      z-index: 7;
+      position: absolute;
+      background-color: transparent;
+    }
+  }
+
+  > div {
+    height: 100%;
+  }
+
+  h4 {
+    font-weight: 100;
+    color: @SidebarLightText;
+    background-color: @SidebarHeader;
+  }
+
+  li {
+    position: relative;
+    padding-top: @Pad1 + 1;
+
+    + li::before {
+      border-top: 1px solid @DarkText;
+      width: 220 - @Pad2;
+      position: absolute;
+      content: ' ';
+      height: 1px;
+      top: 0;
+    }
+
+    &.sel {
+      border-top: 1px solid @DarkText;
+      background-color: @DarkNavy;
+      padding-top: @Pad1;
+      min-height: 110px;
+
+      &::before {
+        border: none;
+      }
+
+      + li::before {
+        width: 220px;
+        left: 0;
+      }
+
+      img {
+        left: 0;
+        bottom: 0;
+        position: absolute;
+      }
+    }
+  }
+
+  span.up,
+  span.down {
+    position: relative;
+
+    &::before {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+    }
+  }
+
+  span.up {
+    .hi {
+      color: @LightGreen;
+    }
+
+    &::before {
+      left: -2px;
+      content: '▾';
+      transform-origin: 0 0;
+      margin-right: @Pad1 / 2;
+      transform: rotate(180deg) translateY(-20px);
+    }
+  }
+
+  span.down {
+    .hi {
+      color: @LightRed;
+    }
+
+    &::before {
+      content: '▾';
+      left: -12px;
+    }
+  }
+
+  &:hover {
+    background-color: @Sidebar;
+  }
+
+  .content {
+    ul {
+      overflow: auto;
+      width: 110%;
+      padding-right: 10%;
+      height: ~"calc(100vh - 34px)";
+    }
+
+    li {
+      .item {
+        cursor: pointer;
+      }
+
+      small {
+        z-index: 7;
+        position: relative;
+        background-color: @DarkNavy;
+      }
+    }
+  }
+
+  .mkt-menu {
+    top: @Pad1;
+    width: 10000px;
+    cursor: pointer;
+    position: absolute;
+    transform: rotate(90deg) translateY(-26px);
+    transform-origin: 0 0;
+
+    &::before {
+      content: '▾';
+      margin-right: @Pad1;
+    }
+
+    ~ * > .content {
+      background-color: @SidebarBackground;
+      border-left: 1px solid @DarkBackground;
+      margin-left: @Pad3;
+      width: 220px;
+      height: 100%;
+      display: none;
+    }
+
+    ~ input {
+      display: none;
+
+      &:checked ~ * > .content {
+        display: block;
+      }
+    }
+  }
+}

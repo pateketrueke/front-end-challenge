@@ -1,0 +1,135 @@
+.menu {
+  cursor: pointer;
+
+  + .menu {
+    margin-left: @Pad2;
+  }
+
+  &.round {
+    min-width: 40px;
+    border-radius: 10px;
+    border: 1px solid @Sidebar;
+  }
+
+  &-pin {
+    position: relative;
+    cursor: inherit;
+    color: @LightText;
+
+    &::after {
+      pointer-events: none;
+      transition: all .3s;
+      position: absolute;
+      content: '▾';
+      right: -@Pad2;
+    }
+  }
+
+  &-lb {
+    margin-right: @Pad1;
+  }
+
+  .x-icon_candles,
+  .x-icon_deep {
+    width: 24px;
+    height: 16px;
+    vertical-align: middle;
+  }
+
+  button {
+    border: 0;
+    padding: 0 @Pad1;
+    width: 50%;
+    font-size: 16px;
+    line-height: 16px;
+    cursor: inherit;
+    border-radius: 10px 0 0 10px;
+    background-color: transparent;
+
+    + button {
+      border-radius: 0 10px 10px 0;
+      border-left: 1px solid @Sidebar;
+    }
+
+    &:hover {
+      background-color: @Sidebar;
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &[disabled] {
+      opacity: .5;
+      cursor: default;
+      background-color: transparent;
+    }
+  }
+
+  ul {
+    opacity: 0;
+    z-index: 7;
+    cursor: inherit;
+    position: absolute;
+    visibility: hidden;
+    transition: all .3s;
+    background-color: @DarkNavy;
+    box-shadow: 0 0 3px @DarkShadow;
+  }
+
+  &-sub {
+    a {
+      text-decoration: none;
+      display: inline-block;
+      padding: @Pad1;
+      width: 100%;
+
+      &:hover {
+        background-color: @RegularNavy;
+      }
+    }
+
+    > li {
+      position: relative;
+
+      ul {
+        position: absolute;
+        visibility: hidden;
+        right: -100%;
+        top: 0;
+      }
+
+      &:hover {
+        ul {
+          opacity: 1;
+          visibility: visible;
+        }
+      }
+
+      &.sel {
+        background-color: @Sidebar;
+      }
+    }
+  }
+
+  &:hover {
+    .menu-pin::after {
+      transform: rotate(180deg);
+      transform-origin: center;
+      margin-top: 4px;
+    }
+
+    .menu-sub {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}
+
+.user-menu {
+  img {
+    padding: 2px;
+    border-radius: 50%;
+    border: 2px solid @DarkText;
+  }
+}

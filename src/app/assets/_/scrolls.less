@@ -1,0 +1,85 @@
+.h-scroll {
+  position: relative;
+  overflow: hidden;
+  height: @Pad3;
+
+  > * {
+    height: 48px;
+    overflow: auto;
+    white-space: nowrap;
+
+    @media screen and (min-width: @SmallWidth) {
+      height: auto;
+    }
+  }
+
+  &.is-enabled {
+    > * {
+      &::after,
+      &::before {
+        content: ' ';
+        display: none;
+        pointer-events: none;
+        position: absolute;
+        left: 0;
+        width: 50px;
+        height: 48px;
+        z-index: 0;
+      }
+    }
+
+    &.at-begin > * {
+      &::before {
+        background-image: linear-gradient(to left, transparent, @DarkShadow);
+        display: block;
+      }
+    }
+
+    &.at-end > * {
+      &::after {
+        background-image: linear-gradient(to right, transparent, @DarkShadow);
+        display: block;
+        left: auto;
+        right: 0;
+      }
+    }
+  }
+}
+
+.v-scroll {
+  &.is-enabled {
+    &::before,
+    &::after {
+      pointer-events: none;
+      position: absolute;
+      display: none;
+      width: 100%;
+      content: ' ';
+      z-index: 0;
+    }
+
+    &.at-begin {
+      &::before {
+        background-image: linear-gradient(to top, transparent, @DarkShadow);
+        top: @Pad3;
+        display: block;
+        height: @Pad1;
+      }
+    }
+
+    &.at-end {
+      &::after {
+        background-image: linear-gradient(to bottom, transparent, @DarkShadow);
+        display: block;
+        height: 48px;
+        bottom: 0;
+      }
+    }
+  }
+}
+
+.md-push.v-scroll.is-enabled.at-begin {
+  &::before {
+    top: (@Pad1 * 3) + @Pad3;
+  }
+}

@@ -1,0 +1,20 @@
+.navigation {
+  color: @LightText;
+  padding: @Pad1;
+
+  @media screen and (min-width: @SmallWidth) {
+    padding: @Pad1 @Pad2;
+  }
+
+  > .pad {
+    padding: 0 @Pad1;
+
+    &:first-child {
+      padding-left: 0;
+    }
+
+    &.push {
+      margin-right: @Pad2;
+    }
+  }
+}

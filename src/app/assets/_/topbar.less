@@ -1,0 +1,37 @@
+.topbar {
+  background-color: @DarkNavy;
+
+  .menu,
+  .h-scroll .flex > * {
+    padding: @Pad1;
+  }
+
+  .h-scroll {
+    margin-left: @Pad2;
+  }
+
+  @media screen and (min-width: @SmallWidth) {
+    .h-scroll {
+      height: 48px;
+
+      .flex {
+        height: 60px;
+      }
+    }
+
+    .menu,
+    .h-scroll .flex > * {
+      padding: @Pad2;
+    }
+  }
+
+  .light {
+    color: @SidebarText;
+  }
+
+  .menu {
+    .menu-pin {
+      color: @LightGreen;
+    }
+  }
+}

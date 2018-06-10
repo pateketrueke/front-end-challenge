@@ -1,0 +1,244 @@
+.stats {
+  border-top: 1px solid @Sidebar;
+  position: absolute;
+  right: 0;
+  left: 0;
+
+  tbody tr {
+    background-color: transparent;
+    transition: all .5s ease-in;
+    opacity: .8;
+
+    &:hover:not(.sel) {
+      opacity: 1;
+      transition: none;
+      background-color: @DarkShadow;
+    }
+  }
+
+  .coin {
+    font-size: 90%;
+
+    &::after {
+      display: none;
+      color: @DarkText;
+      margin-left: @Pad1 / 2;
+      content: attr(data-currency);
+    }
+
+    &::before {
+      color: @DarkText;
+      margin-right: @Pad1 / 2;
+      content: attr(data-currency);
+    }
+  }
+
+  .type {
+    &::after {
+      display: none;
+      margin-left: @Pad1;
+    }
+
+    &::before {
+      margin-right: @Pad1;
+    }
+  }
+
+  .data,
+  .asks,
+  .bids {
+    &-done,
+    &-exit,
+    &-enter,
+    &-enter-done,
+    &-active {
+      transition: all .5s ease-in;
+    }
+
+    &-exit { opacity: .5; }
+    &-exit-active { opacity: .1; }
+    &-enter-done,
+    &-enter-active { opacity: 1; }
+  }
+
+  .data {
+    &-enter { background-color: @LightShadow; }
+  }
+
+  .asks {
+    &-enter { background-color: @DarkestRed; }
+  }
+
+  .bids {
+    &-enter { background-color: @DarkestGreen; }
+  }
+
+  .bids::after,
+  .bids::before {
+    content: 'Bid';
+  }
+
+  .asks::after,
+  .asks::before {
+    content: 'Ask';
+  }
+
+  .bar {
+    display: inline-block;
+    margin-right: @Pad1;
+    height: 100%;
+    width: 3em;
+
+    > * {
+      height: 10px;
+      display: inline-block;
+      background-color: @DarkText;
+    }
+  }
+
+  .hi {
+    color: @SidebarText;
+  }
+
+  .up {
+    color: @DarkGreen;
+  }
+
+  .down {
+    color: @DarkRed;
+  }
+
+  .sel {
+    background-color: @Sidebar;
+    transition: none;
+
+    .hi {
+      color: @LightText;
+      color: #E4E8E5;
+    }
+
+    .up {
+      color: @LightGreen;
+    }
+
+    .down {
+      color: @LightRed;
+    }
+  }
+
+  caption {
+    background-color: #23313E;
+    color: @LightText;
+  }
+
+  tr {
+    .pad {
+      padding: (@Pad1 / 2) @Pad1;
+    }
+  }
+
+  th {
+    font-weight: normal;
+    color: @SidebarText;
+
+    span {
+      color: @DarkText;
+    }
+  }
+
+  .right,
+  .left {
+    .flex {
+      *:nth-child(1) { flex: 1 1 auto; }
+    }
+
+    tr {
+      td:nth-child(1), th:nth-child(1) { width: 33%; }
+      td:nth-child(2), th:nth-child(2) { width: 22%; }
+      td:nth-child(3), th:nth-child(3) { width: 22%; }
+      td:nth-child(4), th:nth-child(4) { width: 22%; }
+    }
+  }
+
+  .left {
+    caption {
+      background-color: #1D262F;
+    }
+
+    .bar > * {
+      background-color: @DarkGreen;
+    }
+
+    .sel {
+      background-color: #385D3C;
+
+      .bar > * {
+        background-color: @LightGreen;
+      }
+
+      td {
+        color: #898E8A;
+      }
+    }
+  }
+
+  .right {
+    .bar > * {
+      background-color: @DarkRed;
+    }
+
+    .sel {
+      background-color: @DarkRed;
+
+      .bar > * {
+        background-color: @LightRed;
+      }
+
+      td {
+        color: #898E8A;
+      }
+    }
+  }
+
+  @media screen and (min-width: @MediumWidth) {
+    tr {
+      display: flex;
+
+      td, th {
+        flex: 1 1 auto;
+      }
+    }
+
+    .left {
+      .flex {
+        > *:nth-child(1) { order: 1; flex: 1 1 auto; }
+        > *:nth-child(2) { order: 2; }
+      }
+    }
+
+    .right {
+      .bar {
+        text-align: right;
+        margin-right: 0;
+        margin-left: @Pad1;
+      }
+
+      .flex {
+        > *:nth-child(1) { order: 2; flex: none; }
+        > *:nth-child(2) { order: 1; flex: 1 1 auto; }
+      }
+
+      caption {
+        .coin::after, .kind::after { display: inline-block; }
+        .coin::before, .kind::before { display: none; }
+      }
+
+      tr {
+        td:nth-child(1), th:nth-child(1) { order: 4; text-align: left; }
+        td:nth-child(2), th:nth-child(2) { order: 3; }
+        td:nth-child(3), th:nth-child(3) { order: 2; }
+        td:nth-child(4), th:nth-child(4) { order: 1; }
+      }
+    }
+  }
+}
